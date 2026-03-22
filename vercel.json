@@ -1,0 +1,10 @@
+{
+  "name": "agentive-solutions",
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "functions": {
+    "api/report.js": {
+      "maxDuration": 30
+    }
+  }
+}

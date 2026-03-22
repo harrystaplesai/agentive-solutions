@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Readiness Assessment | Agentive Solutions</title>
+  <meta name="description" content="Score your business across 8 dimensions of AI readiness. 24 questions, 5 minutes, instant results." />
+  <link rel="canonical" href="https://agentivesolutions.co.uk/assessment" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:title" content="AI Readiness Assessment | Agentive Solutions" />
+  <meta property="og:description" content="Score your business across 8 dimensions of AI readiness. 24 questions, 5 minutes, instant results." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://agentivesolutions.co.uk/assessment" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #FAFAF8;
+      --bg-alt: #F3F2EE;
+      --surface: #FFFFFF;
+      --text-primary: #1A1A17;
+      --text-secondary: #6B6B60;
+      --text-tertiary: #9C9C90;
+      --accent: #C8764B;
+      --accent-hover: #B5683F;
+      --accent-subtle: rgba(200, 118, 75, 0.08);
+      --border: rgba(26, 26, 23, 0.08);
+      --border-strong: rgba(26, 26, 23, 0.14);
+      --radius-sm: 0.75rem;
+      --radius-md: 1.25rem;
+      --radius-lg: 2rem;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --teal: #1D9E75;
+      --teal-dark: #085041;
+      --teal-light: #E1F5EE;
+      --amber: #EF9F27;
+      --red: #E24B4A;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); border: 0;
+    }
+
+    /* ─── Navigation ───────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+    }
+    .nav.scrolled {
+      background: rgba(250, 250, 248, 0.85);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      box-shadow: 0 1px 0 var(--border);
+      padding: 0.6rem 0;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 3rem);
+    }
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: 100px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  background 0.2s ease;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--text-primary);
+      color: var(--bg);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 4px 20px rgba(26, 26, 23, 0.2);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1.5px solid var(--border-strong);
+    }
+    .btn-secondary:hover {
+      background: var(--text-primary);
+      color: var(--bg);
+      border-color: var(--text-primary);
+    }
+    .btn-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn:hover .btn-arrow { transform: translateX(2px); }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── Container ────────────────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 3rem);
+    }
+
+    /* ─── Assessment Shell ─────────────────────────────── */
+    .assessment-wrapper {
+      min-height: 100dvh;
+      padding-top: 7rem;
+      padding-bottom: 4rem;
+    }
+
+    .step { display: none; }
+    .step.active { display: block; }
+
+    /* ─── Step 1: Lead Capture ─────────────────────────── */
+    .lead-capture {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .lead-capture-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 0.5rem;
+    }
+    .lead-capture-inner {
+      background: var(--bg);
+      border-radius: calc(var(--radius-lg) - 0.35rem);
+      padding: clamp(2rem, 5vw, 3rem);
+    }
+    .lead-capture .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.75rem;
+      display: inline-block;
+    }
+    .lead-capture h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+    }
+    .lead-capture .subtitle {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .form-group input,
+    .form-group select {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      font-family: inherit;
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--text-primary);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B60' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.1);
+    }
+    .form-group input::placeholder {
+      color: var(--text-tertiary);
+    }
+    .form-group .error-msg {
+      font-size: 0.75rem;
+      color: var(--red);
+      display: none;
+    }
+    .form-group.has-error input,
+    .form-group.has-error select {
+      border-color: var(--red);
+    }
+    .form-group.has-error .error-msg {
+      display: block;
+    }
+
+    .btn-teal {
+      background: var(--teal);
+      color: #fff;
+      width: 100%;
+      justify-content: center;
+      padding: 0.9rem 2rem;
+      font-size: 0.95rem;
+      margin-top: 0.75rem;
+    }
+    .btn-teal:hover {
+      background: var(--teal-dark);
+      box-shadow: 0 4px 20px rgba(29, 158, 117, 0.25);
+      transform: translateY(-1px);
+    }
+    .small-print {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      text-align: center;
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+
+    /* ─── Step 2: Question Flow ────────────────────────── */
+    .question-flow {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .progress-container {
+      margin-bottom: 2.5rem;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .progress-category {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+    .progress-count {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+    .progress-bar-track {
+      height: 4px;
+      background: var(--border-strong);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--teal);
+      border-radius: 100px;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .question-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 0.5rem;
+    }
+    .question-card-inner {
+      background: var(--bg);
+      border-radius: calc(var(--radius-lg) - 0.35rem);
+      padding: clamp(2rem, 5vw, 2.5rem);
+    }
+
+    .question-text {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 3vw, 1.6rem);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 2rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .question-text::before {
+      content: '\201C';
+      position: absolute;
+      left: -0.1rem;
+      top: -0.3rem;
+      font-size: 2.5rem;
+      color: var(--teal);
+      opacity: 0.3;
+      font-family: var(--font-serif);
+      line-height: 1;
+    }
+
+    .why-toggle {
+      margin-bottom: 2rem;
+    }
+    .why-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--teal);
+      transition: opacity 0.2s ease;
+    }
+    .why-toggle-btn:hover { opacity: 0.75; }
+    .why-toggle-icon {
+      display: inline-flex;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .why-toggle-btn.open .why-toggle-icon {
+      transform: rotate(180deg);
+    }
+    .why-content {
+      display: none;
+      padding: 0.75rem 1rem;
+      background: var(--teal-light);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      color: var(--teal-dark);
+      line-height: 1.6;
+      margin-top: 0.5rem;
+    }
+    .why-content.open {
+      display: block;
+      animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .likert-options {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .likert-option {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .likert-option input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .likert-option label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 1rem 0.5rem;
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+      text-align: center;
+    }
+    .likert-option label:hover {
+      border-color: var(--teal);
+      background: rgba(29, 158, 117, 0.03);
+    }
+    .likert-option input:checked + label {
+      border-color: var(--teal);
+      background: var(--teal-light);
+      box-shadow: 0 0 0 2px rgba(29, 158, 117, 0.15);
+    }
+    .likert-number {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--border);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+    .likert-option input:checked + label .likert-number {
+      background: var(--teal);
+      color: #fff;
+    }
+    .likert-label-text {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    .question-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.25rem;
+      background: transparent;
+      border: 1.5px solid var(--border-strong);
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-back:hover {
+      background: var(--text-primary);
+      color: var(--bg);
+      border-color: var(--text-primary);
+    }
+    .btn-back.hidden {
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-next:hover:not(:disabled) {
+      background: var(--teal-dark);
+      box-shadow: 0 4px 20px rgba(29, 158, 117, 0.25);
+      transform: translateY(-1px);
+    }
+    .btn-next:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ─── Step 3: Loading Screen ───────────────────────── */
+    .loading-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      text-align: center;
+    }
+    .spinner {
+      width: 56px;
+      height: 56px;
+      border: 3px solid var(--border);
+      border-top-color: var(--teal);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 2rem;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loading-message {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      min-height: 1.8rem;
+      transition: opacity 0.3s ease;
+    }
+
+    /* ─── Step 4: Results ──────────────────────────────── */
+    .results {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .results-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .results-company {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+    .results-name {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+    .results-score-big {
+      font-family: var(--font-serif);
+      font-size: clamp(4rem, 10vw, 6rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+    .results-score-label {
+      font-size: 0.9rem;
+      color: var(--text-tertiary);
+      margin-bottom: 1rem;
+    }
+    .results-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .badge-advanced {
+      background: var(--teal-light);
+      color: var(--teal-dark);
+    }
+    .badge-intermediate {
+      background: var(--teal-light);
+      color: var(--teal);
+    }
+    .badge-developing {
+      background: rgba(239, 159, 39, 0.1);
+      color: #b37a10;
+    }
+    .badge-early {
+      background: rgba(226, 75, 74, 0.1);
+      color: var(--red);
+    }
+
+    /* Radar Chart */
+    .results-chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .results-chart-inner {
+      background: var(--bg);
+      border-radius: calc(var(--radius-lg) - 0.35rem);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      display: flex;
+      justify-content: center;
+    }
+    .chart-container {
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 1;
+    }
+
+    /* Category Bars */
+    .results-categories-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .results-categories-inner {
+      background: var(--bg);
+      border-radius: calc(var(--radius-lg) - 0.35rem);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+    }
+    .results-categories-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+    .category-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .category-row:last-child { margin-bottom: 0; }
+    .category-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      width: 180px;
+      flex-shrink: 0;
+    }
+    .category-bar-track {
+      flex: 1;
+      height: 10px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .category-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .category-score-value {
+      font-size: 0.85rem;
+      font-weight: 700;
+      width: 36px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* Recommendations */
+    .results-recs-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .results-recs-inner {
+      background: var(--bg);
+      border-radius: calc(var(--radius-lg) - 0.35rem);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      text-align: center;
+    }
+    .results-recs-inner h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .results-recs-inner p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Discovery CTA */
+    .results-cta-card {
+      background: var(--teal);
+      border-radius: var(--radius-lg);
+      padding: clamp(2rem, 5vw, 3rem);
+      text-align: center;
+    }
+    .results-cta-card h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .results-cta-card p {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-cta-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: #fff;
+      color: var(--teal-dark);
+      border: none;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-cta-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ─── Footer ───────────────────────────────────────── */
+    .footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-left {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: var(--text-primary); }
+
+    /* ─── Step transitions ─────────────────────────────── */
+    .step-enter {
+      animation: stepIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes stepIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Mobile Responsive ────────────────────────────── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(250, 250, 248, 0.97);
+        backdrop-filter: blur(20px);
+        padding: 1.5rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-toggle { display: flex; }
+
+      .form-grid { grid-template-columns: 1fr; }
+
+      .likert-options {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .likert-option label {
+        flex-direction: row;
+        padding: 0.75rem 1rem;
+        gap: 0.75rem;
+      }
+      .likert-label-text {
+        font-size: 0.8rem;
+      }
+
+      .category-row {
+        flex-wrap: wrap;
+      }
+      .category-name {
+        width: 100%;
+      }
+
+      .question-text {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .results-score-big {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ──────────────────────────────────── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">agentive<span>.</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#agents">Agents</a></li>
+        <li><a href="booking.html" class="btn btn-primary">Book a call <span class="btn-arrow">&rarr;</span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── Assessment Wrapper ──────────────────────────── -->
+  <div class="assessment-wrapper container">
+
+    <!-- ─── Step 1: Lead Capture ────────────────────────── -->
+    <div class="step active step-enter" id="step-1">
+      <div class="lead-capture">
+        <div class="lead-capture-card">
+          <div class="lead-capture-inner">
+            <div class="eyebrow">Free assessment</div>
+            <h1>How AI-ready is your business?</h1>
+            <p class="subtitle">Score your business across 8 dimensions of AI readiness. 24 questions. Takes about 5 minutes. Results are instant.</p>
+
+            <form id="lead-form" novalidate>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="firstName">First name</label>
+                  <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
+                  <span class="error-msg">First name is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last name</label>
+                  <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+                  <span class="error-msg">Last name is required</span>
+                </div>
+                <div class="form-group full-width">
+                  <label for="workEmail">Work email</label>
+                  <input type="email" id="workEmail" name="workEmail" placeholder="jane@company.co.uk" required />
+                  <span class="error-msg">Please enter a valid work email</span>
+                </div>
+                <div class="form-group full-width">
+                  <label for="companyName">Company name</label>
+                  <input type="text" id="companyName" name="companyName" placeholder="Acme Ltd" required />
+                  <span class="error-msg">Company name is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="companySize">Company size</label>
+                  <select id="companySize" name="companySize" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="1-9">1-9</option>
+                    <option value="10-49">10-49</option>
+                    <option value="50-249">50-249</option>
+                    <option value="250-999">250-999</option>
+                    <option value="1000+">1000+</option>
+                  </select>
+                  <span class="error-msg">Please select a company size</span>
+                </div>
+                <div class="form-group">
+                  <label for="industry">Industry</label>
+                  <select id="industry" name="industry" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="Accountancy">Accountancy</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Legal">Legal</option>
+                    <option value="Marketing & Agency">Marketing &amp; Agency</option>
+                    <option value="Trades & Construction">Trades &amp; Construction</option>
+                    <option value="Property & Letting">Property &amp; Letting</option>
+                    <option value="Health & Wellness">Health &amp; Wellness</option>
+                    <option value="Retail & E-commerce">Retail &amp; E-commerce</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <span class="error-msg">Please select an industry</span>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-teal">Start your free assessment <span class="btn-arrow">&rarr;</span></button>
+            </form>
+
+            <p class="small-print">By completing this assessment you agree to receive your results and occasional insights from Agentive Solutions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Step 2: Question Flow ───────────────────────── -->
+    <div class="step" id="step-2">
+      <div class="question-flow">
+        <div class="progress-container">
+          <div class="progress-label">
+            <span class="progress-category" id="progress-category"></span>
+            <span class="progress-count" id="progress-count"></span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progress-bar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="question-card">
+          <div class="question-card-inner">
+            <p class="question-text" id="question-text"></p>
+
+            <div class="why-toggle">
+              <button type="button" class="why-toggle-btn" id="why-toggle-btn">
+                <span class="why-toggle-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+                Why does this matter?
+              </button>
+              <div class="why-content" id="why-content"></div>
+            </div>
+
+            <div class="likert-options" id="likert-options">
+              <div class="likert-option">
+                <input type="radio" name="likert" id="likert-1" value="1" />
+                <label for="likert-1">
+                  <span class="likert-number">1</span>
+                  <span class="likert-label-text">Strongly Disagree</span>
+                </label>
+              </div>
+              <div class="likert-option">
+                <input type="radio" name="likert" id="likert-2" value="2" />
+                <label for="likert-2">
+                  <span class="likert-number">2</span>
+                  <span class="likert-label-text">Disagree</span>
+                </label>
+              </div>
+              <div class="likert-option">
+                <input type="radio" name="likert" id="likert-3" value="3" />
+                <label for="likert-3">
+                  <span class="likert-number">3</span>
+                  <span class="likert-label-text">Neutral</span>
+                </label>
+              </div>
+              <div class="likert-option">
+                <input type="radio" name="likert" id="likert-4" value="4" />
+                <label for="likert-4">
+                  <span class="likert-number">4</span>
+                  <span class="likert-label-text">Agree</span>
+                </label>
+              </div>
+              <div class="likert-option">
+                <input type="radio" name="likert" id="likert-5" value="5" />
+                <label for="likert-5">
+                  <span class="likert-number">5</span>
+                  <span class="likert-label-text">Strongly Agree</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="question-nav">
+              <button type="button" class="btn-back" id="btn-back">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Back
+              </button>
+              <button type="button" class="btn-next" id="btn-next" disabled>
+                Next
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Step 3: Loading Screen ──────────────────────── -->
+    <div class="step" id="step-3">
+      <div class="loading-screen">
+        <div class="spinner"></div>
+        <p class="loading-message" id="loading-message">Scoring across 8 dimensions...</p>
+      </div>
+    </div>
+
+    <!-- ─── Step 4: Results ─────────────────────────────── -->
+    <div class="step" id="step-4">
+      <div class="results">
+        <div class="results-header">
+          <p class="results-company" id="results-company"></p>
+          <p class="results-name" id="results-name"></p>
+          <div class="results-score-big" id="results-score-big"></div>
+          <p class="results-score-label">out of 10</p>
+          <span class="results-badge" id="results-badge"></span>
+        </div>
+
+        <div class="results-chart-card">
+          <div class="results-chart-inner">
+            <div class="chart-container">
+              <canvas id="radar-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-categories-card">
+          <div class="results-categories-inner">
+            <h3 class="results-categories-title">Category scores</h3>
+            <div id="category-bars"></div>
+          </div>
+        </div>
+
+        <div class="results-recs-card">
+          <div class="results-recs-inner">
+            <h2 style="font-size:1.2rem;">Your personalised action plan</h2>
+            <div id="recs-loading" style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-tertiary); font-size: 0.9rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"/><path d="M12 2a10 10 0 019.95 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Generating your personalised action plan...
+            </div>
+            <div id="recs-content" style="line-height: 1.7; font-size: 0.95rem; color: var(--text-secondary); text-align: left;"></div>
+            <p id="recs-fallback" style="display: none; color: var(--text-tertiary); font-size: 0.9rem;"></p>
+          </div>
+        </div>
+
+        <div class="results-cta-card">
+          <h2>Ready to close the gaps?</h2>
+          <p>Book a free 30-minute discovery call and we will walk through your results together, identify quick wins, and map out a practical next step.</p>
+          <a href="booking.html" class="btn-cta-white">Book your free discovery call <span class="btn-arrow">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── Footer ──────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-left">&copy; 2026 Agentive Solutions &middot; Bournemouth, UK</span>
+      <ul class="footer-links">
+        <li><a href="https://agentivesolutions.co.uk">agentivesolutions.co.uk</a></li>
+        <li><a href="index.html#agents">Agents</a></li>
+        <li><a href="booking.html">Book a call</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // ─── Nav scroll behaviour ────────────────────────────
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ─── Mobile nav toggle ───────────────────────────────
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      const isOpen = navToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // ─── State ───────────────────────────────────────────
+    const state = {
+      lead: {},
+      answers: new Array(24).fill(null),
+      currentQuestion: 0
+    };
+
+    // ─── Questions Data ──────────────────────────────────
+    const categories = [
+      'Strategy & Vision',
+      'Culture & Change-Readiness',
+      'Skills & Literacy',
+      'Data & Information',
+      'Technology & Integration',
+      'Process & Operations',
+      'Governance, Ethics & Risk',
+      'Financial & Resources'
+    ];
+
+    const questions = [
+      // Category 0 — Strategy & Vision
+      {
+        text: 'We have a clear plan for how AI will affect our business over the next 1-3 years.',
+        why: 'Shows whether you are thinking proactively or reactively about AI. Businesses without a plan tend to get caught off guard.',
+        category: 0
+      },
+      {
+        text: 'We set measurable goals around AI adoption and track them regularly.',
+        why: 'Separates businesses that are experimenting from ones that are actually implementing with intent.',
+        category: 0
+      },
+      {
+        text: 'We know what our competitors are doing with AI and whether we are ahead or behind.',
+        why: 'Competitive awareness is a strong motivator. Most business owners do not know where they stand and that uncertainty costs them.',
+        category: 0
+      },
+      // Category 1 — Culture & Change-Readiness
+      {
+        text: 'Our team is open to changing how they work if it means less manual effort.',
+        why: 'The biggest AI implementation blocker is team resistance. This surfaces it early.',
+        category: 1
+      },
+      {
+        text: 'When we introduce new tools or processes, adoption tends to go smoothly.',
+        why: 'Past change behaviour predicts future AI adoption success. Relevant to how much support you will need.',
+        category: 1
+      },
+      {
+        text: 'We actively collect feedback from our team about what is frustrating or inefficient.',
+        why: 'Businesses that listen to their teams find automation opportunities faster. It signals operational maturity.',
+        category: 1
+      },
+      // Category 2 — Skills & Literacy
+      {
+        text: 'I personally feel confident using AI tools in my day-to-day work.',
+        why: 'Your own comfort level directly affects how quickly your business will adopt AI. This one is personal and honest.',
+        category: 2
+      },
+      {
+        text: 'Our team has had some training or exposure to AI tools in the last 12 months.',
+        why: 'Baseline literacy affects onboarding time and complexity. Useful for understanding where to start.',
+        category: 2
+      },
+      {
+        text: 'We know which AI tools exist that are relevant to our industry.',
+        why: 'Awareness is one of the biggest reasons businesses have not adopted yet. This confirms whether education is part of what you need.',
+        category: 2
+      },
+      // Category 3 — Data & Information
+      {
+        text: 'Our customer and client data is stored consistently in one place.',
+        why: 'Fragmented data is the most common technical blocker for AI. Immediately relevant to whether AI agents can connect to your systems.',
+        category: 3
+      },
+      {
+        text: 'We could easily pull a report of all our active clients, leads, and recent interactions.',
+        why: 'Very concrete and practical. Most business owners discover here that their data is messier than they thought.',
+        category: 3
+      },
+      {
+        text: 'We know where our sensitive business data lives and who has access to it.',
+        why: 'Data security awareness affects compliance risk. Important for any business handling client information.',
+        category: 3
+      },
+      // Category 4 — Technology & Integration
+      {
+        text: 'The tools we use day-to-day are modern, cloud-based, and generally work well together.',
+        why: 'A cloud-native stack is the prerequisite for AI automation. This identifies whether significant setup work is needed.',
+        category: 4
+      },
+      {
+        text: 'We currently use automation tools (like Zapier, Make, or similar) to connect our systems.',
+        why: 'Existing automation awareness means you already get the concept. It shortens the path to results.',
+        category: 4
+      },
+      {
+        text: 'When we adopt a new tool, integrating it with our existing systems is usually straightforward.',
+        why: 'Integration friction is a real concern. This surfaces whether you have had bad experiences that need addressing.',
+        category: 4
+      },
+      // Category 5 — Process & Operations
+      {
+        text: 'Our key business processes are documented so anyone on the team could follow them.',
+        why: 'Documented processes are the foundation for automation. Without them, AI agents cannot replicate your workflows accurately.',
+        category: 5
+      },
+      {
+        text: 'We have a clear picture of which tasks in the business are most repetitive and time-consuming.',
+        why: 'If you can articulate the pain, the solution becomes obvious. This is the core of where AI saves you time.',
+        category: 5
+      },
+      {
+        text: 'We regularly look for ways to reduce manual work and improve how we operate.',
+        why: 'An operational improvement mindset correlates strongly with successful AI adoption and long-term results.',
+        category: 5
+      },
+      // Category 6 — Governance, Ethics & Risk
+      {
+        text: 'We have basic policies in place for how staff should and should not use AI tools.',
+        why: 'Most small businesses have nothing here. A low score here is an easy, quick win.',
+        category: 6
+      },
+      {
+        text: 'We understand the data privacy implications of using AI tools in our business.',
+        why: 'GDPR awareness is particularly relevant for UK service businesses. This surfaces compliance anxiety early.',
+        category: 6
+      },
+      {
+        text: 'If an AI system made a significant error in our business, we would know how to respond.',
+        why: 'Incident preparedness is almost always low. It makes you think about risk in a concrete way.',
+        category: 6
+      },
+      // Category 7 — Financial & Resources
+      {
+        text: 'We have budget set aside specifically for technology and AI tools this year.',
+        why: 'Directly tells us whether you are ready to invest or whether we are talking about future plans.',
+        category: 7
+      },
+      {
+        text: 'When we invest in new technology, we track whether it actually delivers a return.',
+        why: 'ROI-conscious buyers need different support than those who buy on instinct. Helps us tailor the conversation.',
+        category: 7
+      },
+      {
+        text: 'Senior leadership in our business is actively involved in decisions about AI adoption.',
+        why: 'If the person completing this is not the decision-maker, that changes the next step. This identifies who needs to be in the room.',
+        category: 7
+      }
+    ];
+
+    // ─── Step Management ─────────────────────────────────
+    function showStep(num) {
+      document.querySelectorAll('.step').forEach(s => {
+        s.classList.remove('active');
+        s.classList.remove('step-enter');
+      });
+      const target = document.getElementById('step-' + num);
+      target.classList.add('active');
+      target.classList.add('step-enter');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ─── Step 1: Lead Form ───────────────────────────────
+    const leadForm = document.getElementById('lead-form');
+    leadForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+      const fields = ['firstName', 'lastName', 'workEmail', 'companyName', 'companySize', 'industry'];
+
+      fields.forEach(f => {
+        const el = document.getElementById(f);
+        const group = el.closest('.form-group');
+        group.classList.remove('has-error');
+
+        if (!el.value.trim()) {
+          group.classList.add('has-error');
+          valid = false;
+        }
+
+        if (f === 'workEmail') {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(el.value.trim())) {
+            group.classList.add('has-error');
+            valid = false;
+          }
+        }
+      });
+
+      if (!valid) return;
+
+      state.lead = {
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim(),
+        email: document.getElementById('workEmail').value.trim(),
+        company: document.getElementById('companyName').value.trim(),
+        companySize: document.getElementById('companySize').value,
+        industry: document.getElementById('industry').value
+      };
+
+      state.currentQuestion = 0;
+      renderQuestion();
+      showStep(2);
+    });
+
+    // ─── Step 2: Question Flow ───────────────────────────
+    function renderQuestion() {
+      const q = questions[state.currentQuestion];
+      const idx = state.currentQuestion;
+
+      document.getElementById('progress-category').textContent = categories[q.category];
+      document.getElementById('progress-count').textContent = (idx + 1) + ' of 24';
+      document.getElementById('progress-bar').style.width = ((idx + 1) / 24 * 100) + '%';
+      document.getElementById('question-text').textContent = q.text;
+      document.getElementById('why-content').textContent = q.why;
+
+      // Reset why toggle
+      const whyBtn = document.getElementById('why-toggle-btn');
+      const whyContent = document.getElementById('why-content');
+      whyBtn.classList.remove('open');
+      whyContent.classList.remove('open');
+
+      // Reset radio buttons
+      const radios = document.querySelectorAll('input[name="likert"]');
+      radios.forEach(r => { r.checked = false; });
+
+      // Restore previous answer if navigating back
+      if (state.answers[idx] !== null) {
+        const savedRadio = document.getElementById('likert-' + state.answers[idx]);
+        if (savedRadio) savedRadio.checked = true;
+      }
+
+      // Back button visibility
+      const backBtn = document.getElementById('btn-back');
+      backBtn.classList.toggle('hidden', idx === 0);
+
+      // Next button state
+      const nextBtn = document.getElementById('btn-next');
+      nextBtn.disabled = state.answers[idx] === null;
+      nextBtn.textContent = '';
+      if (idx === 23) {
+        nextBtn.innerHTML = 'See my results <span class="btn-arrow">&rarr;</span>';
+      } else {
+        nextBtn.innerHTML = 'Next <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+      }
+    }
+
+    // Likert selection
+    document.querySelectorAll('input[name="likert"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        state.answers[state.currentQuestion] = parseInt(this.value);
+        document.getElementById('btn-next').disabled = false;
+      });
+    });
+
+    // Why toggle
+    document.getElementById('why-toggle-btn').addEventListener('click', function() {
+      this.classList.toggle('open');
+      document.getElementById('why-content').classList.toggle('open');
+    });
+
+    // Next button
+    document.getElementById('btn-next').addEventListener('click', function() {
+      if (state.currentQuestion < 23) {
+        state.currentQuestion++;
+        renderQuestion();
+        // Animate card
+        const card = document.querySelector('.question-card');
+        card.style.animation = 'none';
+        card.offsetHeight;
+        card.style.animation = 'stepIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+      } else {
+        showStep(3);
+        runLoadingSequence();
+      }
+    });
+
+    // Back button
+    document.getElementById('btn-back').addEventListener('click', function() {
+      if (state.currentQuestion > 0) {
+        state.currentQuestion--;
+        renderQuestion();
+        const card = document.querySelector('.question-card');
+        card.style.animation = 'none';
+        card.offsetHeight;
+        card.style.animation = 'stepIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+      }
+    });
+
+    // ─── Step 3: Loading Screen ──────────────────────────
+    function runLoadingSequence() {
+      const messages = [
+        'Scoring across 8 dimensions...',
+        'Mapping your strengths and gaps...',
+        'Generating your personalised action plan...'
+      ];
+      const msgEl = document.getElementById('loading-message');
+      let i = 0;
+      msgEl.textContent = messages[0];
+
+      const interval = setInterval(() => {
+        i++;
+        if (i < messages.length) {
+          msgEl.style.opacity = '0';
+          setTimeout(() => {
+            msgEl.textContent = messages[i];
+            msgEl.style.opacity = '1';
+          }, 200);
+        }
+      }, 900);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        calculateResults();
+        renderResults();
+        submitToHubSpot();
+        showStep(4);
+      }, 2700);
+    }
+
+    // ─── Scoring ─────────────────────────────────────────
+    let categoryScores = [];
+    let overallScore = 0;
+
+    function calculateResults() {
+      categoryScores = [];
+      for (let c = 0; c < 8; c++) {
+        const start = c * 3;
+        const slice = state.answers.slice(start, start + 3);
+        const sum = slice.reduce((a, b) => a + b, 0);
+        const score = Math.round((sum / 15) * 10 * 10) / 10;
+        categoryScores.push(score);
+      }
+      overallScore = Math.round(categoryScores.reduce((a, b) => a + b, 0) / 8 * 10) / 10;
+    }
+
+    // ─── Step 4: Render Results ──────────────────────────
+    function renderResults() {
+      document.getElementById('results-company').textContent = state.lead.company;
+      document.getElementById('results-name').textContent = 'Assessment for ' + state.lead.firstName + ' ' + state.lead.lastName;
+      document.getElementById('results-score-big').textContent = overallScore.toFixed(1);
+
+      // Badge & stage
+      const badge = document.getElementById('results-badge');
+      let stage = 'Early Stage';
+      if (overallScore >= 8) stage = 'Advanced';
+      else if (overallScore >= 6) stage = 'Intermediate';
+      else if (overallScore >= 4) stage = 'Developing';
+
+      badge.textContent = stage;
+      badge.className = 'results-badge badge-' + stage.toLowerCase().replace(' ', '-');
+
+      // Radar chart
+      const canvas = document.getElementById('radar-chart');
+      const existingChart = Chart.getChart(canvas);
+      if (existingChart) existingChart.destroy();
+      const ctx = canvas.getContext('2d');
+      const radarChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: categories.map(c => {
+            if (c.length > 18) {
+              const mid = c.lastIndexOf(' ', Math.ceil(c.length / 2));
+              return [c.slice(0, mid), c.slice(mid + 1)];
+            }
+            return c;
+          }),
+          datasets: [{
+            label: 'Your Score',
+            data: new Array(8).fill(0),
+            backgroundColor: 'rgba(29, 158, 117, 0.15)',
+            borderColor: '#1D9E75',
+            borderWidth: 2,
+            pointBackgroundColor: '#1D9E75',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          animation: {
+            duration: 1200,
+            easing: 'easeOutCubic'
+          },
+          scales: {
+            r: {
+              beginAtZero: true,
+              max: 10,
+              min: 0,
+              ticks: {
+                stepSize: 2,
+                font: {
+                  family: "'Plus Jakarta Sans', sans-serif",
+                  size: 10
+                },
+                color: '#9C9C90',
+                backdropColor: 'transparent'
+              },
+              grid: {
+                color: 'rgba(26, 26, 23, 0.08)'
+              },
+              angleLines: {
+                color: 'rgba(26, 26, 23, 0.08)'
+              },
+              pointLabels: {
+                font: {
+                  family: "'Plus Jakarta Sans', sans-serif",
+                  size: 12,
+                  weight: '500'
+                },
+                color: '#1A1A17',
+                padding: 16
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+
+      // Animate radar chart from zero to real scores
+      setTimeout(() => {
+        radarChart.data.datasets[0].data = categoryScores;
+        radarChart.update();
+      }, 300);
+
+      // Category bars
+      const barsContainer = document.getElementById('category-bars');
+      barsContainer.innerHTML = '';
+      categories.forEach((cat, i) => {
+        const score = categoryScores[i];
+        let color = '#1D9E75';
+        if (score < 5) color = '#E24B4A';
+        else if (score < 7) color = '#EF9F27';
+
+        const row = document.createElement('div');
+        row.className = 'category-row';
+        row.innerHTML =
+          '<span class="category-name">' + cat + '</span>' +
+          '<div class="category-bar-track"><div class="category-bar-fill" style="width: 0%; background: ' + color + '"></div></div>' +
+          '<span class="category-score-value" style="color: ' + color + '">' + score.toFixed(1) + '</span>';
+        barsContainer.appendChild(row);
+
+        // Animate bars after a short delay
+        setTimeout(() => {
+          row.querySelector('.category-bar-fill').style.width = (score / 10 * 100) + '%';
+        }, 100 + i * 80);
+      });
+
+      // Find lowest 3 categories
+      const lowestCategories = categories
+        .map((cat, i) => ({ name: cat, score: categoryScores[i] }))
+        .sort((a, b) => a.score - b.score)
+        .slice(0, 3)
+        .map(c => c.name);
+
+      // Generate AI recommendations
+      generateRecommendations(categoryScores, overallScore, stage, lowestCategories);
+    }
+
+    // ─── Markdown Renderer ──────────────────────────────
+    function renderMarkdown(text) {
+      return text
+        // Headers
+        .replace(/^### (.+)$/gm, '<h4 style="font-size:1rem;font-weight:600;margin:1.5rem 0 0.5rem;">$1</h4>')
+        .replace(/^## (.+)$/gm, '<h3 style="font-size:1.1rem;font-weight:600;margin:1.5rem 0 0.5rem;">$1</h3>')
+        .replace(/^# (.+)$/gm, '<h3 style="font-family:var(--font-serif);font-size:1.3rem;font-weight:400;margin:0 0 1rem;">$1</h3>')
+        // Bold
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        // Italic
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        // Line breaks into paragraphs
+        .replace(/\n\n/g, '</p><p style="margin-bottom:1rem;">')
+        .replace(/\n/g, '<br>')
+        // Wrap in paragraph
+        .replace(/^/, '<p style="margin-bottom:1rem;">')
+        .replace(/$/, '</p>');
+    }
+
+    // ─── AI Recommendations ─────────────────────────────
+    async function generateRecommendations(categoryScores, overallScore, stage, lowestCategories) {
+      const loadingEl = document.getElementById('recs-loading');
+      const contentEl = document.getElementById('recs-content');
+      const fallbackEl = document.getElementById('recs-fallback');
+
+      try {
+        const response = await fetch('/api/report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            company: state.lead.company,
+            name: state.lead.firstName + ' ' + state.lead.lastName,
+            size: state.lead.companySize,
+            industry: state.lead.industry,
+            overallScore: overallScore,
+            stage: stage,
+            categoryScores: categoryScores,
+            categories: categories,
+            lowestCategories: lowestCategories,
+            questionResponses: questions.map((q, i) => ({
+              question: q.text,
+              category: categories[q.category],
+              answer: state.answers[i],
+              label: ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'][state.answers[i] - 1]
+            }))
+          })
+        });
+
+        if (!response.ok) throw new Error('API returned ' + response.status);
+
+        loadingEl.style.display = 'none';
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let rawText = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          const chunk = decoder.decode(value, { stream: true });
+          const lines = chunk.split('\n').filter(l => l.trim().startsWith('data: '));
+
+          for (const line of lines) {
+            const data = line.replace('data: ', '').trim();
+            if (data === '[DONE]') break;
+            try {
+              const parsed = JSON.parse(data);
+              if (parsed.content) {
+                rawText += parsed.content;
+                contentEl.innerHTML = renderMarkdown(rawText);
+              }
+            } catch (e) {
+              // Skip malformed chunks
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Recommendations error:', error);
+        loadingEl.style.display = 'none';
+        fallbackEl.style.display = 'block';
+        fallbackEl.textContent = 'Your personalised recommendations will be emailed to ' + state.lead.email + ' shortly.';
+      }
+    }
+
+    // ─── HubSpot Stub ────────────────────────────────────
+    function submitToHubSpot() {
+      // Build the payload for the HubSpot Forms API submission.
+      // To connect this to HubSpot, replace the console.log below with a
+      // fetch() call to your HubSpot Forms API endpoint:
+      //
+      // POST https://api.hsforms.com/submissions/v3/integration/submit/{portalId}/{formGuid}
+      //
+      // The payload structure matches HubSpot's expected format.
+      const payload = {
+        portalId: 'YOUR_PORTAL_ID',
+        formGuid: 'YOUR_FORM_GUID',
+        fields: [
+          { name: 'firstname', value: state.lead.firstName },
+          { name: 'lastname', value: state.lead.lastName },
+          { name: 'email', value: state.lead.email },
+          { name: 'company', value: state.lead.company },
+          { name: 'company_size', value: state.lead.companySize },
+          { name: 'industry', value: state.lead.industry },
+          { name: 'ai_readiness_score', value: overallScore.toFixed(1) },
+          { name: 'ai_readiness_stage', value: overallScore >= 8 ? 'Advanced' : overallScore >= 6 ? 'Intermediate' : overallScore >= 4 ? 'Developing' : 'Early Stage' },
+          { name: 'strategy_vision_score', value: categoryScores[0].toFixed(1) },
+          { name: 'culture_change_score', value: categoryScores[1].toFixed(1) },
+          { name: 'skills_literacy_score', value: categoryScores[2].toFixed(1) },
+          { name: 'data_information_score', value: categoryScores[3].toFixed(1) },
+          { name: 'technology_integration_score', value: categoryScores[4].toFixed(1) },
+          { name: 'process_operations_score', value: categoryScores[5].toFixed(1) },
+          { name: 'governance_ethics_score', value: categoryScores[6].toFixed(1) },
+          { name: 'financial_resources_score', value: categoryScores[7].toFixed(1) }
+        ],
+        context: {
+          pageUri: window.location.href,
+          pageName: 'AI Readiness Assessment'
+        }
+      };
+
+      console.log('[HubSpot Stub] Assessment data ready for submission:', payload);
+      console.log('[HubSpot Stub] To activate, replace this log with a fetch() POST to the HubSpot Forms API endpoint above.');
+    }
+  </script>
+
+</body>
+</html>
