@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agents | Agentive Solutions</title>
+  <meta name="description" content="See what AI agents actually do for accountants, solicitors, and mortgage brokers. Real workflows grouped by industry." />
+  <link rel="canonical" href="https://agentivesolutions.co.uk/agents" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:title" content="AI Agents | Agentive Solutions" />
+  <meta property="og:description" content="Real workflows. Real output. AI agents grouped by industry for UK professional services." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0A0A0F;
+      --bg-alt: #101018;
+      --bg-card: #14141E;
+      --bg-card-hover: #1A1A28;
+      --text-primary: #F0F0F5;
+      --text-secondary: #A0A0B0;
+      --text-muted: #606070;
+      --accent: #1D9E75;
+      --accent-hover: #17C68E;
+      --accent-subtle: rgba(29, 158, 117, 0.12);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-strong: rgba(255, 255, 255, 0.12);
+      --radius-sm: 0.5rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); }
+    .nav-logo .dot { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-link { font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); transition: color 0.2s; }
+    .nav-link:hover { color: var(--text-primary); }
+    .nav-link.active { color: var(--text-primary); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 600; font-family: var(--font-sans); cursor: pointer; transition: all 0.2s; border: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .nav-mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); margin: 5px 0; transition: all 0.3s; }
+    .nav-mobile-menu { display: none; flex-direction: column; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--border); background: rgba(10, 10, 15, 0.95); }
+    .nav-mobile-menu.open { display: flex; }
+
+    /* Page header */
+    .page-header {
+      padding-top: 140px;
+      padding-bottom: 60px;
+      text-align: center;
+    }
+
+    .page-header .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .help-hint {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: default;
+      margin: 14px auto 0;
+      position: relative;
+    }
+
+    .help-hint:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .help-tooltip {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .help-hint:hover .help-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Filter tabs */
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .filter-tab {
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font-sans);
+    }
+
+    .filter-tab:hover { color: var(--text-secondary); border-color: var(--border-strong); }
+    .filter-tab.active { color: var(--text-primary); background: var(--bg-card); border-color: var(--border-strong); }
+
+    /* Agent cards grid */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      padding-bottom: 80px;
+    }
+
+    .agent-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s;
+      display: block;
+    }
+
+    .agent-card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .agent-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .agent-card.revealed:hover {
+      transform: translateY(-4px);
+    }
+
+    .agent-card.hidden { display: none; }
+
+    .agent-card-image {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .agent-card-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .agent-card-body {
+      padding: 24px;
+    }
+
+    .agent-card-category {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .agent-card-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .agent-card-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Industry headings */
+    .industry-heading {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      grid-column: 1 / -1;
+    }
+
+    .industry-heading:first-of-type {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .industry-heading.hidden { display: none; }
+
+    /* CTA */
+    .cta-section {
+      padding: 100px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* Footer */
+    .footer { padding: 48px 0; border-top: 1px solid var(--border); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+    .footer-logo .dot { color: var(--accent); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-link { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
+    .footer-link:hover { color: var(--text-primary); }
+    .footer-meta { display: flex; gap: 20px; font-size: 0.8rem; color: var(--text-muted); }
+
+    @media (max-width: 1024px) {
+      .agents-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: block; }
+      .agents-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">agentive<span class="dot">.</span></a>
+      <div class="nav-links">
+        <a href="agents.html" class="nav-link active">Use cases</a>
+        <a href="index.html#process" class="nav-link">How it works</a>
+        <a href="/booking.html" class="btn btn-primary">Book an Exploration Call</a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Menu" onclick="document.querySelector('.nav-mobile-menu').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile-menu">
+      <a href="agents.html" class="nav-link">Use cases</a>
+      <a href="index.html#process" class="nav-link">How it works</a>
+      <a href="/booking.html" class="btn btn-primary">Book an Exploration Call</a>
+    </div>
+  </nav>
+
+  <section class="page-header container">
+    <p class="eyebrow">Use cases</p>
+    <h1>What agents actually do</h1>
+    <p>Real workflows. Real output. Grouped by industry so you can see exactly what's relevant to your firm.</p>
+    <div class="help-hint">
+      ?
+      <div class="help-tooltip">Don't see what you need? Every business is different. We build custom agents for your specific workflows. Tell us what you want automated and we'll scope it.</div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="accountants">Accountants</button>
+      <button class="filter-tab" data-filter="solicitors">Solicitors</button>
+      <button class="filter-tab" data-filter="brokers">Mortgage Brokers</button>
+    </div>
+
+    <div class="agents-grid">
+
+      <!-- ACCOUNTANTS -->
+      <h3 class="industry-heading" data-category="accountants">Accountants</h3>
+
+      <a href="agents/acc-document-chaser.html" class="agent-card" data-category="accountants">
+        <div class="agent-card-image" style="background: rgba(29, 158, 117, 0.08);">
+          <img src="agents/acc-document-chaser.png" alt="Document Chaser" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Accountants</div>
+          <h2 class="agent-card-name">Document Chaser</h2>
+          <p class="agent-card-desc">Chases clients for outstanding documents via WhatsApp every morning.</p>
+        </div>
+      </a>
+
+      <a href="agents/acc-enquiry-responder.html" class="agent-card" data-category="accountants">
+        <div class="agent-card-image" style="background: rgba(91, 141, 239, 0.08);">
+          <img src="agents/acc-enquiry-responder.png" alt="Enquiry Responder" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Accountants</div>
+          <h2 class="agent-card-name">Enquiry Responder</h2>
+          <p class="agent-card-desc">Responds to new client enquiries in under 60 seconds, 24/7.</p>
+        </div>
+      </a>
+
+      <a href="agents/acc-morning-briefing.html" class="agent-card" data-category="accountants">
+        <div class="agent-card-image" style="background: rgba(255, 189, 89, 0.08);">
+          <img src="agents/acc-morning-briefing.png" alt="Morning Briefing" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Accountants</div>
+          <h2 class="agent-card-name">Morning Briefing</h2>
+          <p class="agent-card-desc">8am every day: what came in, what's due, what needs attention.</p>
+        </div>
+      </a>
+
+      <a href="agents/acc-client-qa.html" class="agent-card" data-category="accountants">
+        <div class="agent-card-image" style="background: rgba(162, 120, 255, 0.08);">
+          <img src="agents/acc-client-qa.png" alt="Client Q&amp;A" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Accountants</div>
+          <h2 class="agent-card-name">Client Q&amp;A</h2>
+          <p class="agent-card-desc">Answers routine client questions instantly via WhatsApp.</p>
+        </div>
+      </a>
+
+      <a href="agents/acc-fee-chaser.html" class="agent-card" data-category="accountants">
+        <div class="agent-card-image" style="background: rgba(255, 107, 107, 0.08);">
+          <img src="agents/acc-fee-chaser.png" alt="Fee Chaser" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Accountants</div>
+          <h2 class="agent-card-name">Fee Chaser</h2>
+          <p class="agent-card-desc">Chases outstanding invoices with polite, escalating reminders.</p>
+        </div>
+      </a>
+
+      <!-- SOLICITORS -->
+      <h3 class="industry-heading" data-category="solicitors">Solicitors</h3>
+
+      <a href="agents/sol-document-chaser.html" class="agent-card" data-category="solicitors">
+        <div class="agent-card-image" style="background: rgba(29, 158, 117, 0.08);">
+          <img src="agents/sol-document-chaser.png" alt="Document &amp; ID Chaser" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Solicitors</div>
+          <h2 class="agent-card-name">Document &amp; ID Chaser</h2>
+          <p class="agent-card-desc">Requests and chases ID, forms, and signed documents per matter.</p>
+        </div>
+      </a>
+
+      <a href="agents/sol-case-updates.html" class="agent-card" data-category="solicitors">
+        <div class="agent-card-image" style="background: rgba(103, 232, 249, 0.08);">
+          <img src="agents/sol-case-updates.png" alt="Case Update Handler" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Solicitors</div>
+          <h2 class="agent-card-name">Case Update Handler</h2>
+          <p class="agent-card-desc">Handles 'where is my case?' questions instantly via WhatsApp.</p>
+        </div>
+      </a>
+
+      <a href="agents/sol-review-requester.html" class="agent-card" data-category="solicitors">
+        <div class="agent-card-image" style="background: rgba(72, 199, 176, 0.08);">
+          <img src="agents/sol-review-requester.png" alt="Review Requester" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Solicitors</div>
+          <h2 class="agent-card-name">Review Requester</h2>
+          <p class="agent-card-desc">Sends review requests after every completed matter.</p>
+        </div>
+      </a>
+
+      <a href="agents/sol-enquiry-handler.html" class="agent-card" data-category="solicitors">
+        <div class="agent-card-image" style="background: rgba(91, 141, 239, 0.08);">
+          <img src="agents/sol-enquiry-handler.png" alt="New Client Enquiry" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Solicitors</div>
+          <h2 class="agent-card-name">New Client Enquiry</h2>
+          <p class="agent-card-desc">Qualifies and books consultations from website and email leads.</p>
+        </div>
+      </a>
+
+      <a href="agents/sol-compliance.html" class="agent-card" data-category="solicitors">
+        <div class="agent-card-image" style="background: rgba(255, 107, 107, 0.08);">
+          <img src="agents/sol-compliance.png" alt="Compliance Monitor" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Solicitors</div>
+          <h2 class="agent-card-name">Compliance Monitor</h2>
+          <p class="agent-card-desc">Tracks AML documents, ID expiry, and compliance deadlines.</p>
+        </div>
+      </a>
+
+      <!-- MORTGAGE BROKERS -->
+      <h3 class="industry-heading" data-category="brokers">Mortgage Brokers</h3>
+
+      <a href="agents/mb-lead-responder.html" class="agent-card" data-category="brokers">
+        <div class="agent-card-image" style="background: rgba(91, 141, 239, 0.08);">
+          <img src="agents/mb-lead-responder.png" alt="Lead Responder" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Mortgage Brokers</div>
+          <h2 class="agent-card-name">Lead Responder</h2>
+          <p class="agent-card-desc">Responds to mortgage enquiries in under 60 seconds, any hour.</p>
+        </div>
+      </a>
+
+      <a href="agents/mb-document-chaser.html" class="agent-card" data-category="brokers">
+        <div class="agent-card-image" style="background: rgba(29, 158, 117, 0.08);">
+          <img src="agents/mb-document-chaser.png" alt="Document Chaser" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Mortgage Brokers</div>
+          <h2 class="agent-card-name">Document Chaser</h2>
+          <p class="agent-card-desc">Chases payslips, bank statements, and ID until they arrive.</p>
+        </div>
+      </a>
+
+      <a href="agents/mb-remortgage-radar.html" class="agent-card" data-category="brokers">
+        <div class="agent-card-image" style="background: rgba(162, 120, 255, 0.08);">
+          <img src="agents/mb-remortgage-radar.png" alt="Remortgage Radar" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Mortgage Brokers</div>
+          <h2 class="agent-card-name">Remortgage Radar</h2>
+          <p class="agent-card-desc">Contacts clients 6 months before their fixed rate ends.</p>
+        </div>
+      </a>
+
+      <a href="agents/mb-application-updates.html" class="agent-card" data-category="brokers">
+        <div class="agent-card-image" style="background: rgba(103, 232, 249, 0.08);">
+          <img src="agents/mb-application-updates.png" alt="Application Updates" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Mortgage Brokers</div>
+          <h2 class="agent-card-name">Application Updates</h2>
+          <p class="agent-card-desc">Sends clients proactive updates on their application status.</p>
+        </div>
+      </a>
+
+      <a href="agents/mb-retention.html" class="agent-card" data-category="brokers">
+        <div class="agent-card-image" style="background: rgba(255, 189, 89, 0.08);">
+          <img src="agents/mb-retention.png" alt="Post-Completion Retention" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+        <div class="agent-card-body">
+          <div class="agent-card-category">Mortgage Brokers</div>
+          <h2 class="agent-card-name">Post-Completion Retention</h2>
+          <p class="agent-card-desc">Stays in touch after completion to prevent client loss.</p>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>See which agents your firm needs</h2>
+      <p>30 minutes. We'll look at how your team works and show you what changes in week one.</p>
+      <a href="/booking.html" class="btn btn-primary" style="padding: 14px 36px; font-size: 1rem;">Book an Exploration Call</a>
+      <p class="cta-note">Free &middot; 30 minutes &middot; No commitment</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">agentive<span class="dot">.</span></span>
+        <div class="footer-links">
+          <a href="agents.html" class="footer-link">Use cases</a>
+          <a href="index.html#process" class="footer-link">How it works</a>
+          <a href="/booking.html" class="footer-link">Book an Exploration Call</a>
+        </div>
+        <div class="footer-meta">
+          <span>Bournemouth, UK</span>
+          <span>&copy; 2026 Agentive Solutions</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal cards on scroll
+    (function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.agent-card').forEach(function(el, i) {
+        el.style.transitionDelay = (i * 0.08) + 's';
+        observer.observe(el);
+      });
+    })();
+
+    // Filter tabs
+    (function() {
+      var tabs = document.querySelectorAll('.filter-tab');
+      var cards = document.querySelectorAll('.agent-card');
+      var headings = document.querySelectorAll('.industry-heading');
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          tabs.forEach(function(t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+          var filter = tab.getAttribute('data-filter');
+
+          cards.forEach(function(card) {
+            if (filter === 'all') {
+              card.classList.remove('hidden');
+            } else {
+              var category = card.getAttribute('data-category') || '';
+              if (category === filter) {
+                card.classList.remove('hidden');
+              } else {
+                card.classList.add('hidden');
+              }
+            }
+          });
+
+          headings.forEach(function(heading) {
+            if (filter === 'all') {
+              heading.classList.remove('hidden');
+            } else {
+              var category = heading.getAttribute('data-category') || '';
+              if (category === filter) {
+                heading.classList.remove('hidden');
+              } else {
+                heading.classList.add('hidden');
+              }
+            }
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

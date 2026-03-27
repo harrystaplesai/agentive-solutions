@@ -3,3 +3,5 @@ node_modules/
 .vercel/
 icon-preview.html
 icon-preview-v2.html
+.vercel
+.env*.local

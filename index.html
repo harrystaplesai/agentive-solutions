@@ -3,39 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agentive Solutions | AI Operations for Service Businesses</title>
-  <meta name="description" content="AI agent systems that run service businesses on autopilot. Lead response, inbox management, scheduling, and invoicing handled 24/7." />
+  <title>Agentive Solutions | AI Agent Teams for UK Professional Services</title>
+  <meta name="description" content="AI agent teams for accountants, solicitors, and mortgage brokers. Document chasing, client comms, deadline monitoring, inbox management. Live in two weeks." />
   <link rel="canonical" href="https://agentivesolutions.co.uk/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <meta property="og:title" content="Agentive Solutions | AI Operations for Service Businesses" />
-  <meta property="og:description" content="AI agent systems that run service businesses on autopilot. Lead response, inbox management, scheduling, and invoicing handled 24/7." />
+  <meta property="og:title" content="Agentive Solutions | AI Agent Teams for UK Professional Services" />
+  <meta property="og:description" content="AI agent teams for accountants, solicitors, and mortgage brokers. Document chasing, client comms, deadline monitoring, inbox management. Live in two weeks." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://agentivesolutions.co.uk/" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Agentive Solutions | AI Operations for Service Businesses" />
+  <meta name="twitter:title" content="Agentive Solutions | AI Agent Teams for UK Professional Services" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #FAFAF8;
-      --bg-alt: #F3F2EE;
-      --surface: #FFFFFF;
-      --text-primary: #1A1A17;
-      --text-secondary: #6B6B60;
-      --text-tertiary: #9C9C90;
-      --accent: #C8764B;
-      --accent-hover: #B5683F;
-      --accent-subtle: rgba(200, 118, 75, 0.08);
-      --border: rgba(26, 26, 23, 0.08);
-      --border-strong: rgba(26, 26, 23, 0.14);
-      --radius-sm: 0.75rem;
-      --radius-md: 1.25rem;
-      --radius-lg: 2rem;
-      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      --font-serif: 'Instrument Serif', Georgia, serif;
+      --bg: #0A0A0F;
+      --bg-alt: #101018;
+      --bg-card: #14141E;
+      --bg-card-hover: #1A1A28;
+      --text-primary: #F0F0F5;
+      --text-secondary: #A0A0B0;
+      --text-muted: #606070;
+      --accent: #1D9E75;
+      --accent-hover: #17C68E;
+      --accent-subtle: rgba(29, 158, 117, 0.12);
+      --agent-name: #D4A574;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-strong: rgba(255, 255, 255, 0.12);
+      --radius-sm: 0.5rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     }
 
     html {
@@ -50,1204 +51,1457 @@
       color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
-      position: relative;
-      width: 100%;
     }
 
-    /* ─── Utility ───────────────────────────────────────── */
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 clamp(1.5rem, 5vw, 3rem);
+      padding: 0 24px;
     }
 
-    .eyebrow {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      display: inline-block;
-    }
-
-    .sr-only {
-      position: absolute; width: 1px; height: 1px;
-      padding: 0; margin: -1px; overflow: hidden;
-      clip: rect(0,0,0,0); border: 0;
-    }
-
-    /* ─── Reveal Animation ─────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-
-    /* ─── Navigation ───────────────────────────────────── */
+    /* ===== NAV ===== */
     .nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
-      padding: 1rem 0;
-      transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+      z-index: 1000;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    .nav.scrolled {
-      background: rgba(250, 250, 248, 0.85);
-      backdrop-filter: blur(20px) saturate(1.4);
-      -webkit-backdrop-filter: blur(20px) saturate(1.4);
-      box-shadow: 0 1px 0 var(--border);
-      padding: 0.6rem 0;
-    }
+
     .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      height: 64px;
     }
+
     .nav-logo {
+      font-size: 1.35rem;
       font-weight: 700;
-      font-size: 1.15rem;
-      color: var(--text-primary);
-      text-decoration: none;
       letter-spacing: -0.02em;
+      color: var(--text-primary);
     }
-    .nav-logo span { color: var(--accent); }
+
+    .nav-logo .dot {
+      color: var(--accent);
+    }
+
     .nav-links {
       display: flex;
-      gap: 2rem;
-      list-style: none;
       align-items: center;
+      gap: 32px;
     }
-    .nav-links a {
-      font-size: 0.875rem;
+
+    .nav-link {
+      font-size: 0.9rem;
       font-weight: 500;
       color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s ease;
+      transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--text-primary); }
-    .nav-links a.btn-primary { color: #fff; }
-    .nav-links a.btn-primary:hover { color: #fff; }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.75rem;
-      font-size: 0.875rem;
+      justify-content: center;
+      padding: 10px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
       font-weight: 600;
-      font-family: inherit;
-      border-radius: 100px;
-      text-decoration: none;
+      font-family: var(--font-sans);
       cursor: pointer;
+      transition: all 0.2s;
       border: none;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                  background 0.2s ease;
     }
-    .btn:active { transform: scale(0.97); }
+
     .btn-primary {
-      background: var(--text-primary);
-      color: var(--bg);
+      background: var(--accent);
+      color: #fff;
     }
+
     .btn-primary:hover {
-      box-shadow: 0 4px 20px rgba(26, 26, 23, 0.2);
+      background: var(--accent-hover);
       transform: translateY(-1px);
     }
-    .btn-secondary {
-      background: transparent;
-      color: var(--text-primary);
-      border: 1.5px solid var(--border-strong);
-    }
-    .btn-secondary:hover {
-      background: var(--text-primary);
-      color: var(--bg);
-      border-color: var(--text-primary);
-    }
-    .btn-arrow {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.75rem;
-      height: 1.75rem;
-      background: rgba(255,255,255,0.2);
-      border-radius: 50%;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .btn:hover .btn-arrow { transform: translateX(2px); }
 
-    /* Mobile nav toggle */
-    .nav-toggle {
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text-primary);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .nav-mobile-toggle {
       display: none;
-      flex-direction: column;
-      gap: 5px;
       background: none;
       border: none;
       cursor: pointer;
       padding: 4px;
     }
-    .nav-toggle span {
+
+    .nav-mobile-toggle span {
+      display: block;
       width: 22px;
       height: 2px;
       background: var(--text-primary);
-      border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      margin: 5px 0;
+      transition: all 0.3s;
     }
-    .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-toggle.active span:nth-child(2) { opacity: 0; }
-    .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* ─── Hero ─────────────────────────────────────────── */
-    .hero {
-      min-height: 100dvh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 4rem;
-      padding-top: 6rem;
-      padding-bottom: 4rem;
-    }
-    .hero-content { max-width: 540px; }
-    .hero-intro {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      margin-bottom: 1.25rem;
-      line-height: 1.5;
-    }
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      font-weight: 400;
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 em {
-      font-style: italic;
+    /* ===== EYEBROW ===== */
+    .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--accent);
+      margin-bottom: 16px;
     }
-    .hero p {
+
+    .section-heading {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
       font-size: 1.1rem;
       color: var(--text-secondary);
       line-height: 1.7;
-      margin-bottom: 2.5rem;
-      max-width: 440px;
+      max-width: 640px;
     }
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .hero-visual {
+
+    /* ===== HERO ===== */
+    .hero {
       position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 240px 1fr 140px;
       overflow: hidden;
     }
-    .hero-card-stack {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      padding-bottom: 3rem;
+
+    /* Left sidebar - Active Agents */
+    .hero-sidebar-left {
+      padding: 80px 16px 40px 24px;
+      border-right: 1px solid var(--border);
+      z-index: 2;
     }
-    .hero-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.5rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 8px 30px rgba(0,0,0,0.04);
-    }
-    .hero-card + .hero-card {
-      position: absolute;
-      bottom: -1.5rem;
-      left: 1.5rem;
-      right: 0;
-      z-index: -1;
-      opacity: 0.6;
-      transform: rotate(2deg);
-    }
-    .hero-card + .hero-card + .hero-card {
-      bottom: -2.8rem;
-      left: 2.5rem;
-      right: 0;
-      z-index: -2;
-      opacity: 0.3;
-      transform: rotate(4deg);
-    }
-    .hero-card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
-    }
-    .hero-card-icon {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-card-title {
-      font-size: 0.85rem;
+
+    .hero-sidebar-title {
+      font-size: 0.7rem;
       font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
     }
-    .hero-card-subtitle {
-      font-size: 0.75rem;
-      color: var(--text-tertiary);
-    }
-    .hero-card-body {
-      background: var(--bg-alt);
-      border-radius: var(--radius-sm);
-      padding: 1rem 1.25rem;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-    .hero-card-body .typing-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      background: var(--accent);
-      margin-left: 2px;
-      animation: blink 1s step-end infinite;
-      vertical-align: text-bottom;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-    .hero-card-meta {
+
+    .hero-agent-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      color: var(--text-tertiary);
-    }
-    .hero-card-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      color: #3D8C5C;
-      font-weight: 500;
-    }
-    .hero-card-status::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: #3D8C5C;
-      border-radius: 50%;
+      padding: 10px 0;
+      gap: 8px;
     }
 
-    /* ─── Logos / Trust ─────────────────────────────────── */
-    .trust {
-      padding-top: 3rem;
-      padding-bottom: 5rem;
-      text-align: center;
-    }
-    .trust p {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 2rem;
-    }
-    .trust-logos {
+    .hero-agent-left {
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-      opacity: 0.35;
+      gap: 8px;
     }
-    .trust-logo {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
+
+    .hero-agent-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hero-agent-name {
+      font-size: 0.82rem;
+      font-weight: 500;
       color: var(--text-primary);
       white-space: nowrap;
     }
 
-    /* ─── Problem Section ──────────────────────────────── */
-    .problem {
-      padding-top: 6rem;
-      padding-bottom: 6rem;
-    }
-    .problem-header {
-      max-width: 560px;
-      margin-bottom: 4rem;
-    }
-    .problem-header h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
-    .problem-header p {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-    .problem-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-    .problem-item {
-      background: var(--surface);
-      padding: 2.5rem;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 1.25rem;
-      align-items: start;
-    }
-    .problem-before {
-      font-size: 0.9rem;
-      color: var(--text-tertiary);
-      text-decoration: line-through;
-      line-height: 1.5;
-    }
-    .problem-arrow {
-      color: var(--accent);
-      font-size: 1.25rem;
-      line-height: 1;
-      padding-top: 0.1rem;
-    }
-    .problem-after {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      line-height: 1.5;
+    .hero-agent-status {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      font-family: 'SF Mono', 'Fira Code', monospace;
     }
 
-    /* ─── Differentiators ──────────────────────────────── */
-    .diff {
-      padding-top: 2rem;
-      padding-bottom: 6rem;
-    }
-    .diff-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-    .diff-item {
-      padding: clamp(2rem, 4vw, 3rem);
-      background: var(--surface);
-      position: relative;
-    }
-    .diff-item:nth-child(2) { border-left: 1px solid var(--border); }
-    .diff-item:nth-child(3) { border-top: 1px solid var(--border); }
-    .diff-item:nth-child(4) {
-      border-top: 1px solid var(--border);
-      border-left: 1px solid var(--border);
-    }
-    .diff-number {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      color: var(--accent);
-      opacity: 0.35;
-      line-height: 1;
-      margin-bottom: 1.25rem;
-    }
-    .diff-item h3 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.6rem;
-    }
-    .diff-item p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      max-width: 340px;
-    }
-    @media (max-width: 640px) {
-      .diff-grid { grid-template-columns: 1fr; }
-      .diff-item:nth-child(2) { border-left: 0; border-top: 1px solid var(--border); }
-      .diff-item:nth-child(4) { border-left: 0; }
-    }
-
-    /* ─── Agents Section ───────────────────────────────── */
-    .agents {
-      padding-top: 6rem;
-      padding-bottom: 8rem;
-    }
-    .agents-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: end;
-      margin-bottom: 4rem;
-    }
-    .agents-header h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      font-weight: 400;
-    }
-    .agents-header p {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 440px;
-    }
-    .agents-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: auto auto auto;
-      gap: 1rem;
-    }
-    .agent-card {
-      /* Double-bezel / Doppelrand architecture */
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 0.5rem;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .agent-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
-    }
-    .agent-card-inner {
-      background: var(--bg);
-      border-radius: calc(var(--radius-lg) - 0.35rem);
-      padding: 2rem;
-      height: 100%;
-    }
-    .agent-card-icon {
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.25rem;
-    }
-    .agent-card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-      letter-spacing: -0.01em;
-    }
-    .agent-card p {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-    /* Feature card spanning 2 columns */
-    .agent-card.wide {
-      grid-column: span 2;
-    }
-    .agent-card.wide .agent-card-inner {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 2rem;
-      align-items: center;
-    }
-    .agent-card.wide .agent-card-icon {
-      margin-bottom: 0;
-      width: 64px;
-      height: 64px;
-    }
-
-    /* ─── Platforms ─────────────────────────────────────── */
-    .platforms {
-      padding-top: 2rem;
-      padding-bottom: 6rem;
-    }
-    .platforms-inner {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 0.5rem;
-    }
-    .platforms-content {
-      background: var(--bg);
-      border-radius: calc(var(--radius-lg) - 0.35rem) calc(var(--radius-lg) - 0.35rem) 0 0;
-      padding: clamp(2rem, 5vw, 3.5rem) clamp(2rem, 5vw, 3rem) 2rem;
-      text-align: center;
-    }
-    .platforms-content h2,
-    .platforms-content p {
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .platforms-content h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
-    .platforms-content p {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-    .platforms-grid {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      padding: 1.5rem clamp(1.5rem, 4vw, 3rem) clamp(2rem, 5vw, 3rem);
-      background: var(--bg);
-      border-radius: 0 0 calc(var(--radius-lg) - 0.35rem) calc(var(--radius-lg) - 0.35rem);
-    }
-    .platform-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.65rem 1.25rem 0.65rem 0.75rem;
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-radius: 100px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                  box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .platform-chip:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    }
-    .platform-chip-more {
-      background: var(--accent-subtle);
-      border-color: rgba(200, 118, 75, 0.15);
-      color: var(--accent);
-    }
-    .platform-plus {
-      font-size: 1.1rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    /* ─── How It Works ─────────────────────────────────── */
-    .process {
-      padding-top: 6rem;
-      padding-bottom: 8rem;
-      background: var(--text-primary);
-      color: var(--bg);
+    /* Centre - Live Feed + Overlay */
+    .hero-centre {
       position: relative;
       overflow: hidden;
     }
-    .process::before {
-      content: '';
+
+    .hero-feed-label {
       position: absolute;
-      top: 0;
+      top: 80px;
+      left: 24px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-feed-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero-feed-scroll {
+      position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
-      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
+      top: 110px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 0;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
     }
-    .process .eyebrow { color: var(--accent); }
-    .process-header {
-      max-width: 560px;
-      margin-bottom: 5rem;
-    }
-    .process-header h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      font-weight: 400;
-      color: var(--bg);
-    }
-    .process-header p {
-      font-size: 1.05rem;
-      color: rgba(250, 250, 248, 0.55);
-      line-height: 1.7;
-      margin-top: 1rem;
-    }
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      counter-reset: step;
-    }
-    .process-step {
-      counter-increment: step;
-      position: relative;
-    }
-    .process-step::before {
-      content: counter(step, decimal-leading-zero);
-      font-family: var(--font-serif);
-      font-size: 3rem;
-      font-weight: 400;
-      color: rgba(200, 118, 75, 0.3);
-      line-height: 1;
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-    .process-step h3 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      color: var(--bg);
-    }
-    .process-step p {
-      font-size: 0.875rem;
-      color: rgba(250, 250, 248, 0.5);
-      line-height: 1.7;
-    }
-    .process-step-line {
-      position: absolute;
-      top: 1.8rem;
-      right: -1rem;
-      width: calc(100% - 2rem);
-      height: 1px;
-      background: linear-gradient(90deg, rgba(200,118,75,0.3), transparent);
-      pointer-events: none;
-    }
-    .process-step:last-child .process-step-line { display: none; }
 
-    /* ─── CTA ──────────────────────────────────────────── */
-    .cta {
-      padding-top: 6rem;
-      padding-bottom: 8rem;
+    .hero-feed-scroll::-webkit-scrollbar {
+      display: none;
     }
-    .cta-inner {
-      background: var(--text-primary);
-      border-radius: var(--radius-lg);
-      padding: clamp(3rem, 8vw, 5rem) clamp(2rem, 6vw, 4rem);
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 3rem;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-inner::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(200,118,75,0.15), transparent 70%);
-      pointer-events: none;
-    }
-    .cta h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      font-weight: 400;
-      color: var(--bg);
-      margin-bottom: 1rem;
-    }
-    .cta p {
-      font-size: 1rem;
-      color: rgba(250, 250, 248, 0.5);
-      line-height: 1.7;
-      max-width: 440px;
-    }
-    .cta-actions {
+
+    .hero-feed-track {
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 0.7rem;
+      line-height: 1.9;
+      padding: 0 24px;
+      color: var(--text-muted);
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-    .cta .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-    .cta .btn-primary:hover {
-      background: var(--accent-hover);
-      box-shadow: 0 4px 24px rgba(200,118,75,0.3);
-    }
-    .cta-note {
-      font-size: 0.8rem;
-      color: rgba(250,250,248,0.35);
+      justify-content: flex-end;
+      min-height: 100%;
     }
 
-    /* ─── Footer ───────────────────────────────────────── */
-    .footer {
-      padding: 3rem 0;
+    .hero-feed-track .fl {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.4s ease, max-height 0.4s ease;
+    }
+
+    .hero-feed-track .fl.visible {
+      opacity: 1;
+      max-height: 3em;
+    }
+
+    .hero-feed-track .fl {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hero-feed-track .fa { font-weight: 600; }
+    .hero-feed-track .fa-doc { color: #1D9E75; }
+    .hero-feed-track .fa-enquiry { color: #5B8DEF; }
+    .hero-feed-track .fa-qa { color: #A278FF; }
+    .hero-feed-track .fa-deadline { color: #FF6B6B; }
+    .hero-feed-track .fa-inbox { color: #5B8DEF; }
+    .hero-feed-track .fa-review { color: #FFBD59; }
+    .hero-feed-track .fa-briefing { color: #67E8F9; }
+
+    .hero-feed-track .fl-done {
+      color: var(--accent);
+    }
+
+    /* Centered headline overlay */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 24px;
+      background: radial-gradient(ellipse 50% 45% at 50% 50%, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.7) 60%, transparent 100%);
+    }
+
+    .hero-headline {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+
+    .hero-scroll-cue {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Right sidebar - Stats */
+    .hero-sidebar-right {
+      padding: 80px 24px 40px 0;
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      z-index: 2;
+    }
+
+    .hero-stat {
+      text-align: right;
+    }
+
+    .hero-stat-label {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .hero-stat-value {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-stat-value .stat-unit {
+      font-size: 0.7em;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline-section {
+      padding: 120px 0;
+    }
+
+    .timeline-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .timeline-header .section-sub {
+      margin: 0 auto;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border-strong) 5%, var(--border-strong) 95%, transparent);
+    }
+
+    .timeline-entry {
+      position: relative;
+      padding-left: 56px;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .timeline-entry.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 20px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+
+    .timeline-time {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timeline-agent {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .timeline-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+    }
+
+    .timeline-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    .timeline-punchline {
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .timeline-punchline p {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    /* ===== MANIFESTO ===== */
+    .manifesto-section {
+      padding: 120px 0;
       border-top: 1px solid var(--border);
     }
+
+    .manifesto-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .manifesto-line {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 40px;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .manifesto-line.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .manifesto-line.muted {
+      color: var(--text-secondary);
+    }
+
+    .manifesto-highlight {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* ===== NETWORK DIAGRAM ===== */
+    .network-section {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .network-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .network-diagram {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .network-svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .network-labels {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .network-label {
+      position: absolute;
+    }
+
+    .network-label-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .network-statement {
+      text-align: center;
+      margin-top: 60px;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    /* ===== PROCESS ===== */
+    .process-section {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .process-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .process-header .section-sub {
+      margin: 0 auto;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .process-step {
+      text-align: center;
+      padding: 32px 20px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .process-step.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .process-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-subtle);
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .process-step-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .process-step-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ===== PRICING ===== */
+    .pricing-section {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .pricing-card {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      text-align: center;
+    }
+
+    .pricing-amount {
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 32px;
+    }
+
+    .pricing-period {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .pricing-includes {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+
+    .pricing-item {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .pricing-item::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .pricing-comparison {
+      padding: 20px;
+      background: var(--accent-subtle);
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+    }
+
+    .pricing-comparison p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== DIFFERENTIATORS ===== */
+    .diff-section {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .diff-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .diff-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .diff-card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .diff-card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .diff-card-body {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .cta-section .section-heading {
+      margin-bottom: 16px;
+    }
+
+    .cta-section .section-sub {
+      margin: 0 auto 40px;
+      max-width: 560px;
+    }
+
+    .cta-note {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+    }
+
     .footer-inner {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 24px;
     }
-    .footer-left {
-      font-size: 0.85rem;
-      color: var(--text-tertiary);
+
+    .footer-logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
     }
+
+    .footer-logo .dot {
+      color: var(--accent);
+    }
+
     .footer-links {
       display: flex;
-      gap: 2rem;
-      list-style: none;
+      gap: 24px;
+      flex-wrap: wrap;
     }
-    .footer-links a {
-      font-size: 0.85rem;
-      color: var(--text-tertiary);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-    .footer-links a:hover { color: var(--text-primary); }
 
-    /* ─── Mobile Responsive ────────────────────────────── */
-    @media (max-width: 960px) {
+    .footer-link {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-meta {
+      display: flex;
+      gap: 24px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== REVEAL UTILITY ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== MOBILE NAV ===== */
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 15, 0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 24px;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 999;
+    }
+
+    .nav-mobile-menu.open {
+      display: flex;
+    }
+
+    .nav-mobile-menu .nav-link {
+      font-size: 1rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-grid > div:first-child {
+        order: 1;
+      }
+
+      .hero-grid > div:last-child {
+        order: 0;
+      }
+
+      .network-diagram {
+        max-width: 100%;
+      }
+
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-mobile-toggle {
+        display: block;
+      }
+
       .hero {
         grid-template-columns: 1fr;
         min-height: auto;
-        padding-top: 8rem;
-        padding-bottom: 3rem;
       }
-      .hero-visual { order: 1; }
-      .hero-card-stack { max-width: 360px; margin: 0 auto; }
-      .agents-header { grid-template-columns: 1fr; gap: 1.5rem; }
-      .agents-grid { grid-template-columns: 1fr 1fr; }
-      .agent-card.wide { grid-column: span 2; }
-      .process-steps { grid-template-columns: 1fr 1fr; gap: 3rem 2rem; }
-      .process-step-line { display: none; }
-      .cta-inner { grid-template-columns: 1fr; text-align: center; }
-      .cta-actions { align-items: center; }
-    }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(250, 250, 248, 0.97);
-        backdrop-filter: blur(20px);
-        padding: 1.5rem;
-        gap: 1rem;
-        border-bottom: 1px solid var(--border);
+
+      .hero-sidebar-left,
+      .hero-sidebar-right {
+        display: none;
       }
-      .nav-toggle { display: flex; }
-      .hero h1 { font-size: 2.4rem; }
-      .agents-grid { grid-template-columns: 1fr; }
-      .agent-card.wide { grid-column: span 1; }
-      .agent-card.wide .agent-card-inner {
+
+      .hero-centre {
+        min-height: 80vh;
+      }
+
+      .hero-headline {
+        font-size: 2rem;
+      }
+
+      .hero-feed-scroll {
+        top: 70px;
+      }
+
+      .hero-feed-label {
+        top: 70px;
+      }
+
+      .network-label-name {
+        font-size: 0.75rem;
+      }
+
+      .diff-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
       }
-      .problem-grid { grid-template-columns: 1fr; }
-      .process-steps { grid-template-columns: 1fr; }
+
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline::before {
+        left: 12px;
+      }
+
+      .timeline-entry {
+        padding-left: 40px;
+      }
+
+      .timeline-entry::before {
+        left: 8px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Agentive Solutions",
-    "url": "https://agentivesolutions.co.uk",
-    "description": "AI agent systems that run service businesses on autopilot.",
-    "areaServed": "GB",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bournemouth",
-      "addressCountry": "GB"
-    }
-  }
-  </script>
 </head>
 <body>
 
-  <!-- ─── Navigation ──────────────────────────────────── -->
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="container nav-inner">
-      <a href="#" class="nav-logo">agentive<span>.</span></a>
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+  <!-- ===== NAV ===== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">agentive<span class="dot">.</span></a>
+      <div class="nav-links">
+        <a href="agents.html" class="nav-link">Use cases</a>
+        <a href="#process" class="nav-link">How it works</a>
+        <a href="/booking.html" class="btn btn-primary">Book an Exploration Call</a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Menu" onclick="document.querySelector('.nav-mobile-menu').classList.toggle('open')">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-      <ul class="nav-links">
-        <li><a href="#agents">Agents</a></li>
-        <li><a href="#process">How it works</a></li>
-        <li><a href="assessment.html">Free assessment</a></li>
-        <li><a href="booking.html" class="btn btn-primary">Book a call <span class="btn-arrow">&rarr;</span></a></li>
-      </ul>
+    </div>
+    <div class="nav-mobile-menu">
+      <a href="agents.html" class="nav-link" onclick="document.querySelector('.nav-mobile-menu').classList.remove('open')">Use cases</a>
+      <a href="#process" class="nav-link" onclick="document.querySelector('.nav-mobile-menu').classList.remove('open')">How it works</a>
+      <a href="/booking.html" class="btn btn-primary">Book an Exploration Call</a>
     </div>
   </nav>
 
-  <main>
-
-  <!-- ─── Hero ────────────────────────────────────────── -->
-  <section class="hero container">
-    <div class="hero-content reveal">
-      <p class="hero-intro">We build AI operations systems for service businesses.</p>
-      <h1>Your business, running on <em>autopilot</em></h1>
-      <p>We deploy a team of AI agents that handle lead response, inbox management, scheduling, invoicing, and more, so you can focus on growth, not admin.</p>
-      <div class="hero-actions">
-        <a href="booking.html" class="btn btn-primary">Book a discovery call <span class="btn-arrow">&rarr;</span></a>
-        <a href="#agents" class="btn btn-secondary">See the agents</a>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <!-- Left sidebar: Active Agents -->
+    <div class="hero-sidebar-left">
+      <div class="hero-sidebar-title">Active Agents</div>
+      <div class="hero-agent-row">
+        <div class="hero-agent-left">
+          <div class="hero-agent-dot" style="background:#1D9E75;"></div>
+          <div class="hero-agent-name">Document Chaser</div>
+        </div>
+        <div class="hero-agent-status">Chasing</div>
+      </div>
+      <div class="hero-agent-row">
+        <div class="hero-agent-left">
+          <div class="hero-agent-dot" style="background:#5B8DEF;"></div>
+          <div class="hero-agent-name">Enquiry Responder</div>
+        </div>
+        <div class="hero-agent-status">Qualifying</div>
+      </div>
+      <div class="hero-agent-row">
+        <div class="hero-agent-left">
+          <div class="hero-agent-dot" style="background:#A278FF;"></div>
+          <div class="hero-agent-name">Client Q&amp;A</div>
+        </div>
+        <div class="hero-agent-status">Answering</div>
+      </div>
+      <div class="hero-agent-row">
+        <div class="hero-agent-left">
+          <div class="hero-agent-dot" style="background:#FF6B6B;"></div>
+          <div class="hero-agent-name">Deadline Monitor</div>
+        </div>
+        <div class="hero-agent-status">Checking</div>
+      </div>
+      <div class="hero-agent-row">
+        <div class="hero-agent-left">
+          <div class="hero-agent-dot" style="background:#67E8F9;"></div>
+          <div class="hero-agent-name">Inbox Manager</div>
+        </div>
+        <div class="hero-agent-status">Sorting</div>
       </div>
     </div>
-    <div class="hero-visual reveal reveal-delay-2">
-      <div class="hero-card-stack">
-        <div class="hero-card">
-          <div class="hero-card-header">
-            <div class="hero-card-icon"><svg width="40" height="40" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" fill="#C8764B" opacity="0.05"/><circle cx="30" cy="30" r="24" stroke="#C8764B" stroke-width="1" opacity="0.1" stroke-dasharray="4 4"/><path d="M38 22a14 14 0 010 16" stroke="#C8764B" stroke-width="1.8" stroke-linecap="round" opacity="0.3"/><path d="M42 18a20 20 0 010 24" stroke="#C8764B" stroke-width="1.5" stroke-linecap="round" opacity="0.15"/><path d="M22 38a14 14 0 010-16" stroke="#C8764B" stroke-width="1.8" stroke-linecap="round" opacity="0.3"/><path d="M18 42a20 20 0 010-24" stroke="#C8764B" stroke-width="1.5" stroke-linecap="round" opacity="0.15"/><circle cx="30" cy="30" r="7" fill="#C8764B" opacity="0.12"/><circle cx="30" cy="30" r="4.5" fill="#C8764B" opacity="0.85"/><path d="M30 20v-4M40 30h4M30 40v4M20 30h-4" stroke="#C8764B" stroke-width="1" stroke-linecap="round" opacity="0.2"/></svg></div>
-            <div>
-              <div class="hero-card-title">Lead Response Agent</div>
-              <div class="hero-card-subtitle">Working now</div>
-            </div>
-          </div>
-          <div class="hero-card-body">
-            <span id="typewriter"></span><span class="typing-cursor"></span>
-          </div>
-          <div class="hero-card-meta">
-            <span>Response time: 47 seconds</span>
-            <span class="hero-card-status">Active</span>
-          </div>
+
+    <!-- Centre: Live Feed + Overlay -->
+    <div class="hero-centre">
+      <div class="hero-feed-label">
+        <div class="hero-feed-dot"></div>
+        <span>Live Feed</span>
+      </div>
+      <div class="hero-feed-scroll">
+        <div class="hero-feed-track" id="heroFeed">
+          <span class="fl"><span class="fa fa-doc">[Document Chaser]</span> Checking outstanding documents across 23 active clients...</span>
+          <span class="fl"><span class="fa fa-doc">[Document Chaser]</span> 8 clients still missing bank statements for Q1 VAT return.</span>
+          <span class="fl"><span class="fa fa-doc">[Document Chaser]</span> Personalised WhatsApp sent to each. Tom B responded within 4 minutes.</span>
+          <span class="fl fl-done"><span class="fa fa-doc">[Document Chaser]</span> &#10003; 8 chased. 1 received. 7 outstanding logged.</span>
+          <span class="fl">&nbsp;</span>
+          <span class="fl"><span class="fa fa-enquiry">[Enquiry Responder]</span> New enquiry via website at 11:47pm.</span>
+          <span class="fl"><span class="fa fa-enquiry">[Enquiry Responder]</span> Sole trader seeking bookkeeping and self-assessment support.</span>
+          <span class="fl"><span class="fa fa-enquiry">[Enquiry Responder]</span> Qualification complete. Exploration call booked for Thursday 10am.</span>
+          <span class="fl fl-done"><span class="fa fa-enquiry">[Enquiry Responder]</span> &#10003; Lead qualified and in the diary. Goodnight.</span>
+          <span class="fl">&nbsp;</span>
+          <span class="fl"><span class="fa fa-deadline">[Deadline Monitor]</span> Running weekly compliance check...</span>
+          <span class="fl"><span class="fa fa-deadline">[Deadline Monitor]</span> 3 VAT returns due Friday. All in progress, no action needed.</span>
+          <span class="fl"><span class="fa fa-deadline">[Deadline Monitor]</span> 2 CT600s due next month. Documents not yet received.</span>
+          <span class="fl"><span class="fa fa-deadline">[Deadline Monitor]</span> Document Chaser briefed. Chase starts this morning.</span>
+          <span class="fl fl-done"><span class="fa fa-deadline">[Deadline Monitor]</span> &#10003; Weekly deadline report delivered to team WhatsApp.</span>
+          <span class="fl">&nbsp;</span>
+          <span class="fl"><span class="fa fa-qa">[Client Q&amp;A]</span> Sarah M asking about SA302 for mortgage application.</span>
+          <span class="fl"><span class="fa fa-qa">[Client Q&amp;A]</span> Sent explanation and portal instructions. Flagged for accountant sign-off.</span>
+          <span class="fl"><span class="fa fa-qa">[Client Q&amp;A]</span> Sarah confirmed. Exactly what she needed. No partner involvement required.</span>
+          <span class="fl fl-done"><span class="fa fa-qa">[Client Q&amp;A]</span> &#10003; Handled in 3 minutes. At 9pm on a Sunday.</span>
+          <span class="fl">&nbsp;</span>
+          <span class="fl"><span class="fa fa-briefing">[Morning Briefing]</span> Good morning. Here's today:</span>
+          <span class="fl"><span class="fa fa-briefing">[Morning Briefing]</span> 4 documents received overnight. 12 still outstanding.</span>
+          <span class="fl"><span class="fa fa-briefing">[Morning Briefing]</span> 2 new enquiries. Both qualified, both in the diary.</span>
+          <span class="fl"><span class="fa fa-briefing">[Morning Briefing]</span> 1 VAT return ready for partner sign-off.</span>
+          <span class="fl fl-done"><span class="fa fa-briefing">[Morning Briefing]</span> &#10003; Full briefing delivered to team WhatsApp at 8:00am.</span>
+          <span class="fl">&nbsp;</span>
+          <span class="fl"><span class="fa fa-inbox">[Inbox Manager]</span> Processing 34 overnight emails...</span>
+          <span class="fl"><span class="fa fa-inbox">[Inbox Manager]</span> HMRC acknowledgement handled. Reference request from Halifax replied.</span>
+          <span class="fl"><span class="fa fa-inbox">[Inbox Manager]</span> 6 emails flagged for partner review. Rest cleared.</span>
+          <span class="fl fl-done"><span class="fa fa-inbox">[Inbox Manager]</span> &#10003; 28 of 34 emails handled. Inbox cleared.</span>
+          <span class="fl">&nbsp;</span>
+          <span class="fl"><span class="fa fa-review">[Review Agent]</span> Self-assessment completed for James P last week.</span>
+          <span class="fl"><span class="fa fa-review">[Review Agent]</span> Review request sent via email and WhatsApp.</span>
+          <span class="fl"><span class="fa fa-review">[Review Agent]</span> New 5-star Google review received. Response drafted.</span>
+          <span class="fl fl-done"><span class="fa fa-review">[Review Agent]</span> &#10003; Google rating now 4.8. Response awaiting approval.</span>
         </div>
-        <div class="hero-card"></div>
-        <div class="hero-card"></div>
+      </div>
+      <div class="hero-overlay">
+        <h1 class="hero-headline">Your AI team are already working.</h1>
+        <div class="hero-scroll-cue">
+          <span>Scroll to see what they handled today</span>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="hero-ctas">
+          <a href="/booking.html" class="btn btn-primary">Book an Exploration Call</a>
+          <a href="#timeline" class="btn btn-ghost">See a full day</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right sidebar: Stats -->
+    <div class="hero-sidebar-right">
+      <div class="hero-stat">
+        <div class="hero-stat-label">Tasks</div>
+        <div class="hero-stat-value" id="statTasks">0</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Agents</div>
+        <div class="hero-stat-value">7</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Uptime</div>
+        <div class="hero-stat-value">99.97<span class="stat-unit">%</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Saved</div>
+        <div class="hero-stat-value" id="statSaved">0<span class="stat-unit">h</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ─── Trust Bar ───────────────────────────────────── -->
-  <div class="trust container reveal">
-    <p>Built for service businesses with 2-50 staff across the UK</p>
-  </div>
-
-  <!-- ─── Problem / Before & After ────────────────────── -->
-  <section class="problem container" id="problem">
-    <div class="problem-header reveal">
-      <span class="eyebrow">The problem</span>
-      <h2>You're growing, but admin is pulling you back</h2>
-      <p>Most service business owners lose hours each week to tasks that don't need their brain, just their time. That's what we fix.</p>
-    </div>
-    <div class="problem-grid reveal reveal-delay-1">
-      <div class="problem-item">
-        <span class="problem-before">Leads unanswered for hours</span>
-        <span class="problem-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        <span class="problem-after">Every lead gets a reply within minutes</span>
-      </div>
-      <div class="problem-item">
-        <span class="problem-before">Owner drowning in email</span>
-        <span class="problem-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        <span class="problem-after">Only the emails that matter reach you</span>
-      </div>
-      <div class="problem-item">
-        <span class="problem-before">Missed appointments and forgotten follow-ups</span>
-        <span class="problem-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        <span class="problem-after">Automated reminders keep everyone on track</span>
-      </div>
-      <div class="problem-item">
-        <span class="problem-before">Chasing invoices manually</span>
-        <span class="problem-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        <span class="problem-after">Polite payment chasing, on autopilot</span>
-      </div>
-      <div class="problem-item">
-        <span class="problem-before">Proposals take hours to write</span>
-        <span class="problem-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        <span class="problem-after">Proposals drafted from a voice note</span>
-      </div>
-      <div class="problem-item">
-        <span class="problem-before">Chaotic client onboarding</span>
-        <span class="problem-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        <span class="problem-after">Consistent, professional process every time</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Differentiators ──────────────────────────────── -->
-  <section class="diff container">
-    <div class="diff-grid">
-      <div class="diff-item reveal">
-        <div class="diff-number">01</div>
-        <h3>Real agents, not automations</h3>
-        <p>These aren't if/then workflows. Each agent can read context, make judgement calls, and pull in other agents when it needs to. Try getting a Zapier zap to do that.</p>
-      </div>
-      <div class="diff-item reveal reveal-delay-1">
-        <div class="diff-number">02</div>
-        <h3>They learn and remember</h3>
-        <p>Your agents remember that Mrs. Davies prefers morning appointments, that one client always needs VAT on their invoices, and that another one always pays late. The longer they run, the less you need to explain.</p>
-      </div>
-      <div class="diff-item reveal reveal-delay-2">
-        <div class="diff-number">03</div>
-        <h3>Your data stays yours</h3>
-        <p>Your agents run on isolated infrastructure that belongs to your business. Client data doesn't get shared, doesn't get used to train models, and doesn't leave your setup.</p>
-      </div>
-      <div class="diff-item reveal reveal-delay-3">
-        <div class="diff-number">04</div>
-        <h3>Always on, always working</h3>
-        <p>You don't need to remember to check on things. Your Monday briefing lands before you've made coffee. Overdue invoices get chased while you're busy with clients. It just runs.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Agents ──────────────────────────────────────── -->
-  <section class="agents container" id="agents">
-    <div class="agents-header reveal">
-      <div>
-        <span class="eyebrow">Agentive OS</span>
-        <h2>Eight agents, one operations team</h2>
-      </div>
-      <p>Each agent has a specific role: responding, scheduling, chasing, drafting. They plug into the tools you already use.</p>
-    </div>
-    <div class="agents-grid">
-      <div class="agent-card reveal">
-        <div class="agent-card-inner">
-          <div class="agent-card-icon"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" fill="#C8764B" opacity="0.05"/><circle cx="30" cy="30" r="24" stroke="#C8764B" stroke-width="1" opacity="0.1" stroke-dasharray="4 4"/><path d="M38 22a14 14 0 010 16" stroke="#C8764B" stroke-width="1.8" stroke-linecap="round" opacity="0.3"/><path d="M42 18a20 20 0 010 24" stroke="#C8764B" stroke-width="1.5" stroke-linecap="round" opacity="0.15"/><path d="M22 38a14 14 0 010-16" stroke="#C8764B" stroke-width="1.8" stroke-linecap="round" opacity="0.3"/><path d="M18 42a20 20 0 010-24" stroke="#C8764B" stroke-width="1.5" stroke-linecap="round" opacity="0.15"/><circle cx="30" cy="30" r="7" fill="#C8764B" opacity="0.12"/><circle cx="30" cy="30" r="4.5" fill="#C8764B" opacity="0.85"/><path d="M30 20v-4M40 30h4M30 40v4M20 30h-4" stroke="#C8764B" stroke-width="1" stroke-linecap="round" opacity="0.2"/></svg></div>
-          <h3>Lead Response</h3>
-          <p>Responds to enquiries within minutes, qualifies the lead, and books a discovery call, even at 11pm on a Sunday.</p>
-        </div>
-      </div>
-      <div class="agent-card reveal reveal-delay-1">
-        <div class="agent-card-inner">
-          <div class="agent-card-icon"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="8" y="12" width="44" height="36" rx="4" fill="#4A7A52" opacity="0.05"/><rect x="12" y="16" width="36" height="24" rx="3" fill="#4A7A52" opacity="0.08" stroke="#4A7A52" stroke-width="1" opacity="0.15"/><rect x="10" y="20" width="36" height="24" rx="3" fill="white" stroke="#4A7A52" stroke-width="1.5" opacity="0.6"/><path d="M10 23l18 11 18-11" stroke="#4A7A52" stroke-width="1.5" stroke-linejoin="round" opacity="0.5"/><path d="M40 11h10l-4 8h-4" stroke="#4A7A52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/><path d="M42 19v6" stroke="#4A7A52" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/><circle cx="17" cy="30" r="1.5" fill="#4A7A52" opacity="0.4"/><circle cx="17" cy="35" r="1.5" fill="#4A7A52" opacity="0.25"/><path d="M21 30h12M21 35h8" stroke="#4A7A52" stroke-width="1.2" stroke-linecap="round" opacity="0.25"/></svg></div>
-          <h3>Inbox Manager</h3>
-          <p>Most of your inbox doesn't need you. This agent handles the routine replies and only passes along what actually requires your brain.</p>
-        </div>
-      </div>
-      <div class="agent-card reveal reveal-delay-2">
-        <div class="agent-card-inner">
-          <div class="agent-card-icon"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="9" y="14" width="32" height="34" rx="4" fill="#41788C" opacity="0.06"/><rect x="9" y="14" width="32" height="34" rx="4" stroke="#41788C" stroke-width="1.5" opacity="0.35"/><rect x="9" y="14" width="32" height="10" rx="4" fill="#41788C" opacity="0.15"/><path d="M19 11v6M31 11v6" stroke="#41788C" stroke-width="2" stroke-linecap="round" opacity="0.4"/><circle cx="17" cy="30" r="1.2" fill="#41788C" opacity="0.2"/><circle cx="25" cy="30" r="1.2" fill="#41788C" opacity="0.2"/><circle cx="33" cy="30" r="1.2" fill="#41788C" opacity="0.2"/><circle cx="17" cy="37" r="1.2" fill="#41788C" opacity="0.2"/><circle cx="25" cy="37" r="2.5" fill="#41788C" opacity="0.6"/><circle cx="33" cy="37" r="1.2" fill="#41788C" opacity="0.2"/><circle cx="43" cy="38" r="11" fill="white" stroke="#41788C" stroke-width="1.5" opacity="0.85"/><circle cx="43" cy="38" r="8" fill="#41788C" opacity="0.06"/><path d="M43 33v5l3.5 2" stroke="#41788C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/><path d="M43 30v1M50 38h-1M43 46v-1M36 38h1" stroke="#41788C" stroke-width="1" stroke-linecap="round" opacity="0.2"/></svg></div>
-          <h3>Booking & Scheduling</h3>
-          <p>Confirmations go out instantly. Reminders land at the right time. If someone needs to reschedule, it handles that too, no back and forth.</p>
-        </div>
-      </div>
-      <div class="agent-card reveal reveal-delay-1">
-        <div class="agent-card-inner">
-          <div class="agent-card-icon"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><circle cx="28" cy="28" r="22" fill="#B48C32" opacity="0.04"/><path d="M28 10l5.5 11.2 12.3 1.8-8.9 8.7 2.1 12.3L28 38l-11 5.8 2.1-12.3-8.9-8.7 12.3-1.8z" fill="#B48C32" opacity="0.1" stroke="#B48C32" stroke-width="1.5" stroke-linejoin="round"/><path d="M28 16l3.2 6.5 7.2 1-5.2 5.1 1.2 7.2L28 32.2l-6.4 3.4 1.2-7.2-5.2-5.1 7.2-1z" fill="#B48C32" opacity="0.12"/><rect x="36" y="36" width="18" height="13" rx="6.5" fill="white" stroke="#B48C32" stroke-width="1.5" opacity="0.8"/><path d="M38 49l3-4" stroke="#B48C32" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/><circle cx="42" cy="42.5" r="1.2" fill="#B48C32" opacity="0.7"/><circle cx="46" cy="42.5" r="1.2" fill="#B48C32" opacity="0.7"/><circle cx="50" cy="42.5" r="1.2" fill="#B48C32" opacity="0.3"/></svg></div>
-          <h3>Review & Reputation</h3>
-          <p>When work is done, your client gets a review request. When reviews come in, you get a drafted response ready to approve or tweak.</p>
-        </div>
-      </div>
-      <div class="agent-card wide reveal reveal-delay-2">
-        <div class="agent-card-inner">
-          <div class="agent-card-icon"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><path d="M12 8h26v40l-3.5-2.5-3.5 2.5-3.5-2.5-3.5 2.5-3.5-2.5-3.5 2.5-3.5-2.5L12 48V8z" fill="#C8764B" opacity="0.06" stroke="#C8764B" stroke-width="1.5" stroke-linejoin="round"/><path d="M18 17h14" stroke="#C8764B" stroke-width="1.3" stroke-linecap="round" opacity="0.25"/><path d="M18 22h10" stroke="#C8764B" stroke-width="1.3" stroke-linecap="round" opacity="0.2"/><path d="M18 27h14" stroke="#C8764B" stroke-width="1.3" stroke-linecap="round" opacity="0.15"/><path d="M18 32h14" stroke="#C8764B" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.3"/><path d="M18 37h6" stroke="#C8764B" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/><path d="M28 37h4" stroke="#C8764B" stroke-width="2" stroke-linecap="round" opacity="0.6"/><path d="M42 40v-8M39 35l3-3 3 3" stroke="#C8764B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/><path d="M48 36v-10M45 29l3-3 3 3" stroke="#C8764B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/><circle cx="45" cy="14" r="6" fill="#C8764B" opacity="0.08"/><text x="45" y="17" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700" fill="#C8764B" opacity="0.5">£</text></svg></div>
-          <div>
-            <h3>Invoice Follow-up</h3>
-            <p>Nobody enjoys chasing money. This agent sends polite reminders that escalate gradually, so you don't have to have the awkward conversation.</p>
-          </div>
-        </div>
-      </div>
-      <div class="agent-card reveal">
-        <div class="agent-card-inner">
-          <div class="agent-card-icon"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><path d="M14 10h20l8 8v30a2 2 0 01-2 2H14a2 2 0 01-2-2V12a2 2 0 012-2z" fill="#7A5070" opacity="0.06" stroke="#7A5070" stroke-width="1.5"/><path d="M34 10v8h8" stroke="#7A5070" stroke-width="1.5" stroke-linejoin="round" opacity="0.25"/><path d="M19 24h16M19 29h12M19 34h14M19 39h8" stroke="#7A5070" stroke-width="1.2" stroke-linecap="round" opacity="0.18"/><g opacity="0.7"><rect x="42" y="30" width="2.5" height="10" rx="1.25" fill="#7A5070" opacity="0.35"/><rect x="47" y="26" width="2.5" height="18" rx="1.25" fill="#7A5070" opacity="0.55"/><rect x="52" y="32" width="2.5" height="6" rx="1.25" fill="#7A5070" opacity="0.25"/><rect x="42" y="20" width="2.5" height="6" rx="1.25" fill="#7A5070" opacity="0.2"/><rect x="47" y="16" width="2.5" height="6" rx="1.25" fill="#7A5070" opacity="0.15"/></g><circle cx="48" cy="48" r="5" fill="#7A5070" opacity="0.08"/><circle cx="48" cy="47" r="2.5" fill="none" stroke="#7A5070" stroke-width="1.5" opacity="0.4"/><path d="M48 50v2M45 52h6" stroke="#7A5070" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/></svg></div>
-          <h3>Quote & Proposal</h3>
-          <p>Leave a voice note describing what the client needs. You get a properly formatted proposal back, built from your pricing and templates. Send it or adjust it.</p>
-        </div>
-      </div>
-      <div class="agent-card reveal reveal-delay-1">
-        <div class="agent-card-inner">
-          <div class="agent-card-icon"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="20" y="8" width="22" height="40" rx="2" fill="#41788C" opacity="0.05" stroke="#41788C" stroke-width="1.5" opacity="0.3"/><path d="M20 8l-8 4v36l8 4" fill="#41788C" opacity="0.08" stroke="#41788C" stroke-width="1.5" stroke-linejoin="round" opacity="0.25"/><circle cx="36" cy="30" r="1.5" fill="#41788C" opacity="0.5"/><path d="M12 20l-6-2M12 30H5M12 40l-6 2" stroke="#41788C" stroke-width="1" stroke-linecap="round" opacity="0.12"/><rect x="34" y="12" width="18" height="22" rx="3" fill="white" stroke="#41788C" stroke-width="1.3" opacity="0.7"/><rect x="38" y="17" width="5" height="3" rx="0.8" fill="#4A7A52" opacity="0.5"/><path d="M45 18.5h4" stroke="#41788C" stroke-width="1" stroke-linecap="round" opacity="0.25"/><rect x="38" y="23" width="5" height="3" rx="0.8" fill="#4A7A52" opacity="0.3"/><path d="M45 24.5h3" stroke="#41788C" stroke-width="1" stroke-linecap="round" opacity="0.25"/><rect x="38" y="29" width="5" height="3" rx="0.8" fill="#41788C" opacity="0.1" stroke="#41788C" stroke-width="0.8" opacity="0.2"/><path d="M45 30.5h4" stroke="#41788C" stroke-width="1" stroke-linecap="round" opacity="0.15"/><circle cx="16" cy="24" r="3" fill="#41788C" opacity="0.2"/><path d="M16 27c-3 0-5 2.5-5 5v4" stroke="#41788C" stroke-width="1.5" stroke-linecap="round" opacity="0.15"/></svg></div>
-          <h3>Client Onboarding</h3>
-          <p>Triggers a welcome sequence: confirmation email, contract, intake form, and kickoff booking. All automatically.</p>
-        </div>
-      </div>
-      <div class="agent-card reveal reveal-delay-2">
-        <div class="agent-card-inner">
-          <div class="agent-card-icon"><svg width="60" height="60" viewBox="0 0 60 60" fill="none"><rect x="6" y="14" width="40" height="30" rx="3" fill="#3A3A42" opacity="0.04" stroke="#3A3A42" stroke-width="1.5" opacity="0.3"/><rect x="6" y="14" width="40" height="8" rx="3" fill="#3A3A42" opacity="0.04"/><rect x="12" y="32" width="5" height="7" rx="1.2" fill="#3A3A42" opacity="0.12"/><rect x="20" y="28" width="5" height="11" rx="1.2" fill="#3A3A42" opacity="0.22"/><rect x="28" y="24" width="5" height="15" rx="1.2" fill="#3A3A42" opacity="0.38"/><rect x="36" y="27" width="5" height="12" rx="1.2" fill="#C8764B" opacity="0.5"/><path d="M14.5 30L22.5 27L30.5 23L38.5 25" stroke="#3A3A42" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/><circle cx="12" cy="19" r="1.5" fill="#4A7A52" opacity="0.4"/><circle cx="17" cy="19" r="1.5" fill="#C8764B" opacity="0.35"/><circle cx="22" cy="19" r="1.5" fill="#41788C" opacity="0.3"/><circle cx="50" cy="12" r="8" fill="#B48C32" opacity="0.08"/><circle cx="50" cy="12" r="5" fill="#B48C32" opacity="0.2"/><path d="M50 4v2M56 6l-1.5 1.5M58 12h-2M56 18l-1.5-1.5M44 6l1.5 1.5M42 12h2M44 18l1.5-1.5" stroke="#B48C32" stroke-width="1" stroke-linecap="round" opacity="0.2"/><path d="M22 44h8M26 44v4" stroke="#3A3A42" stroke-width="1.5" stroke-linecap="round" opacity="0.2"/></svg></div>
-          <h3>Weekly Ops Briefing</h3>
-          <p>Every Monday you get a clear summary of what happened, what's coming up, and what's slipped. No digging through apps to piece it together.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Platforms ─────────────────────────────────────── -->
-  <section class="platforms container" id="platforms">
-    <div class="platforms-inner reveal">
-      <div class="platforms-content">
-        <span class="eyebrow">Works where you work</span>
-        <h2>Take action from anywhere</h2>
-        <p>Message your agents from WhatsApp between meetings. Check in via Slack from your desk. Reply on email from your phone. They work wherever you already are.</p>
-      </div>
-      <div class="platforms-grid">
-        <div class="platform-chip">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#25D366" opacity="0.1"/><path d="M14 6.5C9.86 6.5 6.5 9.86 6.5 14c0 1.32.34 2.56.94 3.64L6.5 21.5l3.96-.94A7.47 7.47 0 0014 21.5c4.14 0 7.5-3.36 7.5-7.5S18.14 6.5 14 6.5z" stroke="#25D366" stroke-width="1.3"/><path d="M17 15.8c-.3.9-1.5 1.6-1.5 1.6s-3.2-.4-5-3.2c0 0-.8-1.1-.8-2.2s.5-1.2.7-1.4c.2-.2.5-.2.6-.2h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.8.1.1 0 .4-.1.5-.2.2-.3.3-.5.5.3.5.8 1.1 1.4 1.5.6.4 1.1.6 1.3.5.2-.1.8-.9.9-1.1.2-.2.3-.2.5-.1l1.6.8" stroke="#25D366" stroke-width="1.1" stroke-linecap="round"/></svg>
-          <span>WhatsApp</span>
-        </div>
-        <div class="platform-chip">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#E01E5A" opacity="0.08"/><rect x="7" y="11" width="3.5" height="9" rx="1.75" fill="#E01E5A" opacity="0.7"/><rect x="12.25" y="7" width="3.5" height="9" rx="1.75" fill="#36C5F0" opacity="0.7"/><rect x="17.5" y="11" width="3.5" height="9" rx="1.75" fill="#2EB67D" opacity="0.7"/><rect x="12.25" y="18" width="3.5" height="3.5" rx="1.75" fill="#ECB22E" opacity="0.7"/></svg>
-          <span>Slack</span>
-        </div>
-        <div class="platform-chip">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#5B5FC7" opacity="0.1"/><path d="M7 10.5A2.5 2.5 0 019.5 8h9A2.5 2.5 0 0121 10.5v5a2.5 2.5 0 01-2.5 2.5H13l-3 2.5V18H9.5A2.5 2.5 0 017 15.5v-5z" stroke="#5B5FC7" stroke-width="1.3"/><path d="M11 12.5h6M11 15h4" stroke="#5B5FC7" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/></svg>
-          <span>Teams</span>
-        </div>
-        <div class="platform-chip">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#4A7A52" opacity="0.08"/><rect x="6" y="8" width="16" height="12" rx="2" stroke="#4A7A52" stroke-width="1.3"/><path d="M6 11l8 5 8-5" stroke="#4A7A52" stroke-width="1.3" stroke-linejoin="round"/></svg>
-          <span>Email</span>
-        </div>
-        <div class="platform-chip">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" fill="#41788C" opacity="0.08"/><rect x="8" y="6" width="12" height="16" rx="2.5" stroke="#41788C" stroke-width="1.3"/><path d="M12 19h4" stroke="#41788C" stroke-width="1.3" stroke-linecap="round" opacity="0.5"/><circle cx="14" cy="14" r="1" fill="#41788C" opacity="0.3"/></svg>
-          <span>SMS</span>
-        </div>
-        <div class="platform-chip platform-chip-more">
-          <span class="platform-plus">+</span>
-          <span>More</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── Process ─────────────────────────────────────── -->
-  <section class="process" id="process">
+  <!-- ===== TIMELINE ===== -->
+  <section class="timeline-section" id="timeline">
     <div class="container">
-      <div class="process-header reveal">
-        <span class="eyebrow">How it works</span>
-        <h2>From first call to live agents in two weeks</h2>
-        <p>No lengthy integrations, no disruption. We fit around your existing tools and processes.</p>
+      <div class="timeline-header reveal">
+        <p class="eyebrow">A Day With Your Agents</p>
+        <h2 class="section-heading">Here's what happened while you were in client meetings, on calls, and doing the work that actually needs you.</h2>
       </div>
-      <div class="process-steps">
-        <div class="process-step reveal">
-          <h3>Discovery Call</h3>
-          <p>30 minutes. We learn about your business, your biggest pain points, and what you want to automate.</p>
-          <div class="process-step-line"></div>
+
+      <div class="timeline">
+
+        <div class="timeline-entry">
+          <div class="timeline-time">6:00 AM</div>
+          <div class="timeline-agent">Document Agent chased 8 outstanding bank statements</div>
+          <div class="timeline-card">
+            <p>Ran overnight check across <strong style="color: var(--text-primary);">23 active clients</strong>. 8 still missing bank statements for Q1 VAT returns. Personalised WhatsApp messages sent to each. By 8am, <strong style="color: var(--accent);">3 had already responded</strong>.</p>
+          </div>
         </div>
-        <div class="process-step reveal reveal-delay-1">
-          <h3>Setup & Build</h3>
-          <p>We configure and deploy your Agentive OS system, integrated with your existing tools. Typically 1-2 weeks.</p>
-          <div class="process-step-line"></div>
+
+        <div class="timeline-entry">
+          <div class="timeline-time">8:00 AM</div>
+          <div class="timeline-agent">Briefing Agent compiled your daily summary</div>
+          <div class="timeline-card">
+            <p>Morning. Here's today: <strong style="color: var(--accent);">4 documents received overnight</strong>, 12 still outstanding. 2 new enquiries came in after hours, both qualified, both in the diary. 3 VAT returns due this Friday, all in progress. 2 CT600s due next month, documents not yet received. I've briefed the Document Chaser to start chasing this morning. Full summary in the <strong style="color: var(--text-primary);">team WhatsApp</strong>.</p>
+          </div>
         </div>
-        <div class="process-step reveal reveal-delay-2">
-          <h3>Test & Refine</h3>
-          <p>You review how the agents handle real messages and tasks. We adjust tone, timing, and logic until it feels like you wrote it yourself.</p>
-          <div class="process-step-line"></div>
+
+        <div class="timeline-entry">
+          <div class="timeline-time">9:30 AM</div>
+          <div class="timeline-agent">Inbox Agent cleared 28 of 34 emails</div>
+          <div class="timeline-card">
+            <p>You had 34 emails this morning. I've <strong style="color: var(--accent);">handled 28 of them</strong>: HMRC acknowledgements, bank reference requests, routine client queries, and a Companies House confirmation. <strong style="color: var(--text-primary);">6 need your attention</strong>. I've flagged them and moved everything else out of your way.</p>
+          </div>
         </div>
-        <div class="process-step reveal reveal-delay-3">
-          <h3>Go Live</h3>
-          <p>Your agents go live. We keep an eye on performance and make improvements as your business evolves.</p>
+
+        <div class="timeline-entry">
+          <div class="timeline-time">11:00 AM</div>
+          <div class="timeline-agent">Enquiry Agent qualified a lead and booked a call</div>
+          <div class="timeline-card">
+            <p>New enquiry via the website. Sole trader in Bristol, looking for bookkeeping and self-assessment support. I've qualified them: turnover under &pound;85K, no current accountant, wants to start immediately. <strong style="color: var(--accent);">Exploration call booked for Thursday at 10am</strong>. Details in your calendar.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="timeline-time">1:00 PM</div>
+          <div class="timeline-agent">Q&amp;A Agent handled 4 client questions via WhatsApp</div>
+          <div class="timeline-card">
+            <p>Handled 4 routine client questions today via WhatsApp. Sarah M needed her SA302 for a mortgage application. Sent her the explanation and portal login instructions. Flagged it for your sign-off. <strong style="color: var(--accent);">She confirmed within 10 minutes</strong>. No partner time needed.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="timeline-time">5:30 PM</div>
+          <div class="timeline-agent">Compliance Agent ran weekly deadline check</div>
+          <div class="timeline-card">
+            <p>Weekly compliance check complete. 3 VAT returns due Friday: all in progress, no issues. 2 CT600s due next month: documents still outstanding for both. I've briefed the Document Chaser. MTD quarterly submissions: 4 due in 6 weeks, all clients notified. <strong style="color: var(--accent);">Nothing overdue</strong>.</p>
+          </div>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="timeline-time">9:00 PM</div>
+          <div class="timeline-agent">Enquiry Agent responded to a late-night lead</div>
+          <div class="timeline-card">
+            <p>Another enquiry just came in. Limited company director in Manchester, needs annual accounts and corporation tax. <strong style="color: var(--text-primary);">Responded in 47 seconds</strong>. Qualified: &pound;200K turnover, currently with a large firm, wants someone more hands-on. Exploration call booked for Monday at 2pm. <strong style="color: var(--accent);">Goodnight. I'll keep watching</strong>.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="timeline-punchline reveal">
+        <p>That's not a demo. That's Tuesday.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MANIFESTO ===== -->
+  <section class="manifesto-section">
+    <div class="container">
+      <div class="manifesto-inner">
+        <p class="manifesto-line">We don't build chatbots.</p>
+        <p class="manifesto-line">We build <span class="manifesto-highlight">employees</span>.</p>
+        <p class="manifesto-line muted">Employees that chase documents while you're in client meetings. Qualify new enquiries while you sleep. Answer the "where's my tax return" question at 9pm on a Sunday.</p>
+        <p class="manifesto-line muted">Every firm gets its own <span class="manifesto-highlight">multi employee team</span>. Running on your infrastructure. Reporting to your team on WhatsApp or Teams or Slack every morning.</p>
+        <p class="manifesto-line muted">They don't forget. They don't need reminding to chase that bank statement for the fourth time.</p>
+        <p class="manifesto-line">AI employees are entering professional services. This is how the best firms will run.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NETWORK ===== -->
+  <section class="network-section" id="agents">
+    <div class="container">
+      <div class="network-header reveal">
+        <p class="eyebrow">The network</p>
+        <h2 class="section-heading">Your agents. Your infrastructure. One hub.</h2>
+      </div>
+
+      <div class="network-diagram reveal">
+        <svg class="network-svg" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Connecting lines (dashed) -->
+          <line x1="400" y1="250" x2="400" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="400" y1="250" x2="160" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="400" y1="250" x2="640" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="400" y1="250" x2="200" y2="400" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="400" y1="250" x2="600" y2="400" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+
+          <!-- Centre hub -->
+          <circle cx="400" cy="250" r="44" fill="rgba(29,158,117,0.1)" stroke="rgba(29,158,117,0.3)" stroke-width="1.5"/>
+          <circle cx="400" cy="250" r="34" fill="#1D9E75"/>
+          <text x="400" y="246" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="white" letter-spacing="0.5">YOUR</text>
+          <text x="400" y="260" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="white" letter-spacing="0.5">BUSINESS</text>
+
+          <!-- Client Comms (top) -->
+          <circle cx="400" cy="56" r="24" fill="rgba(91,141,239,0.15)" stroke="rgba(91,141,239,0.3)" stroke-width="1"/>
+          <circle cx="400" cy="56" r="16" fill="#5B8DEF"/>
+          <circle cx="400" cy="56" r="8" fill="rgba(255,255,255,0.2)"/>
+          <!-- Satellite dots -->
+          <circle cx="378" cy="38" r="4" fill="#5B8DEF" opacity="0.5"/>
+          <circle cx="422" cy="38" r="4" fill="#5B8DEF" opacity="0.5"/>
+          <circle cx="378" cy="74" r="4" fill="#5B8DEF" opacity="0.5"/>
+
+          <!-- Operations (top-left) -->
+          <circle cx="160" cy="146" r="24" fill="rgba(255,189,89,0.15)" stroke="rgba(255,189,89,0.3)" stroke-width="1"/>
+          <circle cx="160" cy="146" r="16" fill="#FFBD59"/>
+          <circle cx="160" cy="146" r="8" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="138" cy="128" r="4" fill="#FFBD59" opacity="0.5"/>
+          <circle cx="182" cy="128" r="4" fill="#FFBD59" opacity="0.5"/>
+          <circle cx="140" cy="166" r="4" fill="#FFBD59" opacity="0.5"/>
+
+          <!-- Compliance (top-right) -->
+          <circle cx="640" cy="146" r="24" fill="rgba(255,107,107,0.15)" stroke="rgba(255,107,107,0.3)" stroke-width="1"/>
+          <circle cx="640" cy="146" r="16" fill="#FF6B6B"/>
+          <circle cx="640" cy="146" r="8" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="618" cy="128" r="4" fill="#FF6B6B" opacity="0.5"/>
+          <circle cx="662" cy="128" r="4" fill="#FF6B6B" opacity="0.5"/>
+          <circle cx="660" cy="166" r="4" fill="#FF6B6B" opacity="0.5"/>
+
+          <!-- Growth (bottom-left) -->
+          <circle cx="200" cy="396" r="24" fill="rgba(72,199,176,0.15)" stroke="rgba(72,199,176,0.3)" stroke-width="1"/>
+          <circle cx="200" cy="396" r="16" fill="#48C7B0"/>
+          <circle cx="200" cy="396" r="8" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="178" cy="378" r="4" fill="#48C7B0" opacity="0.5"/>
+          <circle cx="222" cy="378" r="4" fill="#48C7B0" opacity="0.5"/>
+          <circle cx="180" cy="416" r="4" fill="#48C7B0" opacity="0.5"/>
+
+          <!-- Document Management (bottom-right) -->
+          <circle cx="600" cy="396" r="24" fill="rgba(29,158,117,0.15)" stroke="rgba(29,158,117,0.3)" stroke-width="1"/>
+          <circle cx="600" cy="396" r="16" fill="#1D9E75"/>
+          <circle cx="600" cy="396" r="8" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="578" cy="378" r="4" fill="#1D9E75" opacity="0.5"/>
+          <circle cx="622" cy="378" r="4" fill="#1D9E75" opacity="0.5"/>
+          <circle cx="620" cy="416" r="4" fill="#1D9E75" opacity="0.5"/>
+        </svg>
+
+        <!-- Labels positioned over the SVG -->
+        <div class="network-labels">
+          <div class="network-label" style="top: 16%; left: 50%; transform: translateX(-50%);">
+            <span class="network-label-name">Client Comms</span>
+          </div>
+          <div class="network-label" style="top: 17%; left: 14%;">
+            <span class="network-label-name">Operations</span>
+          </div>
+          <div class="network-label" style="top: 17%; right: 14%;">
+            <span class="network-label-name">Compliance</span>
+          </div>
+          <div class="network-label" style="bottom: 12%; left: 18%;">
+            <span class="network-label-name">Growth</span>
+          </div>
+          <div class="network-label" style="bottom: 12%; right: 18%;">
+            <span class="network-label-name">Documents</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="network-statement reveal">Every business gets its own <span style="color: var(--accent);">agent team</span>. All connected through one hub.</p>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS ===== -->
+  <section class="process-section" id="process">
+    <div class="container">
+      <div class="process-header">
+        <p class="eyebrow">How It Works</p>
+        <h2 class="section-heading">From first call to live agents in two weeks</h2>
+        <p class="section-sub">We fit around your existing tools and processes. Nothing to rip out, nothing to migrate.</p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-number">1</div>
+          <h3 class="process-step-title">Exploration Call</h3>
+          <p class="process-step-desc">30 minutes. We learn about your firm, your biggest pain points, and how your team currently handles client communication and admin.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">2</div>
+          <h3 class="process-step-title">Setup &amp; Build</h3>
+          <p class="process-step-desc">We configure and deploy your agent team, integrated with your existing tools. Typically 1 to 2 weeks.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">3</div>
+          <h3 class="process-step-title">Test &amp; Refine</h3>
+          <p class="process-step-desc">You review how the agents behave. We tune them to match your firm's voice and your processes exactly.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">4</div>
+          <h3 class="process-step-title">Go Live</h3>
+          <p class="process-step-desc">Agents are running. You start getting your time back. We monitor, support, and improve continuously.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── CTA ─────────────────────────────────────────── -->
-  <section class="cta container" id="cta">
-    <div class="cta-inner reveal">
-      <div>
-        <h2>Ready to see what Agentive OS looks like for your business?</h2>
-        <p>Book a free 30-minute call. We'll walk through your operations and show you where agents would actually save you time.</p>
+  <!-- ===== PRICING ===== -->
+  <!-- ===== DIFFERENTIATORS ===== -->
+  <section class="diff-section">
+    <div class="container">
+      <div class="diff-header">
+        <p class="eyebrow">What makes this different</p>
       </div>
-      <div class="cta-actions">
-        <a href="booking.html" class="btn btn-primary">Book your free call <span class="btn-arrow">&rarr;</span></a>
-        <span class="cta-note">Free · 30 minutes · No commitment</span>
+
+      <div class="diff-grid">
+        <div class="diff-card">
+          <h3 class="diff-card-title">Real agents, not automations</h3>
+          <p class="diff-card-body">Your agents read context, handle situations they've never seen before, and ask when something is ambiguous. More like a junior team member who thinks than a Zapier workflow that breaks.</p>
+        </div>
+        <div class="diff-card">
+          <h3 class="diff-card-title">They know your clients</h3>
+          <p class="diff-card-body">After a few months, your agents know that Mrs Chen always needs chasing twice, that the partner prefers WhatsApp not email, and that new enquiries on Friday afternoons need a same-day response or they're gone. That knowledge lives on your infrastructure.</p>
+        </div>
+        <div class="diff-card">
+          <h3 class="diff-card-title">Your data never leaves your setup</h3>
+          <p class="diff-card-body">Your agents run in an isolated environment that belongs to your firm. Client financial data, case details, and communications stay inside your setup. Nothing gets shared. Nothing trains anyone else's models.</p>
+        </div>
+        <div class="diff-card">
+          <h3 class="diff-card-title">Less than a hire, faster than onboarding</h3>
+          <p class="diff-card-body">A qualified legal secretary or accounts assistant costs &pound;28-35K plus overhead. Your agents are live in two weeks. You skip recruitment, holiday cover, and HR entirely.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  </main>
+  <!-- ===== CTA ===== -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="section-heading">See how your firm runs with agents</h2>
+      <p class="section-sub">30 minutes. We'll look at how your team works today and show you what changes in week one.</p>
+      <a href="/booking.html" class="btn btn-primary" style="padding: 14px 36px; font-size: 1rem;">Book an Exploration Call</a>
+      <p class="cta-note">Free &middot; 30 minutes &middot; No commitment</p>
+    </div>
+  </section>
 
-  <!-- ─── Footer ──────────────────────────────────────── -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <div class="container footer-inner">
-      <span class="footer-left">&copy; 2026 Agentive Solutions · Bournemouth, UK</span>
-      <ul class="footer-links">
-        <li><a href="https://agentivesolutions.co.uk">agentivesolutions.co.uk</a></li>
-        <li><a href="#agents">Agents</a></li>
-        <li><a href="booking.html">Book a call</a></li>
-      </ul>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">agentive<span class="dot">.</span></span>
+        <div class="footer-links">
+          <a href="agents.html" class="footer-link">Use cases</a>
+          <a href="#process" class="footer-link">How it works</a>
+
+          <a href="/booking.html" class="footer-link">Book an Exploration Call</a>
+          <a href="/assessment.html" class="footer-link">Assessment</a>
+        </div>
+        <div class="footer-meta">
+          <span>Bournemouth, UK</span>
+          <span>&copy; 2026 Agentive Solutions</span>
+        </div>
+      </div>
     </div>
   </footer>
 
   <script>
-    // ─── Scroll reveal ────────────────────────────────────
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => observer.observe(el));
+    // Intersection Observer for scroll-based reveal animations
+    (function() {
+      var observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      };
 
-    // ─── Nav scroll effect ────────────────────────────────
-    const nav = document.querySelector('.nav');
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          nav.classList.toggle('scrolled', window.scrollY > 40);
-          ticking = false;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
         });
-        ticking = true;
-      }
-    });
+      }, observerOptions);
 
-    // ─── Mobile nav toggle ────────────────────────────────
-    const toggle = document.querySelector('.nav-toggle');
-    const links = document.querySelector('.nav-links');
-    toggle.addEventListener('click', () => {
-      const open = links.classList.toggle('open');
-      toggle.classList.toggle('active');
-      toggle.setAttribute('aria-expanded', open);
-    });
-
-    // Close mobile nav on link click
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        links.classList.remove('open');
-        toggle.classList.remove('active');
-        toggle.setAttribute('aria-expanded', 'false');
+      // Reveal general elements
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        observer.observe(el);
       });
-    });
 
-    // ─── Typewriter effect ─────────────────────────────────
-    (() => {
-      const el = document.getElementById('typewriter');
-      const text = "Hi Sarah, thanks for getting in touch. I'd love to learn more about what you need. I've got a slot free Thursday at 2pm, shall I book that in for you?";
-      let i = 0;
-      const delay = 1200;
-      const speed = 30;
-      const variance = 20;
+      // Timeline entries - each reveals individually on scroll
+      var timelineObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            timelineObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
 
-      function type() {
-        if (i < text.length) {
-          el.textContent += text.charAt(i);
-          i++;
-          const pause = text.charAt(i - 1) === '.' ? 300 : speed + (Math.random() * variance - variance / 2);
-          setTimeout(type, pause);
-        }
-      }
-      setTimeout(type, delay);
+      document.querySelectorAll('.timeline-entry').forEach(function(el) {
+        timelineObserver.observe(el);
+      });
+
+      // Manifesto lines with stagger
+      var manifestoLines = document.querySelectorAll('.manifesto-line');
+      manifestoLines.forEach(function(el, i) {
+        el.style.transitionDelay = (i * 0.1) + 's';
+        observer.observe(el);
+      });
+
+      // Agent cards with stagger
+      var agentCards = document.querySelectorAll('.agent-card');
+      agentCards.forEach(function(el, i) {
+        el.style.transitionDelay = (i * 0.05) + 's';
+        observer.observe(el);
+      });
+
+      // Process steps with stagger
+      var processSteps = document.querySelectorAll('.process-step');
+      processSteps.forEach(function(el, i) {
+        el.style.transitionDelay = (i * 0.1) + 's';
+        observer.observe(el);
+      });
+
+      // Differentiator cards with stagger
+      var diffCards = document.querySelectorAll('.diff-card');
+      diffCards.forEach(function(el, i) {
+        el.style.transitionDelay = (i * 0.08) + 's';
+        observer.observe(el);
+      });
     })();
 
-    // ─── Magnetic button hover ────────────────────────────
-    document.querySelectorAll('.btn-primary').forEach(btn => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
-      });
-    });
+    // Type feed lines one by one from the bottom, then loop
+    // Tasks and Saved counters increment with each real line
+    (function() {
+      var track = document.getElementById('heroFeed');
+      if (!track) return;
+      var lines = Array.from(track.querySelectorAll('.fl'));
+      var scroll = track.parentElement;
+      var statTasks = document.getElementById('statTasks');
+      var statSaved = document.getElementById('statSaved');
+      var idx = 0;
+      var taskCount = 0;
+      var delay = 900;
+
+      function scrollToBottom() {
+        scroll.scrollTop = scroll.scrollHeight;
+      }
+
+      function updateStats() {
+        if (statTasks) statTasks.textContent = taskCount;
+        if (statSaved) statSaved.innerHTML = Math.round(taskCount * 3) + '<span class="stat-unit">h</span>';
+      }
+
+      function showNext() {
+        if (idx >= lines.length) {
+          idx = 0;
+        }
+        lines[idx].classList.add('visible');
+        requestAnimationFrame(function() {
+          requestAnimationFrame(scrollToBottom);
+        });
+        var isBlank = lines[idx].textContent.trim() === '';
+        if (!isBlank) {
+          taskCount++;
+          updateStats();
+        }
+        idx++;
+        setTimeout(showNext, isBlank ? 400 : delay);
+      }
+
+      scrollToBottom();
+      setTimeout(showNext, 500);
+    })();
   </script>
+
 </body>
 </html>

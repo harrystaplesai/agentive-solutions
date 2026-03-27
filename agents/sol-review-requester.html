@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review Requester | Agentive Solutions</title>
+  <meta name="description" content="When a matter completes, your Review Requester sends a request via WhatsApp 48 hours later. Personal and specific to the matter type." />
+  <link rel="canonical" href="https://agentivesolutions.co.uk/agents/sol-review-requester" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <meta property="og:title" content="Review Requester | Agentive Solutions" />
+  <meta property="og:description" content="Build your reputation without anyone having to remember. Automatic review requests after every completed matter." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0A0A0F;
+      --bg-alt: #101018;
+      --bg-card: #14141E;
+      --bg-card-hover: #1A1A28;
+      --text-primary: #F0F0F5;
+      --text-secondary: #A0A0B0;
+      --text-muted: #606070;
+      --accent: #1D9E75;
+      --accent-hover: #17C68E;
+      --accent-subtle: rgba(29, 158, 117, 0.12);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-strong: rgba(255, 255, 255, 0.12);
+      --radius-sm: 0.5rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --agent-color: #48C7B0;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); }
+    .nav-logo .dot { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-link { font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); transition: color 0.2s; }
+    .nav-link:hover { color: var(--text-primary); }
+    .nav-link.active { color: var(--text-primary); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 600; font-family: var(--font-sans); cursor: pointer; transition: all 0.2s; border: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .nav-mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); margin: 5px 0; transition: all 0.3s; }
+    .nav-mobile-menu { display: none; flex-direction: column; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--border); background: rgba(10, 10, 15, 0.95); }
+    .nav-mobile-menu.open { display: flex; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      padding-top: 88px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .breadcrumb a { transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--text-secondary); }
+    .breadcrumb .sep { margin: 0 8px; }
+
+    /* Hero */
+    .agent-hero {
+      padding-top: 32px;
+      padding-bottom: 64px;
+      text-align: center;
+    }
+    .agent-hero .category-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--agent-color);
+      margin-bottom: 16px;
+    }
+    .agent-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .agent-hero .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Two-column section */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 64px;
+    }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+    .feature-list li { display: flex; gap: 14px; align-items: flex-start; }
+    .feature-check {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--agent-color);
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+    .feature-text strong { display: block; font-weight: 600; margin-bottom: 2px; }
+    .feature-text span { font-size: 0.9rem; color: var(--text-secondary); }
+
+    .section-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .glance-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+    .glance-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .glance-row:last-child { border-bottom: none; }
+    .glance-label { color: var(--text-muted); }
+    .glance-value { color: var(--text-primary); font-weight: 500; text-align: right; }
+
+    /* Green pill */
+    .pill-section {
+      text-align: center;
+      padding-bottom: 64px;
+    }
+    .green-pill {
+      display: inline-block;
+      padding: 10px 28px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(29, 158, 117, 0.1);
+      border: 1px solid rgba(29, 158, 117, 0.2);
+    }
+    .pill-note {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Terminal */
+    .terminal-section { padding-bottom: 80px; }
+    .terminal {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .terminal-body {
+      padding: 24px;
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 2;
+      color: var(--text-secondary);
+    }
+    .terminal-title {
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .terminal-line-success { color: var(--agent-color); }
+    .terminal-duration {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    /* Example message */
+    .example-section { padding-bottom: 80px; }
+    .example-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .example-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .example-message {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* How it works */
+    .how-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+    .how-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .how-header .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--agent-color);
+      margin-bottom: 12px;
+    }
+    .how-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .steps { display: flex; flex-direction: column; gap: 48px; max-width: 640px; margin: 0 auto; }
+    .step { display: flex; gap: 20px; align-items: flex-start; }
+    .step-number {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--agent-color);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-content h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+    .step-content p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* CTA */
+    .cta-section {
+      padding: 80px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .cta-section h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 32px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text-primary); }
+
+    /* Footer */
+    .footer { padding: 48px 0; border-top: 1px solid var(--border); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+    .footer-logo .dot { color: var(--accent); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-link { font-size: 0.85rem; color: var(--text-muted); transition: color 0.2s; }
+    .footer-link:hover { color: var(--text-primary); }
+    .footer-meta { display: flex; gap: 20px; font-size: 0.8rem; color: var(--text-muted); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: block; }
+      .two-col { grid-template-columns: 1fr; gap: 40px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">agentive<span class="dot">.</span></a>
+      <div class="nav-links">
+        <a href="../agents.html" class="nav-link active">Use cases</a>
+        <a href="../index.html#process" class="nav-link">How it works</a>
+        <a href="../booking.html" class="btn btn-primary">Book an Exploration Call</a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Menu" onclick="document.querySelector('.nav-mobile-menu').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile-menu">
+      <a href="../agents.html" class="nav-link">Use cases</a>
+      <a href="../index.html#process" class="nav-link">How it works</a>
+      <a href="../booking.html" class="btn btn-primary">Book an Exploration Call</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../agents.html">Use cases</a>
+      <span class="sep">/</span>
+      <span>Review Requester</span>
+    </div>
+  </div>
+
+  <section class="agent-hero container">
+    <div class="category-tag">Solicitors</div>
+    <h1>Build your reputation without anyone having to remember</h1>
+    <p class="hero-desc">When a matter completes, your Review Requester sends a request via WhatsApp 48 hours later. Personal and specific to the matter type. Follows up once at 7 days. When a review comes in, drafts a response for the partner to approve.</p>
+  </section>
+
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="section-label">What you get</div>
+        <ul class="feature-list">
+          <li>
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-text">
+              <strong>Automatic review requests 48 hours after completion</strong>
+              <span>Timed perfectly. Close enough to remember, far enough to feel settled.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-text">
+              <strong>Matter-specific messaging</strong>
+              <span>Conveyancing clients get a different message to probate clients. It feels personal because it is.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-text">
+              <strong>7-day follow-up</strong>
+              <span>One gentle nudge. Not pushy. Just enough to catch those who meant to but forgot.</span>
+            </div>
+          </li>
+          <li>
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-text">
+              <strong>Drafted responses for approval</strong>
+              <span>When a review comes in, a response is drafted and sent to the partner. Approve or tweak in 30 seconds.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label">At a glance</div>
+        <div class="glance-card">
+          <div class="glance-row">
+            <span class="glance-label">Vertical</span>
+            <span class="glance-value">Solicitors</span>
+          </div>
+          <div class="glance-row">
+            <span class="glance-label">Channels</span>
+            <span class="glance-value">WhatsApp, Slack, Teams</span>
+          </div>
+          <div class="glance-row">
+            <span class="glance-label">Trigger</span>
+            <span class="glance-value">Matter marked complete</span>
+          </div>
+          <div class="glance-row">
+            <span class="glance-label">Output</span>
+            <span class="glance-value">Review requests + drafted responses</span>
+          </div>
+          <div class="glance-row">
+            <span class="glance-label">Human effort</span>
+            <span class="glance-value">Approve responses</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pill-section">
+    <div class="green-pill">Done by an agent. Zero human effort.</div>
+    <p class="pill-note">Triggers when you mark a matter as complete. Follow-up at 7 days.</p>
+  </div>
+
+  <div class="terminal-section container">
+    <div class="terminal">
+      <div class="terminal-header">
+        <div class="terminal-dot" style="background: #FF5F57;"></div>
+        <div class="terminal-dot" style="background: #FEBC2E;"></div>
+        <div class="terminal-dot" style="background: #28C840;"></div>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-title">Review Requester &gt; Review Cycle</div>
+        <div>Conveyancing matter completed for Mr and Mrs Taylor.</div>
+        <div>Review request sent via WhatsApp. 48 hours post-completion.</div>
+        <div>5-star Google review received this morning.</div>
+        <div>Response drafted and sent for partner approval.</div>
+        <div class="terminal-line-success">&#10003; Google rating now 4.7 (up from 4.5 last quarter).</div>
+        <div class="terminal-duration">Duration: 3 min</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="how-section">
+    <div class="container">
+      <div class="how-header">
+        <div class="eyebrow">How to set it up</div>
+        <h2>For Agentive clients</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Matter marked complete triggers it</h3>
+            <p>No need to remember. The request goes out 48 hours after completion.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Client gets a personal WhatsApp message</h3>
+            <p>Specific to their matter type. Not a generic blast.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>New reviews get drafted responses</h3>
+            <p>You approve or tweak. Takes 30 seconds.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to put this agent to work?</h2>
+      <a href="../booking.html" class="btn btn-primary" style="padding: 14px 36px; font-size: 1rem;">Book an Exploration Call</a>
+      <br />
+      <a href="../agents.html" class="back-link">&larr; All agents</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">agentive<span class="dot">.</span></span>
+        <div class="footer-links">
+          <a href="../agents.html" class="footer-link">Use cases</a>
+          <a href="../index.html#process" class="footer-link">How it works</a>
+          <a href="../booking.html" class="footer-link">Book an Exploration Call</a>
+        </div>
+        <div class="footer-meta">
+          <span>Bournemouth, UK</span>
+          <span>&copy; 2026 Agentive Solutions</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
