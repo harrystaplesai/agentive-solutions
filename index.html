@@ -1511,7 +1511,7 @@
 
       function updateStats() {
         if (statTasks) statTasks.textContent = taskCount;
-        if (statSaved) statSaved.innerHTML = Math.round(taskCount * 3) + '<span class="stat-unit">h</span>';
+        if (statSaved) statSaved.innerHTML = Math.round(taskCount * 1.5) + '<span class="stat-unit">h</span>';
       }
 
       function showNext() {
@@ -1523,7 +1523,8 @@
           requestAnimationFrame(scrollToBottom);
         });
         var isBlank = lines[idx].textContent.trim() === '';
-        if (!isBlank) {
+        var isDone = lines[idx].classList.contains('fl-done');
+        if (isDone) {
           taskCount++;
           updateStats();
         }
