@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Employee Teams for Accountancy Firms, Law Firms and Recruitment Agencies | Agentive Solutions</title>
-  <meta name="description" content="We build, deploy, and maintain AI employees that handle document chasing, enquiry response, and admin for UK service businesses. From &pound;500/month. No software to learn. No portal to manage." />
+  <title>AI Systems for Service Businesses | Agentive Solutions</title>
+  <meta name="description" content="We find the most expensive bottleneck in your business and build an AI system that removes it. Recruitment agencies, accountancy firms, and law firms with 10-50 staff." />
   <link rel="canonical" href="https://agentivesolutions.co.uk/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <meta property="og:title" content="AI Employee Teams for Accountancy Firms, Law Firms and Recruitment Agencies | Agentive Solutions" />
-  <meta property="og:description" content="We build, deploy, and maintain AI employees that handle document chasing, enquiry response, and admin for UK service businesses. From &pound;500/month. No software to learn. No portal to manage." />
+  <meta property="og:title" content="AI Systems for Service Businesses | Agentive Solutions" />
+  <meta property="og:description" content="We find the most expensive bottleneck in your business and build an AI system that removes it. Recruitment agencies, accountancy firms, and law firms with 10-50 staff." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://agentivesolutions.co.uk/" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="AI Employee Teams for Accountancy Firms, Law Firms and Recruitment Agencies | Agentive Solutions" />
+  <meta name="twitter:title" content="AI Systems for Service Businesses | Agentive Solutions" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -192,415 +192,40 @@
     }
 
     /* ===== HERO ===== */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 240px 1fr 140px;
-      overflow: hidden;
-    }
-
-    /* Left sidebar - Active Agents */
-    .hero-sidebar-left {
-      padding: 80px 16px 40px 24px;
-      border-right: 1px solid var(--border);
-      z-index: 2;
-    }
-
-    .hero-sidebar-title {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 24px;
-    }
-
-    .hero-agent-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 0;
-      gap: 8px;
-    }
-
-    .hero-agent-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-agent-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .hero-agent-name {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      white-space: nowrap;
-    }
-
-    .hero-agent-status {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-    }
-
-    /* Centre - Live Feed + Overlay */
-    .hero-centre {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-feed-label {
-      position: absolute;
-      top: 80px;
-      left: 24px;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .hero-feed-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse-dot 2s infinite;
-    }
-
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .hero-feed-scroll {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: 110px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      z-index: 0;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
-    }
-
-    .hero-feed-scroll::-webkit-scrollbar {
-      display: none;
-    }
-
-    .hero-feed-track {
-      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
-      font-size: 0.7rem;
-      line-height: 1.9;
-      padding: 0 24px;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-height: 100%;
-    }
-
-    .hero-feed-track .fl {
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: opacity 0.4s ease, max-height 0.4s ease;
-    }
-
-    .hero-feed-track .fl.visible {
-      opacity: 1;
-      max-height: 3em;
-    }
-
-    .hero-feed-track .fl {
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .hero-feed-track .fa { font-weight: 600; }
-    .hero-feed-track .fa-doc { color: #1D9E75; }
-    .hero-feed-track .fa-enquiry { color: #5B8DEF; }
-    .hero-feed-track .fa-qa { color: #A278FF; }
-    .hero-feed-track .fa-deadline { color: #FF6B6B; }
-    .hero-feed-track .fa-inbox { color: #5B8DEF; }
-    .hero-feed-track .fa-review { color: #FFBD59; }
-    .hero-feed-track .fa-briefing { color: #67E8F9; }
-
-    .hero-feed-track .fl-done {
-      color: var(--accent);
-    }
-
-    /* Centered headline overlay */
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    .hero-simple {
+      padding: 180px 0 120px;
       text-align: center;
-      padding: 0 24px;
-      background: radial-gradient(ellipse 50% 45% at 50% 50%, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.7) 60%, transparent 100%);
     }
 
-    .hero-headline {
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
+    .hero-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
       font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.08;
-      margin-bottom: 16px;
-      max-width: 700px;
+      line-height: 1.15;
+      color: var(--text-primary);
+      max-width: 840px;
+      margin: 0 auto 24px;
     }
 
-    .hero-scroll-cue {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto 40px;
     }
 
     .hero-ctas {
       display: flex;
       gap: 16px;
-      flex-wrap: wrap;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
-    /* Right sidebar - Stats */
-    .hero-sidebar-right {
-      padding: 80px 24px 40px 0;
-      border-left: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      z-index: 2;
-    }
-
-    .hero-stat {
-      text-align: right;
-    }
-
-    .hero-stat-label {
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 4px;
-    }
-
-    .hero-stat-value {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-stat-value .stat-unit {
-      font-size: 0.7em;
-      font-weight: 400;
-      color: var(--text-muted);
-    }
-
-    /* ===== TIMELINE ===== */
-    .timeline-section {
-      padding: 120px 0;
-    }
-
-    .timeline-header {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-
-    .timeline-header .section-sub {
-      margin: 0 auto;
-    }
-
-    .timeline {
-      position: relative;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 20px;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--border-strong) 5%, var(--border-strong) 95%, transparent);
-    }
-
-    .timeline-entry {
-      position: relative;
-      padding-left: 56px;
-      margin-bottom: 40px;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .timeline-entry.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .timeline-entry::before {
-      content: '';
-      position: absolute;
-      left: 16px;
-      top: 20px;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid var(--bg);
-    }
-
-    .timeline-time {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .timeline-agent {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 10px;
-    }
-
-    .timeline-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 20px 24px;
-    }
-
-    .timeline-card p {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      line-height: 1.75;
-    }
-
-    .timeline-punchline {
-      text-align: center;
-      margin-top: 80px;
-    }
-
-    .timeline-punchline p {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-    }
-
-    /* ===== MANIFESTO ===== */
-    .manifesto-section {
+    /* ===== OUTCOMES ===== */
+    .outcomes-section {
       padding: 120px 0;
       border-top: 1px solid var(--border);
-    }
-
-    .manifesto-inner {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .manifesto-line {
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 600;
-      line-height: 1.5;
-      margin-bottom: 40px;
-      letter-spacing: -0.01em;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .manifesto-line.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .manifesto-line.muted {
-      color: var(--text-secondary);
-    }
-
-    .manifesto-highlight {
-      color: var(--accent);
-      font-style: italic;
-    }
-
-    /* ===== NETWORK DIAGRAM ===== */
-    .network-section {
-      padding: 120px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .network-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .network-diagram {
-      position: relative;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .network-svg {
-      width: 100%;
-      height: auto;
-    }
-
-    .network-labels {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .network-label {
-      position: absolute;
-    }
-
-    .network-label-name {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-    }
-
-    .network-statement {
-      text-align: center;
-      margin-top: 60px;
-      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      line-height: 1.3;
     }
 
     /* ===== PROCESS ===== */
@@ -664,79 +289,7 @@
       line-height: 1.65;
     }
 
-    /* ===== PRICING ===== */
-    .pricing-section {
-      padding: 120px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .pricing-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .pricing-card {
-      max-width: 560px;
-      margin: 0 auto;
-      background: var(--bg-card);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-lg);
-      padding: 48px;
-      text-align: center;
-    }
-
-    .pricing-amount {
-      font-size: 4rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: -0.03em;
-      line-height: 1;
-      margin-bottom: 32px;
-    }
-
-    .pricing-period {
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: var(--text-muted);
-    }
-
-    .pricing-includes {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 32px;
-      text-align: left;
-    }
-
-    .pricing-item {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      padding-left: 24px;
-      position: relative;
-    }
-
-    .pricing-item::before {
-      content: '\2713';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .pricing-comparison {
-      padding: 20px;
-      background: var(--accent-subtle);
-      border-radius: var(--radius-md);
-      margin-bottom: 8px;
-    }
-
-    .pricing-comparison p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* ===== DIFFERENTIATORS ===== */
+    /* ===== DIFFERENTIATORS / CARDS ===== */
     .diff-section {
       padding: 120px 0;
       border-top: 1px solid var(--border);
@@ -768,6 +321,11 @@
       transform: translateY(0);
     }
 
+    .diff-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
     .diff-card-title {
       font-size: 1.15rem;
       font-weight: 600;
@@ -795,12 +353,6 @@
     .cta-section .section-sub {
       margin: 0 auto 40px;
       max-width: 560px;
-    }
-
-    .cta-note {
-      margin-top: 16px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
     }
 
     /* ===== FOOTER ===== */
@@ -914,92 +466,17 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-
-      .hero-grid > div:first-child {
-        order: 1;
-      }
-
-      .hero-grid > div:last-child {
-        order: 0;
-      }
-
-      .network-diagram {
-        max-width: 100%;
-      }
-
-      .process-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-      }
+      .diff-grid { grid-template-columns: 1fr 1fr; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     }
 
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .nav-mobile-toggle {
-        display: block;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-
-      .hero-sidebar-left,
-      .hero-sidebar-right {
-        display: none;
-      }
-
-      .hero-centre {
-        min-height: 80vh;
-      }
-
-      .hero-headline {
-        font-size: 2rem;
-      }
-
-      .hero-feed-scroll {
-        top: 70px;
-      }
-
-      .hero-feed-label {
-        top: 70px;
-      }
-
-      .network-label-name {
-        font-size: 0.75rem;
-      }
-
-      .diff-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .process-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline::before {
-        left: 12px;
-      }
-
-      .timeline-entry {
-        padding-left: 40px;
-      }
-
-      .timeline-entry::before {
-        left: 8px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: block; }
+      .hero-title { font-size: 1.8rem; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -1010,422 +487,157 @@
     <div class="nav-inner">
       <a href="/" class="nav-logo">agentive<span class="dot">.</span></a>
       <div class="nav-links">
-        <a href="agents.html" class="nav-link">Use cases</a>
-        <a href="blog.html" class="nav-link">Blog</a>
-        <a href="#process" class="nav-link">How it works</a>
-        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#sectors" class="nav-link">Sectors</a>
+        <a href="#how-it-works" class="nav-link">How it works</a>
+        <a href="about.html" class="nav-link">About</a>
         <a href="/booking.html" class="btn btn-primary">Book a call</a>
       </div>
       <button class="nav-mobile-toggle" aria-label="Menu" onclick="document.querySelector('.nav-mobile-menu').classList.toggle('open')">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
     <div class="nav-mobile-menu">
-      <a href="agents.html" class="nav-link" onclick="document.querySelector('.nav-mobile-menu').classList.remove('open')">Use cases</a>
-      <a href="blog.html" class="nav-link" onclick="document.querySelector('.nav-mobile-menu').classList.remove('open')">Blog</a>
-      <a href="#process" class="nav-link" onclick="document.querySelector('.nav-mobile-menu').classList.remove('open')">How it works</a>
-      <a href="#pricing" class="nav-link" onclick="document.querySelector('.nav-mobile-menu').classList.remove('open')">Pricing</a>
+      <a href="#sectors" class="nav-link" onclick="document.querySelector('.nav-mobile-menu').classList.remove('open')">Sectors</a>
+      <a href="#how-it-works" class="nav-link" onclick="document.querySelector('.nav-mobile-menu').classList.remove('open')">How it works</a>
+      <a href="about.html" class="nav-link">About</a>
       <a href="/booking.html" class="btn btn-primary">Book a call</a>
     </div>
   </nav>
 
   <!-- ===== HERO ===== -->
-  <section class="hero">
-    <!-- Left sidebar: Active Agents -->
-    <div class="hero-sidebar-left">
-      <div class="hero-sidebar-title">Active AI Employees</div>
-      <div class="hero-agent-row">
-        <div class="hero-agent-left">
-          <div class="hero-agent-dot" style="background:#1D9E75;"></div>
-          <div class="hero-agent-name">Document Chaser</div>
-        </div>
-        <div class="hero-agent-status">Chasing</div>
-      </div>
-      <div class="hero-agent-row">
-        <div class="hero-agent-left">
-          <div class="hero-agent-dot" style="background:#5B8DEF;"></div>
-          <div class="hero-agent-name">Enquiry Responder</div>
-        </div>
-        <div class="hero-agent-status">Qualifying</div>
-      </div>
-      <div class="hero-agent-row">
-        <div class="hero-agent-left">
-          <div class="hero-agent-dot" style="background:#A278FF;"></div>
-          <div class="hero-agent-name">Client Q&amp;A</div>
-        </div>
-        <div class="hero-agent-status">Answering</div>
-      </div>
-      <div class="hero-agent-row">
-        <div class="hero-agent-left">
-          <div class="hero-agent-dot" style="background:#FF6B6B;"></div>
-          <div class="hero-agent-name">Compliance Monitor</div>
-        </div>
-        <div class="hero-agent-status">Checking</div>
-      </div>
-      <div class="hero-agent-row">
-        <div class="hero-agent-left">
-          <div class="hero-agent-dot" style="background:#67E8F9;"></div>
-          <div class="hero-agent-name">Inbox Manager</div>
-        </div>
-        <div class="hero-agent-status">Sorting</div>
-      </div>
-    </div>
-
-    <!-- Centre: Live Feed + Overlay -->
-    <div class="hero-centre">
-      <div class="hero-feed-label">
-        <div class="hero-feed-dot"></div>
-        <span>Live Feed</span>
-      </div>
-      <div class="hero-feed-scroll">
-        <div class="hero-feed-track" id="heroFeed">
-          <span class="fl"><span class="fa fa-doc">[Document Chaser]</span> Checking outstanding documents across 23 active clients...</span>
-          <span class="fl"><span class="fa fa-doc">[Document Chaser]</span> 8 clients still missing bank statements for Q1 VAT return.</span>
-          <span class="fl"><span class="fa fa-doc">[Document Chaser]</span> Personalised WhatsApp sent to each. Tom B responded within 4 minutes.</span>
-          <span class="fl fl-done"><span class="fa fa-doc">[Document Chaser]</span> &#10003; 8 chased. 1 received. 7 outstanding logged.</span>
-          <span class="fl">&nbsp;</span>
-          <span class="fl"><span class="fa fa-enquiry">[Enquiry Responder]</span> New enquiry via website at 11:47pm.</span>
-          <span class="fl"><span class="fa fa-enquiry">[Enquiry Responder]</span> Sole trader seeking bookkeeping and self-assessment support.</span>
-          <span class="fl"><span class="fa fa-enquiry">[Enquiry Responder]</span> Qualification complete. Exploration call booked for Thursday 10am.</span>
-          <span class="fl fl-done"><span class="fa fa-enquiry">[Enquiry Responder]</span> &#10003; Lead qualified and in the diary. Goodnight.</span>
-          <span class="fl">&nbsp;</span>
-          <span class="fl"><span class="fa fa-deadline">[Deadline Monitor]</span> Running weekly compliance check...</span>
-          <span class="fl"><span class="fa fa-deadline">[Deadline Monitor]</span> 3 VAT returns due Friday. All in progress, no action needed.</span>
-          <span class="fl"><span class="fa fa-deadline">[Deadline Monitor]</span> 2 CT600s due next month. Documents not yet received.</span>
-          <span class="fl"><span class="fa fa-deadline">[Deadline Monitor]</span> Document Chaser briefed. Chase starts this morning.</span>
-          <span class="fl fl-done"><span class="fa fa-deadline">[Deadline Monitor]</span> &#10003; Weekly deadline report delivered to team WhatsApp.</span>
-          <span class="fl">&nbsp;</span>
-          <span class="fl"><span class="fa fa-qa">[Client Q&amp;A]</span> Sarah M asking about SA302 for mortgage application.</span>
-          <span class="fl"><span class="fa fa-qa">[Client Q&amp;A]</span> Sent explanation and portal instructions. Flagged for accountant sign-off.</span>
-          <span class="fl"><span class="fa fa-qa">[Client Q&amp;A]</span> Sarah confirmed. Exactly what she needed. No partner involvement required.</span>
-          <span class="fl fl-done"><span class="fa fa-qa">[Client Q&amp;A]</span> &#10003; Handled in 3 minutes. At 9pm on a Sunday.</span>
-          <span class="fl">&nbsp;</span>
-          <span class="fl"><span class="fa fa-briefing">[Morning Briefing]</span> Good morning. Here's today:</span>
-          <span class="fl"><span class="fa fa-briefing">[Morning Briefing]</span> 4 documents received overnight. 12 still outstanding.</span>
-          <span class="fl"><span class="fa fa-briefing">[Morning Briefing]</span> 2 new enquiries. Both qualified, both in the diary.</span>
-          <span class="fl"><span class="fa fa-briefing">[Morning Briefing]</span> 1 VAT return ready for partner sign-off.</span>
-          <span class="fl fl-done"><span class="fa fa-briefing">[Morning Briefing]</span> &#10003; Full briefing delivered to team WhatsApp at 8:00am.</span>
-          <span class="fl">&nbsp;</span>
-          <span class="fl"><span class="fa fa-inbox">[Inbox Manager]</span> Processing 34 overnight emails...</span>
-          <span class="fl"><span class="fa fa-inbox">[Inbox Manager]</span> HMRC acknowledgement handled. Reference request from Halifax replied.</span>
-          <span class="fl"><span class="fa fa-inbox">[Inbox Manager]</span> 6 emails flagged for partner review. Rest cleared.</span>
-          <span class="fl fl-done"><span class="fa fa-inbox">[Inbox Manager]</span> &#10003; 28 of 34 emails handled. Inbox cleared.</span>
-          <span class="fl">&nbsp;</span>
-          <span class="fl"><span class="fa fa-review">[Review Agent]</span> Self-assessment completed for James P last week.</span>
-          <span class="fl"><span class="fa fa-review">[Review Agent]</span> Review request sent via email and WhatsApp.</span>
-          <span class="fl"><span class="fa fa-review">[Review Agent]</span> New 5-star Google review received. Response drafted.</span>
-          <span class="fl fl-done"><span class="fa fa-review">[Review Agent]</span> &#10003; Google rating now 4.8. Response awaiting approval.</span>
-        </div>
-      </div>
-      <div class="hero-overlay">
-        <h1 class="hero-headline">Your AI employees are already working.</h1>
-        <div class="hero-scroll-cue">
-          <span>Scroll to see what they handled today</span>
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="hero-ctas">
-          <a href="/booking.html" class="btn btn-primary">Book a call</a>
-          <a href="#timeline" class="btn btn-ghost">See it in action</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right sidebar: Stats -->
-    <div class="hero-sidebar-right">
-      <div class="hero-stat">
-        <div class="hero-stat-label">Employees</div>
-        <div class="hero-stat-value">5</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-label">Channels</div>
-        <div class="hero-stat-value">4</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-label">Verticals</div>
-        <div class="hero-stat-value">3</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-label">Uptime</div>
-        <div class="hero-stat-value">99.97<span class="stat-unit">%</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== TIMELINE ===== -->
-  <section class="timeline-section" id="timeline">
+  <section class="hero-simple">
     <div class="container">
-      <div class="timeline-header reveal">
-        <p class="eyebrow">A day with your AI employees</p>
-        <h2 class="section-heading">Here's what happened while you were in client meetings, on calls, and doing the work that actually needs you.</h2>
-      </div>
-
-      <div class="timeline">
-
-        <div class="timeline-entry">
-          <div class="timeline-time">6:00 AM</div>
-          <div class="timeline-agent">Document Chaser chased 8 outstanding bank statements</div>
-          <div class="timeline-card">
-            <p>Ran overnight check across <strong style="color: var(--text-primary);">23 active clients</strong>. 8 still missing bank statements for Q1 VAT returns. Personalised WhatsApp messages sent to each. By 8am, <strong style="color: var(--accent);">3 had already responded</strong>.</p>
-          </div>
-        </div>
-
-        <div class="timeline-entry">
-          <div class="timeline-time">8:00 AM</div>
-          <div class="timeline-agent">Briefing Agent compiled your daily summary</div>
-          <div class="timeline-card">
-            <p>Morning. Here's today: <strong style="color: var(--accent);">4 documents received overnight</strong>, 12 still outstanding. 2 new enquiries came in after hours, both qualified, both in the diary. 3 VAT returns due this Friday, all in progress. 2 CT600s due next month, documents not yet received. I've briefed the Document Chaser to start chasing this morning. Full summary in the <strong style="color: var(--text-primary);">team WhatsApp</strong>.</p>
-          </div>
-        </div>
-
-        <div class="timeline-entry">
-          <div class="timeline-time">9:30 AM</div>
-          <div class="timeline-agent">Inbox Agent cleared 28 of 34 emails</div>
-          <div class="timeline-card">
-            <p>You had 34 emails this morning. I've <strong style="color: var(--accent);">handled 28 of them</strong>: HMRC acknowledgements, bank reference requests, routine client queries, and a Companies House confirmation. <strong style="color: var(--text-primary);">6 need your attention</strong>. I've flagged them and moved everything else out of your way.</p>
-          </div>
-        </div>
-
-        <div class="timeline-entry">
-          <div class="timeline-time">11:00 AM</div>
-          <div class="timeline-agent">Enquiry Agent qualified a lead and booked a call</div>
-          <div class="timeline-card">
-            <p>New enquiry via the website. Sole trader in Bristol, looking for bookkeeping and self-assessment support. I've qualified them: turnover under &pound;85K, no current accountant, wants to start immediately. <strong style="color: var(--accent);">Exploration call booked for Thursday at 10am</strong>. Details in your calendar.</p>
-          </div>
-        </div>
-
-        <div class="timeline-entry">
-          <div class="timeline-time">1:00 PM</div>
-          <div class="timeline-agent">Q&amp;A Agent handled 4 client questions via WhatsApp</div>
-          <div class="timeline-card">
-            <p>Handled 4 routine client questions today via WhatsApp. Sarah M needed her SA302 for a mortgage application. Sent her the explanation and portal login instructions. Flagged it for your sign-off. <strong style="color: var(--accent);">She confirmed within 10 minutes</strong>. No partner time needed.</p>
-          </div>
-        </div>
-
-        <div class="timeline-entry">
-          <div class="timeline-time">5:30 PM</div>
-          <div class="timeline-agent">Compliance Monitor ran weekly deadline check</div>
-          <div class="timeline-card">
-            <p>Weekly compliance check complete. 3 VAT returns due Friday: all in progress, no issues. 2 CT600s due next month: documents still outstanding for both. I've briefed the Document Chaser. MTD quarterly submissions: 4 due in 6 weeks, all clients notified. <strong style="color: var(--accent);">Nothing overdue</strong>.</p>
-          </div>
-        </div>
-
-        <div class="timeline-entry">
-          <div class="timeline-time">9:00 PM</div>
-          <div class="timeline-agent">Enquiry Agent responded to a late-night lead</div>
-          <div class="timeline-card">
-            <p>Another enquiry just came in. Limited company director in Manchester, needs annual accounts and corporation tax. <strong style="color: var(--text-primary);">Responded in 47 seconds</strong>. Qualified: &pound;200K turnover, currently with a large firm, wants someone more hands-on. Exploration call booked for Monday at 2pm. <strong style="color: var(--accent);">Goodnight. I'll keep watching</strong>.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="timeline-punchline reveal">
-        <p>That's not a demo. That was Tuesday.</p>
+      <p class="eyebrow">For service businesses with 10-50 staff</p>
+      <h1 class="hero-title">How much revenue is your business losing to slow response times, missed follow-ups, and leads that go cold?</h1>
+      <p class="hero-sub">We find the most expensive bottleneck in your operation and build an AI system that removes it. Not software you buy. Not a template. A system scoped around your process, your tools, and the specific problem that is costing you the most.</p>
+      <div class="hero-ctas">
+        <a href="/booking.html" class="btn btn-primary">Book a 20 minute call</a>
+        <a href="#demo" class="btn btn-ghost">See it in action</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== MANIFESTO ===== -->
-  <section class="manifesto-section">
+  <!-- ===== OUTCOMES ===== -->
+  <section class="outcomes-section" id="outcomes">
     <div class="container">
-      <div class="manifesto-inner">
-        <p class="manifesto-line">We don't sell software.</p>
-        <p class="manifesto-line">We deploy <span class="manifesto-highlight">AI employees</span>.</p>
-        <p class="manifesto-line muted">This is a managed service. We build them. We deploy them. We maintain them. You talk to your AI employees through WhatsApp, Slack, Teams, or email. We handle everything else.</p>
-        <p class="manifesto-line muted">You never touch the technology. You never log into a portal. You never learn a new tool.</p>
-        <p class="manifesto-line muted">We compete with the decision to hire another member of staff. Not with software.</p>
-        <p class="manifesto-line">A part-time admin hire costs &pound;15,000 to &pound;20,000 per year before NI and pension. An AI team that does the same work costs less than &pound;10,000 per year and works every day including weekends.</p>
+      <div class="diff-header">
+        <p class="eyebrow">What changes</p>
+        <h2 class="section-heading">What actually changes when the system goes live</h2>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== NETWORK ===== -->
-  <section class="network-section" id="agents">
-    <div class="container">
-      <div class="network-header reveal">
-        <p class="eyebrow">Who we work with</p>
-        <h2 class="section-heading">Three verticals. Specific problems. Specific numbers.</h2>
-      </div>
-
-      <div class="network-diagram reveal">
-        <svg class="network-svg" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Connecting lines (dashed) -->
-          <line x1="400" y1="250" x2="400" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="400" y1="250" x2="160" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="400" y1="250" x2="640" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="400" y1="250" x2="200" y2="400" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="400" y1="250" x2="600" y2="400" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
-
-          <!-- Centre hub -->
-          <circle cx="400" cy="250" r="44" fill="rgba(29,158,117,0.1)" stroke="rgba(29,158,117,0.3)" stroke-width="1.5"/>
-          <circle cx="400" cy="250" r="34" fill="#1D9E75"/>
-          <text x="400" y="246" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="white" letter-spacing="0.5">YOUR</text>
-          <text x="400" y="260" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="white" letter-spacing="0.5">BUSINESS</text>
-
-          <!-- Client Comms (top) -->
-          <circle cx="400" cy="56" r="24" fill="rgba(91,141,239,0.15)" stroke="rgba(91,141,239,0.3)" stroke-width="1"/>
-          <circle cx="400" cy="56" r="16" fill="#5B8DEF"/>
-          <circle cx="400" cy="56" r="8" fill="rgba(255,255,255,0.2)"/>
-          <!-- Satellite dots -->
-          <circle cx="378" cy="38" r="4" fill="#5B8DEF" opacity="0.5"/>
-          <circle cx="422" cy="38" r="4" fill="#5B8DEF" opacity="0.5"/>
-          <circle cx="378" cy="74" r="4" fill="#5B8DEF" opacity="0.5"/>
-
-          <!-- Operations (top-left) -->
-          <circle cx="160" cy="146" r="24" fill="rgba(255,189,89,0.15)" stroke="rgba(255,189,89,0.3)" stroke-width="1"/>
-          <circle cx="160" cy="146" r="16" fill="#FFBD59"/>
-          <circle cx="160" cy="146" r="8" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="138" cy="128" r="4" fill="#FFBD59" opacity="0.5"/>
-          <circle cx="182" cy="128" r="4" fill="#FFBD59" opacity="0.5"/>
-          <circle cx="140" cy="166" r="4" fill="#FFBD59" opacity="0.5"/>
-
-          <!-- Compliance (top-right) -->
-          <circle cx="640" cy="146" r="24" fill="rgba(255,107,107,0.15)" stroke="rgba(255,107,107,0.3)" stroke-width="1"/>
-          <circle cx="640" cy="146" r="16" fill="#FF6B6B"/>
-          <circle cx="640" cy="146" r="8" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="618" cy="128" r="4" fill="#FF6B6B" opacity="0.5"/>
-          <circle cx="662" cy="128" r="4" fill="#FF6B6B" opacity="0.5"/>
-          <circle cx="660" cy="166" r="4" fill="#FF6B6B" opacity="0.5"/>
-
-          <!-- Growth (bottom-left) -->
-          <circle cx="200" cy="396" r="24" fill="rgba(72,199,176,0.15)" stroke="rgba(72,199,176,0.3)" stroke-width="1"/>
-          <circle cx="200" cy="396" r="16" fill="#48C7B0"/>
-          <circle cx="200" cy="396" r="8" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="178" cy="378" r="4" fill="#48C7B0" opacity="0.5"/>
-          <circle cx="222" cy="378" r="4" fill="#48C7B0" opacity="0.5"/>
-          <circle cx="180" cy="416" r="4" fill="#48C7B0" opacity="0.5"/>
-
-          <!-- Document Management (bottom-right) -->
-          <circle cx="600" cy="396" r="24" fill="rgba(29,158,117,0.15)" stroke="rgba(29,158,117,0.3)" stroke-width="1"/>
-          <circle cx="600" cy="396" r="16" fill="#1D9E75"/>
-          <circle cx="600" cy="396" r="8" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="578" cy="378" r="4" fill="#1D9E75" opacity="0.5"/>
-          <circle cx="622" cy="378" r="4" fill="#1D9E75" opacity="0.5"/>
-          <circle cx="620" cy="416" r="4" fill="#1D9E75" opacity="0.5"/>
-        </svg>
-
-        <!-- Labels positioned over the SVG -->
-        <div class="network-labels">
-          <div class="network-label" style="top: 16%; left: 50%; transform: translateX(-50%);">
-            <span class="network-label-name">Client Comms</span>
-          </div>
-          <div class="network-label" style="top: 17%; left: 14%;">
-            <span class="network-label-name">Operations</span>
-          </div>
-          <div class="network-label" style="top: 17%; right: 14%;">
-            <span class="network-label-name">Compliance</span>
-          </div>
-          <div class="network-label" style="bottom: 12%; left: 18%;">
-            <span class="network-label-name">Growth</span>
-          </div>
-          <div class="network-label" style="bottom: 12%; right: 18%;">
-            <span class="network-label-name">Documents</span>
-          </div>
+      <div class="diff-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="diff-card">
+          <h3 class="diff-card-title">Speed</h3>
+          <p class="diff-card-body">Every enquiry gets a response within minutes. Not hours. Not days. The prospect who filled in your form at 9pm gets a reply before they call your competitor.</p>
+        </div>
+        <div class="diff-card">
+          <h3 class="diff-card-title">Follow-up</h3>
+          <p class="diff-card-body">Every lead gets followed up. Not once. Five times. Until they book or say no. No candidate goes cold because someone was too busy.</p>
+        </div>
+        <div class="diff-card">
+          <h3 class="diff-card-title">Growth</h3>
+          <p class="diff-card-body">New business comes in without your team chasing it. A system that finds prospects in your sector, reaches out, and books meetings with the ones that are interested.</p>
         </div>
       </div>
-
-      <p class="network-statement reveal">Every engagement is scoped around your firm's actual problems. Not a generic product. Not a platform. A team of AI employees built for how you work.</p>
     </div>
   </section>
 
-  <!-- ===== PROCESS ===== -->
-  <section class="process-section" id="process">
+  <!-- ===== SECTORS ===== -->
+  <section class="diff-section" id="sectors">
+    <div class="container">
+      <div class="diff-header">
+        <p class="eyebrow">Sectors</p>
+        <h2 class="section-heading">Where we have the deepest experience</h2>
+        <p class="section-sub" style="margin: 0 auto;">We build AI systems for any service business with 10 to 50 staff. These are the sectors where we have seen the same expensive problems over and over.</p>
+      </div>
+      <div class="diff-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <a href="sectors/recruitment.html" class="diff-card" style="transition: border-color 0.3s, transform 0.3s; display: block;">
+          <h3 class="diff-card-title" style="color: var(--accent);">Recruitment Agencies</h3>
+          <p class="diff-card-body">Lost candidates. Dead leads in the CRM. Consultants losing 90 minutes a day to admin. At &pound;5,000 a placement, one lost candidate a week is over &pound;250,000 a year.</p>
+          <p style="margin-top: 16px; font-size: 0.85rem; color: var(--accent);">See what we build &rarr;</p>
+        </a>
+        <a href="sectors/accountancy.html" class="diff-card" style="transition: border-color 0.3s, transform 0.3s; display: block;">
+          <h3 class="diff-card-title" style="color: var(--accent);">Accountancy Firms</h3>
+          <p class="diff-card-body">Slow enquiry response. Document chasing eating 5 hours a week. MTD adding 300 extra client contacts a year. At &pound;90 an hour, the cost adds up fast.</p>
+          <p style="margin-top: 16px; font-size: 0.85rem; color: var(--accent);">See what we build &rarr;</p>
+        </a>
+        <a href="sectors/law-firms.html" class="diff-card" style="transition: border-color 0.3s, transform 0.3s; display: block;">
+          <h3 class="diff-card-title" style="color: var(--accent);">Law Firms</h3>
+          <p class="diff-card-body">50 hours a week of non-billable admin across a 10 person team. At &pound;250 an hour, that is &pound;12,500 a week in capacity the firm has but cannot bill.</p>
+          <p style="margin-top: 16px; font-size: 0.85rem; color: var(--accent);">See what we build &rarr;</p>
+        </a>
+      </div>
+      <p style="text-align: center; margin-top: 48px; font-size: 1rem; color: var(--text-secondary); max-width: 560px; margin-left: auto; margin-right: auto;">Not in one of these sectors? If your business has qualified people spending time on work that does not need their qualifications, the same approach applies. <a href="/booking.html" style="color: var(--accent);">Book a call</a> and we will figure it out.</p>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="process-section" id="how-it-works">
     <div class="container">
       <div class="process-header">
-        <p class="eyebrow">How It Works</p>
-        <h2 class="section-heading">From first call to live AI employees in 2 to 4 weeks</h2>
-        <p class="section-sub">You are not involved in the build. We handle everything. You just tell us what needs fixing.</p>
+        <p class="eyebrow">How it works</p>
+        <h2 class="section-heading">Every system is built from scratch around your business</h2>
+        <p class="section-sub" style="margin: 0 auto;">No templates. No off-the-shelf product. From first call to live system in 2 to 8 weeks.</p>
       </div>
-
       <div class="process-grid">
         <div class="process-step">
           <div class="process-number">1</div>
-          <h3 class="process-step-title">Scoping Call</h3>
-          <p class="process-step-desc">1 to 2 hours. We learn how your firm actually operates. What falls through the cracks. What eats time. What costs money.</p>
+          <h3 class="process-step-title">We talk for 20 minutes</h3>
+          <p class="process-step-desc">You tell me where work gets stuck, where leads fall through, and what is costing you the most time or money.</p>
         </div>
         <div class="process-step">
           <div class="process-number">2</div>
-          <h3 class="process-step-title">We Build It</h3>
-          <p class="process-step-desc">You are not involved. We build your AI employees against your real workflows, your real clients, your real documents.</p>
+          <h3 class="process-step-title">I send you a scope document</h3>
+          <p class="process-step-desc">Exactly what I would build, how long it takes, and what it costs. No commitment until you have read it.</p>
         </div>
         <div class="process-step">
           <div class="process-number">3</div>
-          <h3 class="process-step-title">Testing</h3>
-          <p class="process-step-desc">We test against real scenarios from your business. Not demo data. Real client names, real document types, real edge cases.</p>
+          <h3 class="process-step-title">We build it in 2 to 8 weeks</h3>
+          <p class="process-step-desc">Connected to your existing systems. You do not change how you work. The system fits around you.</p>
         </div>
         <div class="process-step">
           <div class="process-number">4</div>
-          <h3 class="process-step-title">Soft Launch, Then Live</h3>
-          <p class="process-step-desc">We monitor everything for the first 2 weeks. Then full deployment. Every piece of outbound content passes through compliance review before it reaches anyone.</p>
+          <h3 class="process-step-title">It runs. Every day.</h3>
+          <p class="process-step-desc">Including weekends. We maintain it, improve it, and fix anything that breaks.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== PRICING ===== -->
-  <!-- ===== DIFFERENTIATORS ===== -->
-  <section class="diff-section">
+  <!-- ===== SOCIAL PROOF ===== -->
+  <section class="diff-section" id="proof">
     <div class="container">
       <div class="diff-header">
-        <p class="eyebrow">What makes this different</p>
+        <p class="eyebrow">Track record</p>
+        <h2 class="section-heading">Built for real businesses. Not demos.</h2>
       </div>
-
       <div class="diff-grid">
-        <div class="diff-card">
-          <h3 class="diff-card-title">Not software. A managed service.</h3>
-          <p class="diff-card-body">You never log in. You never configure anything. You never learn a new tool. We build it, deploy it, and maintain it. Your AI employees report to your team on WhatsApp, Slack, or Teams every morning.</p>
+        <div class="diff-card" style="text-align: center;">
+          <h3 class="diff-card-title" style="font-size: 2rem; color: var(--accent);">100%</h3>
+          <p class="diff-card-body">Job success rate on Upwork. Every project delivered. Every client satisfied.</p>
         </div>
-        <div class="diff-card">
-          <h3 class="diff-card-title">They learn your business</h3>
-          <p class="diff-card-body">After a few weeks, your AI employees know that Mrs Chen always needs chasing twice, that the partner prefers WhatsApp not email, and that Friday afternoon enquiries need a same-day response. That knowledge stays on your infrastructure.</p>
+        <div class="diff-card" style="text-align: center;">
+          <h3 class="diff-card-title" style="font-size: 2rem; color: var(--accent);">Top Rated</h3>
+          <p class="diff-card-body">Top rated freelancer status. Earned by consistently delivering work that clients come back for.</p>
         </div>
-        <div class="diff-card">
-          <h3 class="diff-card-title">Your data stays yours</h3>
-          <p class="diff-card-body">Your AI employees run in an isolated environment that belongs to your firm. Client data, case details, and communications never leave your setup. Nothing gets shared. Nothing trains anyone else's models.</p>
+        <div class="diff-card" style="text-align: center;">
+          <h3 class="diff-card-title" style="font-size: 2rem; color: var(--accent);">&pound;20,000+</h3>
+          <p class="diff-card-body">Earned building AI systems for real businesses across agriculture, distribution, recruitment, and professional services.</p>
         </div>
-        <div class="diff-card">
-          <h3 class="diff-card-title">Compliance built in</h3>
-          <p class="diff-card-body">Every piece of outbound content passes through compliance review before it reaches anyone. Nothing is sent without being checked. No rogue messages. No tone mismatches. No risk.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PRICING ===== -->
-  <section class="diff-section" id="pricing">
-    <div class="container">
-      <div class="diff-header">
-        <p class="eyebrow">Pricing</p>
-        <h2 class="section-heading" style="margin-bottom: 12px;">Simple. Transparent. No setup fees.</h2>
-        <p class="section-sub" style="margin: 0 auto;">3 month minimum. Monthly rolling after that. Cancel with 30 days notice.</p>
-      </div>
-
-      <div class="diff-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 800px; margin: 0 auto;">
-        <div class="diff-card">
-          <h3 class="diff-card-title">&pound;299/month</h3>
-          <p class="diff-card-body" style="margin-bottom: 16px;">A single AI employee. Document chasing, enquiry response, or admin handling. One workflow, fully managed by us.</p>
-          <p class="diff-card-body" style="font-size: 0.78rem; color: var(--text-muted);">You cover LLM running costs (typically &pound;20 to &pound;50/month depending on volume).</p>
-        </div>
-        <div class="diff-card" style="border: 1px solid var(--accent); position: relative;">
-          <h3 class="diff-card-title">&pound;799/month</h3>
-          <p class="diff-card-body" style="margin-bottom: 16px;">Your full AI employee team. Multiple roles, complex workflows, higher volumes. Everything your firm needs.</p>
-          <p class="diff-card-body" style="font-size: 0.78rem; color: var(--accent);">All LLM costs included. No surprises.</p>
+        <div class="diff-card" style="text-align: center;">
+          <h3 class="diff-card-title" style="font-size: 2rem; color: var(--accent);">3 Sectors</h3>
+          <p class="diff-card-body">Recruitment agencies, accountancy firms, and law firms. The common thread: qualified people doing work that does not need their qualifications.</p>
         </div>
       </div>
-
-      <p class="network-statement reveal" style="margin-top: 48px;">A part-time admin hire costs &pound;15,000 to &pound;20,000 per year before NI and pension.<br>A full AI employee team costs &pound;9,588 per year and works every day including weekends.</p>
+      <p style="text-align: center; margin-top: 40px;"><a href="https://www.upwork.com/freelancers/~0156fdff93d0309ec9" target="_blank" rel="noopener" style="font-size: 0.9rem; color: var(--text-muted); transition: color 0.2s;">View full profile on Upwork &rarr;</a></p>
     </div>
   </section>
 
   <!-- ===== CTA ===== -->
   <section class="cta-section">
     <div class="container">
-      <h2 class="section-heading">20 minutes to see if this is relevant</h2>
-      <p class="section-sub">Not a sales meeting. A conversation about how your firm works and whether AI employees would make a difference.</p>
+      <h2 class="section-heading">20 minutes to find out if there is a bottleneck in your business worth fixing.</h2>
+      <p class="section-sub">No pitch. No pressure. If I do not find anything I can help with, I will tell you.</p>
       <a href="/booking.html" class="btn btn-primary" style="padding: 14px 36px; font-size: 1rem;">Book a call</a>
-      <p class="cta-note">Free &middot; 20 minutes &middot; No commitment</p>
     </div>
   </section>
 
@@ -1435,12 +647,10 @@
       <div class="footer-inner">
         <span class="footer-logo">agentive<span class="dot">.</span></span>
         <div class="footer-links">
-          <a href="agents.html" class="footer-link">Use cases</a>
-          <a href="blog.html" class="footer-link">Blog</a>
-          <a href="#process" class="footer-link">How it works</a>
-
+          <a href="#sectors" class="footer-link">Sectors</a>
+          <a href="#how-it-works" class="footer-link">How it works</a>
+          <a href="about.html" class="footer-link">About</a>
           <a href="/booking.html" class="footer-link">Book a call</a>
-
         </div>
         <div class="footer-contact">
           <a href="mailto:harry.staples@agentivesolutions.co.uk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>harry.staples@agentivesolutions.co.uk</a>
@@ -1448,21 +658,15 @@
           <a href="https://www.linkedin.com/company/agentivesolutionsuk" target="_blank" rel="noopener" aria-label="Agentive Solutions LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
         </div>
         <div class="footer-meta">
-          <span>Bournemouth, UK</span>
-          <span>&copy; 2026 Agentive Solutions</span>
+          <span>Harry Staples | Agentive Solutions</span>
+          <span>&copy; 2026</span>
         </div>
       </div>
     </div>
   </footer>
 
   <script>
-    // Intersection Observer for scroll-based reveal animations
     (function() {
-      var observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -40px 0px'
-      };
-
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
@@ -1470,84 +674,12 @@
             observer.unobserve(entry.target);
           }
         });
-      }, observerOptions);
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-      // Reveal general elements
-      document.querySelectorAll('.reveal').forEach(function(el) {
+      document.querySelectorAll('.diff-card, .process-step, .reveal').forEach(function(el, i) {
+        el.style.transitionDelay = (i * 0.06) + 's';
         observer.observe(el);
       });
-
-      // Timeline entries - each reveals individually on scroll
-      var timelineObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            timelineObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
-
-      document.querySelectorAll('.timeline-entry').forEach(function(el) {
-        timelineObserver.observe(el);
-      });
-
-      // Manifesto lines with stagger
-      var manifestoLines = document.querySelectorAll('.manifesto-line');
-      manifestoLines.forEach(function(el, i) {
-        el.style.transitionDelay = (i * 0.1) + 's';
-        observer.observe(el);
-      });
-
-      // Agent cards with stagger
-      var agentCards = document.querySelectorAll('.agent-card');
-      agentCards.forEach(function(el, i) {
-        el.style.transitionDelay = (i * 0.05) + 's';
-        observer.observe(el);
-      });
-
-      // Process steps with stagger
-      var processSteps = document.querySelectorAll('.process-step');
-      processSteps.forEach(function(el, i) {
-        el.style.transitionDelay = (i * 0.1) + 's';
-        observer.observe(el);
-      });
-
-      // Differentiator cards with stagger
-      var diffCards = document.querySelectorAll('.diff-card');
-      diffCards.forEach(function(el, i) {
-        el.style.transitionDelay = (i * 0.08) + 's';
-        observer.observe(el);
-      });
-    })();
-
-    // Type feed lines one by one from the bottom, then loop
-    (function() {
-      var track = document.getElementById('heroFeed');
-      if (!track) return;
-      var lines = Array.from(track.querySelectorAll('.fl'));
-      var scroll = track.parentElement;
-      var idx = 0;
-      var delay = 900;
-
-      function scrollToBottom() {
-        scroll.scrollTop = scroll.scrollHeight;
-      }
-
-      function showNext() {
-        if (idx >= lines.length) {
-          idx = 0;
-        }
-        lines[idx].classList.add('visible');
-        requestAnimationFrame(function() {
-          requestAnimationFrame(scrollToBottom);
-        });
-        var isBlank = lines[idx].textContent.trim() === '';
-        idx++;
-        setTimeout(showNext, isBlank ? 400 : delay);
-      }
-
-      scrollToBottom();
-      setTimeout(showNext, 500);
     })();
   </script>
 
