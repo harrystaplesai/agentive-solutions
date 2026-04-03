@@ -30,18 +30,18 @@ export function WorkflowDiagram({ nodes, size = "small" }: WorkflowDiagramProps)
   const isLarge = size === "large";
 
   return (
-    <div className="flex items-center justify-center gap-0" aria-hidden="true">
+    <div className="flex items-center justify-center gap-0 overflow-x-auto" aria-hidden="true">
       {nodes.map((node, i) => {
         const Icon = iconMap[node.icon] || Database;
 
         return (
-          <div key={i} className="flex items-center">
+          <div key={i} className="flex items-center shrink-0">
             {/* Node */}
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-1.5 md:gap-2">
               <div
                 className={cn(
                   "flex items-center justify-center rounded-xl border",
-                  isLarge ? "h-16 w-16" : "h-12 w-12"
+                  isLarge ? "h-10 w-10 md:h-16 md:w-16" : "h-10 w-10 md:h-12 md:w-12"
                 )}
                 style={{
                   backgroundColor: node.color + "15",
@@ -49,7 +49,7 @@ export function WorkflowDiagram({ nodes, size = "small" }: WorkflowDiagramProps)
                 }}
               >
                 <Icon
-                  className={cn(isLarge ? "h-7 w-7" : "h-5 w-5")}
+                  className={cn(isLarge ? "h-5 w-5 md:h-7 md:w-7" : "h-4 w-4 md:h-5 md:w-5")}
                   style={{ color: node.color }}
                   strokeWidth={1.5}
                 />
@@ -57,7 +57,7 @@ export function WorkflowDiagram({ nodes, size = "small" }: WorkflowDiagramProps)
               <span
                 className={cn(
                   "text-center font-mono text-fg-tertiary",
-                  isLarge ? "text-xs max-w-[80px]" : "text-[10px] max-w-[64px]"
+                  isLarge ? "text-[9px] max-w-[56px] md:text-xs md:max-w-[80px]" : "text-[9px] max-w-[52px] md:text-[10px] md:max-w-[64px]"
                 )}
               >
                 {node.label}
@@ -66,16 +66,16 @@ export function WorkflowDiagram({ nodes, size = "small" }: WorkflowDiagramProps)
 
             {/* Connector arrow */}
             {i < nodes.length - 1 && (
-              <div className={cn("flex items-center", isLarge ? "mx-4" : "mx-2")}>
+              <div className={cn("flex items-center", isLarge ? "mx-1.5 md:mx-4" : "mx-1 md:mx-2")}>
                 <div
                   className={cn(
                     "h-px",
-                    isLarge ? "w-10" : "w-6"
+                    isLarge ? "w-4 md:w-10" : "w-3 md:w-6"
                   )}
                   style={{ backgroundColor: "#2a2a2a" }}
                 />
                 <div
-                  className="h-0 w-0 border-y-[3px] border-l-[5px] border-y-transparent"
+                  className="h-0 w-0 border-y-[2px] border-l-[4px] border-y-transparent md:border-y-[3px] md:border-l-[5px]"
                   style={{ borderLeftColor: nodes[i + 1].color + "60" }}
                 />
               </div>
