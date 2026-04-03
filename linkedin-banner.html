@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Banner</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #1a1a1a;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .banner {
+    width: 1584px;
+    height: 396px;
+    background: #050505;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  /* Subtle grid pattern */
+  .grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Accent glow */
+  .glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.07;
+    background: #3b82f6;
+    top: -200px;
+    right: 300px;
+  }
+
+  .glow-2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.04;
+    background: #3b82f6;
+    bottom: -150px;
+    right: 100px;
+  }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 2;
+    padding-right: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: 16px;
+    max-width: 900px;
+  }
+
+  .brand {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #3b82f6;
+  }
+
+  .headline {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #ededed;
+  }
+
+  .headline span {
+    color: #878787;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #878787;
+    max-width: 620px;
+    margin-top: 4px;
+    margin-left: auto;
+  }
+
+  /* Left side: workflow nodes */
+  .nodes {
+    position: absolute;
+    left: 60px;
+    top: 18%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 2;
+  }
+
+  .node-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .node-row:nth-child(2) {
+    margin-left: 32px;
+  }
+
+  .node-row:nth-child(3) {
+    margin-left: 8px;
+  }
+
+  .node {
+    padding: 12px 24px;
+    border-radius: 10px;
+    background: #141414;
+    border: 1px solid #1e1e1e;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ededed;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .node.active {
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.05);
+  }
+
+  /* Connector lines */
+  .connector {
+    width: 28px;
+    height: 1px;
+    background: #2a2a2a;
+    position: relative;
+  }
+
+  .connector::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: -2px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #3b82f6;
+    opacity: 0.6;
+  }
+
+  /* Bottom border accent */
+  .bottom-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+    opacity: 0.3;
+  }
+
+  /* Stats bar */
+  .stats {
+    position: absolute;
+    top: 32px;
+    right: 80px;
+    display: flex;
+    gap: 40px;
+    z-index: 2;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  .stat-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ededed;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #878787;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Instructions */
+  .instructions {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #666;
+    font-family: system-ui;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .instructions kbd {
+    background: #2a2a2a;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #999;
+  }
+</style>
+</head>
+<body>
+
+<div class="banner" id="banner">
+  <div class="grid-pattern"></div>
+  <div class="glow"></div>
+  <div class="glow-2"></div>
+
+  <div class="content">
+    <div class="brand">Agentive Solutions</div>
+    <h1 class="headline">
+      AI systems that run<br>
+      <span>your operations</span>
+    </h1>
+    <p class="subtitle">
+      Document intelligence, workflow automation,
+      lead generation, and custom AI software.
+    </p>
+  </div>
+
+  <div class="nodes">
+    <div class="node-row">
+      <div class="node">Email Ingest</div>
+      <div class="connector"></div>
+      <div class="node active">AI Processing</div>
+    </div>
+    <div class="node-row">
+      <div class="node">ERP / CRM</div>
+      <div class="connector"></div>
+      <div class="node active">Agent Logic</div>
+    </div>
+    <div class="node-row">
+      <div class="node active">Vector Store</div>
+      <div class="connector"></div>
+      <div class="node">Dashboard</div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-value">100%</span>
+      <span class="stat-label">Job Success</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">Top Rated</span>
+      <span class="stat-label">Upwork</span>
+    </div>
+  </div>
+
+  <div class="bottom-accent"></div>
+</div>
+
+<div class="instructions">
+  Screenshot the banner above at exactly 1584 &times; 396px<br>
+  <kbd>Cmd + Shift + 4</kbd> on Mac, or use your browser's screenshot tool<br>
+  Right click the banner &rarr; Inspect &rarr; Screenshot node to get exact dimensions
+</div>
+
+</body>
+</html>

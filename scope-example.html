@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Scope: AI Document Intelligence System</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #050505;
+    --bg-secondary: #0a0a0a;
+    --bg-elevated: #111111;
+    --bg-card: #1c1c1c;
+    --fg: #ededed;
+    --fg-secondary: #b8b8b8;
+    --fg-tertiary: #a0a0a0;
+    --fg-muted: #777777;
+    --accent: #3b82f6;
+    --accent-muted: rgba(59, 130, 246, 0.12);
+    --border: #1e1e1e;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+  }
+
+  /* ============================================
+     SLIDE SYSTEM
+     Each .slide is a full-page section
+     ============================================ */
+
+  .slide {
+    width: 100%;
+    min-height: 100vh;
+    padding: 80px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slide:last-child {
+    page-break-after: avoid;
+  }
+
+  /* ============================================
+     COVER SLIDE
+     ============================================ */
+
+  .slide.cover {
+    justify-content: space-between;
+    background: var(--bg);
+    padding-top: 140px;
+  }
+
+  .cover-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .cover-glow {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: var(--accent);
+    filter: blur(200px);
+    opacity: 0.06;
+    top: -300px;
+    right: -100px;
+  }
+
+  .cover-badge {
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 2;
+  }
+
+  .cover-badge .logo-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--fg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--bg);
+  }
+
+  .cover-badge .logo-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+
+  .cover-meta {
+    position: absolute;
+    top: 80px;
+    right: 80px;
+    text-align: right;
+    z-index: 2;
+  }
+
+  .cover-meta .date {
+    font-size: 13px;
+    color: var(--fg-tertiary);
+  }
+
+  .cover-meta .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--fg-tertiary);
+  }
+
+  .cover-meta .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--warning);
+  }
+
+  .cover-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cover-client {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .cover-title {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+    max-width: 800px;
+  }
+
+  .cover-title span {
+    color: var(--fg-tertiary);
+  }
+
+  .cover-subtitle {
+    margin-top: 20px;
+    font-size: 18px;
+    color: var(--fg-secondary);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  .cover-footer {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 2;
+    margin-top: auto;
+  }
+
+  .cover-footer-left {
+    font-size: 12px;
+    color: var(--fg-muted);
+  }
+
+  .cover-footer-right {
+    font-size: 12px;
+    color: var(--fg-muted);
+    text-align: right;
+  }
+
+  .cover-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+
+  /* ============================================
+     SECTION DIVIDER SLIDE
+     ============================================ */
+
+  .slide.divider {
+    justify-content: center;
+    background: var(--bg);
+  }
+
+  .divider-number {
+    font-size: 120px;
+    font-weight: 800;
+    color: var(--bg-card);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .divider-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 12px;
+  }
+
+  .divider-title {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+  }
+
+  .divider-subtitle {
+    margin-top: 12px;
+    font-size: 18px;
+    color: var(--fg-secondary);
+    max-width: 600px;
+  }
+
+  /* ============================================
+     CONTENT SLIDES
+     ============================================ */
+
+  .slide.content {
+    background: var(--bg-secondary);
+  }
+
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .slide-header-left h2 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+
+  .slide-header-right {
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--bg-card);
+    line-height: 1;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  /* ============================================
+     TYPOGRAPHY
+     ============================================ */
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--fg-secondary);
+    line-height: 1.7;
+    max-width: 720px;
+  }
+
+  p + p { margin-top: 12px; }
+
+  /* ============================================
+     LISTS
+     ============================================ */
+
+  .check-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--fg-secondary);
+    line-height: 1.5;
+  }
+
+  .check-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 7px;
+  }
+
+  /* ============================================
+     CARDS
+     ============================================ */
+
+  .card-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .card-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .card h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 8px;
+  }
+
+  .card p {
+    font-size: 13px;
+    color: var(--fg-tertiary);
+    line-height: 1.6;
+  }
+
+  .card .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--accent-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 16px;
+    color: var(--accent);
+  }
+
+  /* ============================================
+     TABLES
+     ============================================ */
+
+  .scope-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .scope-table thead {
+    background: var(--accent);
+  }
+
+  .scope-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    color: white;
+    letter-spacing: 0.02em;
+  }
+
+  .scope-table th:first-child {
+    border-radius: 8px 0 0 0;
+  }
+
+  .scope-table th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+
+  .scope-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--fg-secondary);
+    vertical-align: top;
+  }
+
+  .scope-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .scope-table .row-label {
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  .scope-table .highlight-row {
+    background: var(--accent-muted);
+  }
+
+  .scope-table .highlight-row td {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  /* Risk badges */
+  .badge {
+    display: inline-flex;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .badge.high { background: rgba(239,68,68,0.15); color: #ef4444; }
+  .badge.medium { background: rgba(245,158,11,0.15); color: #f59e0b; }
+  .badge.low { background: rgba(34,197,94,0.15); color: #22c55e; }
+
+  /* ============================================
+     TWO COLUMN LAYOUT
+     ============================================ */
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .two-col.wide-left {
+    grid-template-columns: 1.4fr 1fr;
+  }
+
+  /* ============================================
+     METRIC BLOCKS
+     ============================================ */
+
+  .metric-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .metric {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .metric .value {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--fg);
+    letter-spacing: -0.03em;
+  }
+
+  .metric .label {
+    font-size: 12px;
+    color: var(--fg-tertiary);
+    margin-top: 4px;
+  }
+
+  /* ============================================
+     WORKFLOW DIAGRAM
+     ============================================ */
+
+  .workflow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 32px 0;
+  }
+
+  .workflow-step {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .workflow-step .step-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .workflow-step .step-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 4px;
+  }
+
+  .workflow-step .step-desc {
+    font-size: 11px;
+    color: var(--fg-tertiary);
+    line-height: 1.5;
+  }
+
+  .workflow-arrow {
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fg-muted);
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  /* ============================================
+     TIMELINE
+     ============================================ */
+
+  .timeline-bar {
+    display: flex;
+    gap: 2px;
+    margin: 24px 0 32px;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .timeline-bar .segment {
+    border-radius: 2px;
+  }
+
+  .timeline-bar .segment.active {
+    background: var(--accent);
+  }
+
+  .timeline-bar .segment.pending {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+  }
+
+  /* ============================================
+     PAGE FOOTER
+     ============================================ */
+
+  .page-footer {
+    margin-top: auto;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--fg-muted);
+  }
+
+  .page-footer .confidential {
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ============================================
+     PRINT
+     ============================================ */
+
+  @media print {
+    .slide {
+      min-height: auto;
+      height: 100vh;
+      padding: 60px;
+    }
+    body { background: var(--bg); }
+  }
+
+  /* ============================================
+     INSTRUCTIONS (non-print)
+     ============================================ */
+
+  .dev-note {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    background: var(--accent);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 100;
+    cursor: pointer;
+  }
+
+  @media print {
+    .dev-note { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="dev-note" onclick="window.print()">Print / Save as PDF</div>
+
+<!-- ============================================
+     SLIDE 1: COVER
+     ============================================ -->
+<div class="slide cover">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+
+  <div class="cover-badge">
+    <div class="logo-mark">A</div>
+    <div class="logo-text">Agentive Solutions</div>
+  </div>
+
+  <div class="cover-meta">
+    <div class="date">April 2, 2026</div>
+    <div class="status">
+      <span class="status-dot"></span>
+      Draft for approval
+    </div>
+  </div>
+
+  <div class="cover-content">
+    <div class="cover-client">Meridian Industrial Services</div>
+    <h1 class="cover-title">
+      AI Document Intelligence<br>
+      <span>System: Tech Scope</span>
+    </h1>
+    <p class="cover-subtitle">
+      Automated certificate ingestion, AI classification, and instant
+      retrieval across 6 business units and 12,000+ equipment records.
+    </p>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-footer-left">
+      Prepared by Harry Staples<br>
+      harry.staples@agentivesolutions.co.uk
+    </div>
+    <div class="cover-footer-right">
+      Confidential<br>
+      Version 1.0
+    </div>
+  </div>
+
+  <div class="cover-line"></div>
+</div>
+
+<!-- ============================================
+     SLIDE 2: SECTION DIVIDER - PROJECT OVERVIEW
+     ============================================ -->
+<div class="slide divider">
+  <div class="cover-grid"></div>
+  <div class="cover-glow" style="right: auto; left: -200px; top: auto; bottom: -300px;"></div>
+  <div class="cover-badge">
+    <div class="logo-mark">A</div>
+    <div class="logo-text">Agentive Solutions</div>
+  </div>
+  <div style="margin-top: auto;">
+    <div class="divider-number">01</div>
+    <div class="divider-label">Section</div>
+    <div class="divider-title">Project Overview</div>
+    <div class="divider-subtitle">
+      What this project delivers and why it matters to your operations.
+    </div>
+  </div>
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 3: PROJECT SUMMARY
+     ============================================ -->
+<div class="slide content">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <div class="section-label">Project Overview</div>
+      <h2>Project summary</h2>
+    </div>
+    <div class="slide-header-right">01</div>
+  </div>
+
+  <div class="two-col wide-left">
+    <div>
+      <p>
+        Meridian Industrial Services manages equipment certifications, safety registrations,
+        and compliance documentation across six regional business units. Staff members forward
+        certificates to shared inboxes where they accumulate without classification, creating a
+        growing backlog that makes retrieval during regulatory inspections slow and unreliable.
+      </p>
+      <p>
+        This project delivers an AI system that monitors those inboxes, extracts and classifies
+        incoming documents, stores them in a searchable database, and provides a chatbot interface
+        for instant retrieval. The system runs autonomously with human oversight, replacing 15+
+        hours of weekly manual sorting with automated processing that completes in seconds.
+      </p>
+
+      <div class="metric-row" style="margin-top: 40px;">
+        <div class="metric">
+          <div class="value">15+</div>
+          <div class="label">Hours saved per week</div>
+        </div>
+        <div class="metric">
+          <div class="value">12K</div>
+          <div class="label">Equipment records</div>
+        </div>
+        <div class="metric">
+          <div class="value">6</div>
+          <div class="label">Business units</div>
+        </div>
+        <div class="metric">
+          <div class="value">&lt;30s</div>
+          <div class="label">Target retrieval time</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h4>Prepared for</h4>
+        <p>James Whitfield, Operations Director</p>
+        <p>Sarah Chen, Compliance Manager</p>
+        <p style="margin-top: 8px; font-size: 12px;">Meridian Industrial Services Ltd.</p>
+      </div>
+      <div class="card">
+        <h4>Delivered by</h4>
+        <p>Harry Staples, Lead Developer</p>
+        <p style="margin-top: 8px; font-size: 12px;">Agentive Solutions</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 4: SECTION DIVIDER - CURRENT SITUATION
+     ============================================ -->
+<div class="slide divider">
+  <div class="cover-grid"></div>
+  <div class="cover-badge">
+    <div class="logo-mark">A</div>
+    <div class="logo-text">Agentive Solutions</div>
+  </div>
+  <div style="margin-top: auto;">
+    <div class="divider-number">02</div>
+    <div class="divider-label">Section</div>
+    <div class="divider-title">Current situation</div>
+    <div class="divider-subtitle">
+      How the process works today and where it breaks down.
+    </div>
+  </div>
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 5: PROCESS MAPPING & PAIN POINTS
+     ============================================ -->
+<div class="slide content">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <div class="section-label">Current Situation</div>
+      <h2>Process mapping and pain points</h2>
+    </div>
+    <div class="slide-header-right">02</div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>Current workflow</h3>
+      <ol class="check-list">
+        <li>Certificates arrive as email attachments to two shared inboxes</li>
+        <li>Admin staff manually review each email and identify document type</li>
+        <li>Documents sorted into equipment folders on shared drive (when capacity allows)</li>
+        <li>Equipment IDs, expiration dates, and metadata entered into spreadsheet by hand</li>
+        <li>Retrieval requires searching through folders or asking the person who filed it</li>
+        <li>Expired certificates discovered only during audits or inspector requests</li>
+      </ol>
+    </div>
+
+    <div>
+      <h3>Pain points</h3>
+      <div class="card-grid" style="grid-template-columns: 1fr; gap: 12px;">
+        <div class="card">
+          <h4>15+ hours per week on manual sorting</h4>
+          <p>Two staff members spend a combined 15 hours each week sorting, filing, and logging documents that arrive across both inboxes.</p>
+        </div>
+        <div class="card">
+          <h4>5 to 15 minute retrieval during inspections</h4>
+          <p>When a regulator asks for a specific certificate, staff search through nested folders and email archives. Some documents take over 15 minutes to locate.</p>
+        </div>
+        <div class="card">
+          <h4>Expired certificates go undetected</h4>
+          <p>No automated tracking for expiration dates. The team discovers gaps during audits, creating compliance exposure and operational risk.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 6: EXISTING TOOLS
+     ============================================ -->
+<div class="slide content">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <div class="section-label">Current Situation</div>
+      <h2>Existing tools and systems</h2>
+    </div>
+    <div class="slide-header-right">02</div>
+  </div>
+
+  <div class="card-grid cols-3">
+    <div class="card">
+      <div class="card-icon">&#9993;</div>
+      <h4>Microsoft 365 Email</h4>
+      <p>Two shared mailboxes receive all incoming certificates. Unlimited storage. No automation rules configured.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128193;</div>
+      <h4>SharePoint / Shared Drive</h4>
+      <p>Nested folder structure organized by business unit and equipment type. Manual uploads only.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128200;</div>
+      <h4>Excel Tracking Sheet</h4>
+      <p>Master spreadsheet with equipment IDs, certificate types, and expiry dates. Updated manually, often weeks behind.</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <h3>Time, effort, and cost</h3>
+    <table class="scope-table" style="margin-top: 16px;">
+      <thead>
+        <tr>
+          <th>Activity</th>
+          <th>Hours per week</th>
+          <th>Staff involved</th>
+          <th>Annual cost (est.)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Document sorting and filing</td>
+          <td>10 to 12</td>
+          <td>2 admin staff</td>
+          <td>$15,600</td>
+        </tr>
+        <tr>
+          <td class="row-label">Search and retrieval requests</td>
+          <td>3 to 5</td>
+          <td>Various</td>
+          <td>$5,200</td>
+        </tr>
+        <tr>
+          <td class="row-label">Expiry date tracking and follow up</td>
+          <td>2 to 3</td>
+          <td>Compliance manager</td>
+          <td>$7,800</td>
+        </tr>
+        <tr class="highlight-row">
+          <td>Total estimated annual cost</td>
+          <td>15 to 20</td>
+          <td></td>
+          <td>$28,600</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 7: SECTION DIVIDER - PROPOSED SOLUTION
+     ============================================ -->
+<div class="slide divider">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-badge">
+    <div class="logo-mark">A</div>
+    <div class="logo-text">Agentive Solutions</div>
+  </div>
+  <div style="margin-top: auto;">
+    <div class="divider-number">03</div>
+    <div class="divider-label">Section</div>
+    <div class="divider-title">Proposed solution</div>
+    <div class="divider-subtitle">
+      System architecture, workflow, and technical approach.
+    </div>
+  </div>
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 8: HIGH-LEVEL WORKFLOW
+     ============================================ -->
+<div class="slide content">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <div class="section-label">Proposed Solution</div>
+      <h2>High level workflow</h2>
+    </div>
+    <div class="slide-header-right">03</div>
+  </div>
+
+  <div class="workflow">
+    <div class="workflow-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Email Ingestion</div>
+      <div class="step-desc">Monitor 2 inboxes via IMAP, extract attachments automatically</div>
+    </div>
+    <div class="workflow-arrow">&rarr;</div>
+    <div class="workflow-step">
+      <div class="step-num">02</div>
+      <div class="step-title">AI Classification</div>
+      <div class="step-desc">Identify doc type, equipment ID, expiry date, business unit</div>
+    </div>
+    <div class="workflow-arrow">&rarr;</div>
+    <div class="workflow-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Vector Storage</div>
+      <div class="step-desc">Store embeddings + metadata in pgvector for semantic search</div>
+    </div>
+    <div class="workflow-arrow">&rarr;</div>
+    <div class="workflow-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Chatbot Interface</div>
+      <div class="step-desc">Natural language queries return documents with download links</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top: 40px;">
+    <div>
+      <h3>Automation scope</h3>
+      <ul class="check-list">
+        <li>Automated email monitoring and attachment extraction from both inboxes</li>
+        <li>AI classification by document type, equipment unit, and business region</li>
+        <li>Metadata extraction including equipment IDs and expiration dates</li>
+        <li>Vector database creation for semantic search across all documents</li>
+        <li>Chatbot interface for instant natural language and structured queries</li>
+        <li>Automated expiration alerts sent 60 days before certificate deadline</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Automation outputs</h3>
+      <ul class="check-list">
+        <li>Organized document library mirroring Meridian's equipment hierarchy</li>
+        <li>Searchable database with both semantic and structured query support</li>
+        <li>Chatbot that returns documents with direct download links and previews</li>
+        <li>Expiration tracking dashboard with proactive alert notifications</li>
+        <li>Audit log of all document processing and retrieval activity</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 9: TECH STACK
+     ============================================ -->
+<div class="slide content">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <div class="section-label">Proposed Solution</div>
+      <h2>Tech stack</h2>
+    </div>
+    <div class="slide-header-right">03</div>
+  </div>
+
+  <table class="scope-table">
+    <thead>
+      <tr>
+        <th style="width: 200px;">Layer</th>
+        <th>Technology</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="row-label">Email processing</td>
+        <td>IMAP integration via N8N</td>
+        <td>Automated monitoring and attachment extraction from Microsoft 365 mailboxes</td>
+      </tr>
+      <tr>
+        <td class="row-label">AI / ML</td>
+        <td>OpenAI GPT or Claude</td>
+        <td>Document classification, metadata extraction, and chatbot reasoning</td>
+      </tr>
+      <tr>
+        <td class="row-label">Database</td>
+        <td>Supabase with pgvector</td>
+        <td>Structured metadata storage and vector embeddings for semantic search</td>
+      </tr>
+      <tr>
+        <td class="row-label">Orchestration</td>
+        <td>N8N</td>
+        <td>Workflow automation, scheduling, error handling, and retry logic</td>
+      </tr>
+      <tr>
+        <td class="row-label">Storage</td>
+        <td>Cloud storage (S3 or equivalent)</td>
+        <td>Secure document storage with unlimited scaling capacity</td>
+      </tr>
+      <tr>
+        <td class="row-label">Interface</td>
+        <td>Custom chatbot application</td>
+        <td>Natural language and structured query interface for document retrieval</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="two-col" style="margin-top: 40px;">
+    <div>
+      <h3>Security considerations</h3>
+      <ul class="check-list">
+        <li>Encrypted document storage and transmission (TLS in transit, AES at rest)</li>
+        <li>Role based access control and user authentication</li>
+        <li>All AI API calls made server side with no client exposure of keys</li>
+        <li>Audit logging for all document access and retrieval events</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Scalability</h3>
+      <ul class="check-list">
+        <li>Cloud architecture supports unlimited document volume growth</li>
+        <li>Horizontal scaling of processing if email volume increases</li>
+        <li>Additional business units and document types added without rework</li>
+        <li>Multi region support for future office expansion</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 10: RISKS
+     ============================================ -->
+<div class="slide content">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <div class="section-label">Proposed Solution</div>
+      <h2>Risks and assumptions</h2>
+    </div>
+    <div class="slide-header-right">03</div>
+  </div>
+
+  <table class="scope-table">
+    <thead>
+      <tr>
+        <th style="width: 280px;">Risk</th>
+        <th style="width: 100px;">Likelihood</th>
+        <th style="width: 100px;">Impact</th>
+        <th>Mitigation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="row-label">Email system requires admin configuration for IMAP access</td>
+        <td><span class="badge medium">Medium</span></td>
+        <td><span class="badge medium">Medium</span></td>
+        <td>Coordinate with IT during week 1; fallback to email forwarding rules if direct access blocked</td>
+      </tr>
+      <tr>
+        <td class="row-label">AI classification accuracy below target on edge case documents</td>
+        <td><span class="badge medium">Medium</span></td>
+        <td><span class="badge low">Low</span></td>
+        <td>Human review queue for low confidence classifications; accuracy improves with feedback</td>
+      </tr>
+      <tr>
+        <td class="row-label">Historical document backlog larger than estimated</td>
+        <td><span class="badge low">Low</span></td>
+        <td><span class="badge low">Low</span></td>
+        <td>Backlog processed in batches during off hours; does not block new document processing</td>
+      </tr>
+      <tr>
+        <td class="row-label">Staff adoption of chatbot interface slower than expected</td>
+        <td><span class="badge medium">Medium</span></td>
+        <td><span class="badge medium">Medium</span></td>
+        <td>Training sessions during handover; chatbot designed to match existing search patterns</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 40px;">
+    <h3>Assumptions and requirements</h3>
+    <ul class="check-list" style="margin-top: 12px;">
+      <li>Meridian provides IMAP or API access to both shared mailboxes within one week of project start</li>
+      <li>Sample documents (50+ across all types) provided for AI training and classification testing</li>
+      <li>Equipment hierarchy and folder structure documented or walkthrough provided</li>
+      <li>Compliance manager available for 2 to 3 hours of validation testing in week 4</li>
+      <li>Existing document backlog does not exceed 10,000 files for initial import</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 11: SECTION DIVIDER - PROJECT PLAN
+     ============================================ -->
+<div class="slide divider">
+  <div class="cover-grid"></div>
+  <div class="cover-badge">
+    <div class="logo-mark">A</div>
+    <div class="logo-text">Agentive Solutions</div>
+  </div>
+  <div style="margin-top: auto;">
+    <div class="divider-number">04</div>
+    <div class="divider-label">Section</div>
+    <div class="divider-title">Project plan</div>
+    <div class="divider-subtitle">
+      Timeline, milestones, deliverables, and investment.
+    </div>
+  </div>
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 12: PHASED TIMELINE & PRICING
+     ============================================ -->
+<div class="slide content">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <div class="section-label">Project Plan</div>
+      <h2>Phased timeline and pricing</h2>
+    </div>
+    <div class="slide-header-right">04</div>
+  </div>
+
+  <table class="scope-table">
+    <thead>
+      <tr>
+        <th style="width: 180px;">Phase</th>
+        <th style="width: 110px;">Duration</th>
+        <th>Scope</th>
+        <th style="width: 130px;">Deliverables</th>
+        <th style="width: 110px; text-align: right;">Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="row-label">Phase 1: Discovery and infrastructure</td>
+        <td>Week 1</td>
+        <td>Email system access, sample document analysis, AI model configuration, Supabase schema design, folder structure mapping</td>
+        <td>Access confirmed, DB schema approved, classification model trained</td>
+        <td style="text-align: right;">$2,500</td>
+      </tr>
+      <tr>
+        <td class="row-label">Phase 2: Core AI engine</td>
+        <td>Weeks 2 to 3</td>
+        <td>Email ingestion pipeline, AI classification engine, metadata extraction, vector store creation, semantic search functionality</td>
+        <td>Processing pipeline operational on live data</td>
+        <td style="text-align: right;">$4,500</td>
+      </tr>
+      <tr>
+        <td class="row-label">Phase 3: Interface and retrieval</td>
+        <td>Week 4</td>
+        <td>Chatbot interface, expiration tracking dashboard, search optimization, alert notification system</td>
+        <td>Chatbot and dashboard ready for testing</td>
+        <td style="text-align: right;">$3,000</td>
+      </tr>
+      <tr>
+        <td class="row-label">Phase 4: Testing and handover</td>
+        <td>Weeks 5 to 6</td>
+        <td>UAT with real documents, performance optimization, historical backlog import, staff training, production deployment, documentation</td>
+        <td>Production system live, team trained, docs delivered</td>
+        <td style="text-align: right;">$2,000</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>Total project</td>
+        <td>6 weeks</td>
+        <td></td>
+        <td></td>
+        <td style="text-align: right;">$12,000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top: 20px; font-size: 12px; color: var(--fg-muted);">
+    This timeline assumes timely access to email systems and sample documents. Waiting periods
+    for client confirmations or data access are not included in the 6 week estimate.
+  </p>
+
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 13: INVESTMENT & PAYMENT TERMS
+     ============================================ -->
+<div class="slide content">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <div class="section-label">Project Plan</div>
+      <h2>Investment and payment terms</h2>
+    </div>
+    <div class="slide-header-right">04</div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>Payment schedule</h3>
+      <p style="margin-bottom: 20px;">
+        Each phase requires a 50% deposit before work begins. The remaining 50% is due upon
+        delivery of that phase's deliverables and client sign off.
+      </p>
+      <table class="scope-table" style="margin-top: 0;">
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th style="text-align: right;">Deposit (50%)</th>
+            <th style="text-align: right;">On delivery (50%)</th>
+            <th style="text-align: right;">Phase total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">Phase 1</td>
+            <td style="text-align: right;">$1,250</td>
+            <td style="text-align: right;">$1,250</td>
+            <td style="text-align: right;">$2,500</td>
+          </tr>
+          <tr>
+            <td class="row-label">Phase 2</td>
+            <td style="text-align: right;">$2,250</td>
+            <td style="text-align: right;">$2,250</td>
+            <td style="text-align: right;">$4,500</td>
+          </tr>
+          <tr>
+            <td class="row-label">Phase 3</td>
+            <td style="text-align: right;">$1,500</td>
+            <td style="text-align: right;">$1,500</td>
+            <td style="text-align: right;">$3,000</td>
+          </tr>
+          <tr>
+            <td class="row-label">Phase 4</td>
+            <td style="text-align: right;">$1,000</td>
+            <td style="text-align: right;">$1,000</td>
+            <td style="text-align: right;">$2,000</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>Total</td>
+            <td style="text-align: right;">$6,000</td>
+            <td style="text-align: right;">$6,000</td>
+            <td style="text-align: right;">$12,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h3>Ongoing monthly costs</h3>
+      <table class="scope-table" style="margin-top: 16px;">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th style="text-align: right;">Monthly</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">N8N (workflow automation)</td>
+            <td style="text-align: right;">$30 to $50</td>
+          </tr>
+          <tr>
+            <td class="row-label">OpenAI API (classification + chat)</td>
+            <td style="text-align: right;">$30 to $50</td>
+          </tr>
+          <tr>
+            <td class="row-label">Supabase + pgvector</td>
+            <td style="text-align: right;">$10 to $30</td>
+          </tr>
+          <tr>
+            <td class="row-label">Cloud storage</td>
+            <td style="text-align: right;">Included*</td>
+          </tr>
+          <tr class="highlight-row">
+            <td>Monthly operating total</td>
+            <td style="text-align: right;">$70 to $130</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 12px; font-size: 11px; color: var(--fg-muted);">
+        * Included if client provides existing cloud storage. Otherwise ~$10/month for S3.
+      </p>
+
+      <div class="card" style="margin-top: 24px;">
+        <h4>Payment terms</h4>
+        <ul class="check-list" style="margin-top: 8px;">
+          <li>50% deposit required to begin each phase</li>
+          <li>Remaining 50% due on phase deliverable sign off</li>
+          <li>Invoices issued at the start and completion of each phase</li>
+          <li>Payment due within 7 days of invoice</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 32px;">
+    <h3>Approval workflow</h3>
+    <p style="margin-top: 8px;">
+      Written confirmation via email from James Whitfield suffices for approval of this scope.
+      Phase 1 begins upon receipt of approval, email system access credentials, and the Phase 1 deposit.
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <span class="confidential">Confidential</span>
+    <span>Agentive Solutions | Meridian Industrial Services</span>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 14: CLOSING
+     ============================================ -->
+<div class="slide cover" style="justify-content: center; align-items: flex-start;">
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-badge">
+    <div class="logo-mark">A</div>
+    <div class="logo-text">Agentive Solutions</div>
+  </div>
+
+  <div style="position: relative; z-index: 2;">
+    <h2 style="font-size: 48px; font-weight: 700; letter-spacing: -0.03em; color: var(--fg);">
+      Next steps
+    </h2>
+    <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 24px; max-width: 600px;">
+      <div style="display: flex; gap: 16px; align-items: flex-start;">
+        <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; font-weight: 700; color: var(--accent);">1</div>
+        <div>
+          <div style="font-size: 15px; font-weight: 600; color: var(--fg);">Review this scope document</div>
+          <div style="font-size: 13px; color: var(--fg-secondary); margin-top: 4px;">Confirm the approach, timeline, and investment align with your expectations.</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: flex-start;">
+        <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; font-weight: 700; color: var(--accent);">2</div>
+        <div>
+          <div style="font-size: 15px; font-weight: 600; color: var(--fg);">Approve via email</div>
+          <div style="font-size: 13px; color: var(--fg-secondary); margin-top: 4px;">A reply confirming approval is all that is needed to proceed.</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: flex-start;">
+        <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; font-weight: 700; color: var(--accent);">3</div>
+        <div>
+          <div style="font-size: 15px; font-weight: 600; color: var(--fg);">Provide email system access</div>
+          <div style="font-size: 13px; color: var(--fg-secondary); margin-top: 4px;">We begin work the same week we receive credentials for the shared mailboxes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-footer-left">
+      <strong style="color: var(--fg); font-size: 14px;">Harry Staples</strong><br>
+      harry.staples@agentivesolutions.co.uk<br>
+      agentivesolutions.co.uk
+    </div>
+    <div class="cover-footer-right">
+      <strong style="color: var(--fg-secondary);">Agentive Solutions</strong><br>
+      AI systems that run your operations
+    </div>
+  </div>
+
+  <div class="cover-line"></div>
+</div>
+
+</body>
+</html>

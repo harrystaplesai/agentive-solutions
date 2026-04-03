@@ -10,6 +10,7 @@ const footerLinks = {
     { href: "/work/ai-crop-planning", label: "Crop planning" },
   ],
   company: [
+    { href: "/blueprints", label: "Blueprints" },
     { href: "/services", label: "Services" },
     { href: "/process", label: "Process" },
     { href: "/about", label: "About" },

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { caseStudies } from "@/content/case-studies";
+import { blueprints } from "@/content/blueprints";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://agentivesolutions.com";
@@ -7,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 1 },
     { url: `${baseUrl}/work`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.9 },
+    { url: `${baseUrl}/blueprints`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/services`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${baseUrl}/process`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
@@ -20,5 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...caseStudyPages];
+  const blueprintPages = blueprints.map((b) => ({
+    url: `${baseUrl}/blueprints/${b.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...caseStudyPages, ...blueprintPages];
 }
