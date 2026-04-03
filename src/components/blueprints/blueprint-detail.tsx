@@ -78,7 +78,7 @@ export function BlueprintDetail({ blueprint }: { blueprint: Blueprint }) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...springs.gentle, delay: 0.1 }}
-          className="mt-10 rounded-2xl border border-border bg-bg-elevated px-12 py-10"
+          className="mt-10 rounded-2xl border border-border bg-bg-elevated px-4 py-8 md:px-12 md:py-10"
         >
           <WorkflowDiagram nodes={blueprint.workflowNodes} size="large" />
         </motion.div>

@@ -30,18 +30,18 @@ export function WorkflowDiagram({ nodes, size = "small" }: WorkflowDiagramProps)
   const isLarge = size === "large";
 
   return (
-    <div className="flex items-center justify-center gap-0 overflow-x-auto" aria-hidden="true">
+    <div className="flex items-center justify-center gap-0" aria-hidden="true">
       {nodes.map((node, i) => {
         const Icon = iconMap[node.icon] || Database;
 
         return (
-          <div key={i} className="flex items-center shrink-0">
+          <div key={i} className="flex items-center min-w-0">
             {/* Node */}
-            <div className="flex flex-col items-center gap-1.5 md:gap-2">
+            <div className="flex flex-col items-center gap-1 md:gap-2 min-w-0">
               <div
                 className={cn(
                   "flex items-center justify-center rounded-xl border",
-                  isLarge ? "h-10 w-10 md:h-16 md:w-16" : "h-10 w-10 md:h-12 md:w-12"
+                  isLarge ? "h-9 w-9 md:h-16 md:w-16" : "h-9 w-9 md:h-12 md:w-12"
                 )}
                 style={{
                   backgroundColor: node.color + "15",
@@ -49,7 +49,7 @@ export function WorkflowDiagram({ nodes, size = "small" }: WorkflowDiagramProps)
                 }}
               >
                 <Icon
-                  className={cn(isLarge ? "h-5 w-5 md:h-7 md:w-7" : "h-4 w-4 md:h-5 md:w-5")}
+                  className={cn(isLarge ? "h-4 w-4 md:h-7 md:w-7" : "h-4 w-4 md:h-5 md:w-5")}
                   style={{ color: node.color }}
                   strokeWidth={1.5}
                 />
@@ -57,7 +57,7 @@ export function WorkflowDiagram({ nodes, size = "small" }: WorkflowDiagramProps)
               <span
                 className={cn(
                   "text-center font-mono text-fg-tertiary",
-                  isLarge ? "text-[9px] max-w-[56px] md:text-xs md:max-w-[80px]" : "text-[9px] max-w-[52px] md:text-[10px] md:max-w-[64px]"
+                  isLarge ? "text-[8px] max-w-[48px] md:text-xs md:max-w-[80px] leading-tight" : "text-[8px] max-w-[44px] md:text-[10px] md:max-w-[64px] leading-tight"
                 )}
               >
                 {node.label}
