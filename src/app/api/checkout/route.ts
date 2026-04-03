@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
 
     const price = tier === "setup" ? blueprint.pricing.setup : blueprint.pricing.blueprint;
     const tierLabel = tier === "setup" ? "Blueprint + Setup" : "Blueprint";
-    const baseUrl = process.env.NEXT_PUBLIC_URL || "https://www.agentivesolutions.co.uk";
+    const baseUrl = "https://www.agentivesolutions.co.uk";
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
