@@ -30,6 +30,7 @@ async function handleCheckout(blueprintSlug: string, tier: "blueprint" | "setup"
     window.location.href = data.url;
   } else {
     console.error("Checkout failed:", data.error);
+    alert("Checkout error: " + (data.error || "Unknown error. Please try again."));
   }
 }
 

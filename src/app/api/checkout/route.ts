@@ -2,12 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getBlueprint } from "@/content/blueprints";
 
-function getStripe() {
-  return new Stripe(process.env.STRIPE_SECRET_KEY!);
-}
-
 export async function POST(request: NextRequest) {
   try {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error("STRIPE_SECRET_KEY is not set");
+      return NextResponse.json(
+        { error: "Payment system not configured" },
+        { status: 500 }
+      );
+    }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
     const body = await request.json();
     const { blueprintSlug, tier } = body;
 
@@ -28,10 +34,10 @@ export async function POST(request: NextRequest) {
 
     const price = tier === "setup" ? blueprint.pricing.setup : blueprint.pricing.blueprint;
     const tierLabel = tier === "setup" ? "Blueprint + Setup" : "Blueprint";
+    const baseUrl = process.env.NEXT_PUBLIC_URL || "https://www.agentivesolutions.co.uk";
 
-    const session = await getStripe().checkout.sessions.create({
+    const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: ["card"],
       line_items: [
         {
           price_data: {
@@ -45,8 +51,8 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_URL}/blueprints/${blueprintSlug}?purchased=true&tier=${tier}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_URL}/blueprints/${blueprintSlug}`,
+      success_url: `${baseUrl}/blueprints/${blueprintSlug}?purchased=true&tier=${tier}`,
+      cancel_url: `${baseUrl}/blueprints/${blueprintSlug}`,
       metadata: {
         blueprintSlug,
         tier,
@@ -55,10 +61,11 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (error) {
-    console.error("Checkout error:", error);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.error("Checkout error:", message);
     return NextResponse.json(
-      { error: "Failed to create checkout session" },
+      { error: message },
       { status: 500 }
     );
   }

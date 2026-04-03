@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logo Export</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #1a1a1a;
+    gap: 40px;
+    padding: 40px;
+    font-family: system-ui;
+  }
+  .label {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .instructions {
+    color: #666;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 400px;
+  }
+  .instructions kbd {
+    background: #2a2a2a;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #999;
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="label">400 x 400 (LinkedIn profile picture size)</div>
+  <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="400" rx="0" fill="#0a0a0a"/>
+    <path d="M140 280 L200 100 L260 280" stroke="#ededed" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <line x1="162" y1="220" x2="238" y2="220" stroke="#3b82f6" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="162" cy="220" r="12" fill="#3b82f6"/>
+    <circle cx="200" cy="220" r="12" fill="#3b82f6"/>
+    <circle cx="238" cy="220" r="12" fill="#3b82f6"/>
+  </svg>
+</div>
+
+<div>
+  <div class="label">512 x 512 (high res export)</div>
+  <svg width="512" height="512" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="400" rx="0" fill="#0a0a0a"/>
+    <path d="M140 280 L200 100 L260 280" stroke="#ededed" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <line x1="162" y1="220" x2="238" y2="220" stroke="#3b82f6" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="162" cy="220" r="12" fill="#3b82f6"/>
+    <circle cx="200" cy="220" r="12" fill="#3b82f6"/>
+    <circle cx="238" cy="220" r="12" fill="#3b82f6"/>
+  </svg>
+</div>
+
+<div class="instructions">
+  Right click the logo &rarr; Inspect &rarr; right click the SVG element &rarr; "Capture node screenshot"<br>
+  This gives you a pixel perfect PNG at the exact dimensions shown.
+</div>
+
+</body>
+</html>
