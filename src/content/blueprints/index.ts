@@ -9,6 +9,7 @@ export type BlueprintCategory =
 export interface WorkflowNode {
   label: string;
   color: string;
+  icon: string;
 }
 
 export interface Blueprint {
@@ -69,10 +70,10 @@ export const blueprints: Blueprint[] = [
     isNew: true,
     pricing: { blueprint: 249, setup: 599 },
     workflowNodes: [
-      { label: "Email Inbox", color: nodeColors.blue },
-      { label: "Extract Files", color: nodeColors.cyan },
-      { label: "AI Classify", color: nodeColors.purple },
-      { label: "Route & Store", color: nodeColors.green },
+      { label: "Email Inbox", color: nodeColors.blue, icon: "Mail" },
+      { label: "Extract Files", color: nodeColors.cyan, icon: "Paperclip" },
+      { label: "AI Classify", color: nodeColors.purple, icon: "Brain" },
+      { label: "Route & Store", color: nodeColors.green, icon: "FolderOpen" },
     ],
     whatsIncluded: [
       "N8N workflow JSON with full configuration",
@@ -104,10 +105,10 @@ export const blueprints: Blueprint[] = [
     isNew: true,
     pricing: { blueprint: 299, setup: 699 },
     workflowNodes: [
-      { label: "Documents", color: nodeColors.blue },
-      { label: "Embed", color: nodeColors.purple },
-      { label: "Vector Store", color: nodeColors.cyan },
-      { label: "Chatbot", color: nodeColors.green },
+      { label: "Documents", color: nodeColors.blue, icon: "FileText" },
+      { label: "Embed", color: nodeColors.purple, icon: "Layers" },
+      { label: "Vector Store", color: nodeColors.cyan, icon: "Database" },
+      { label: "Chatbot", color: nodeColors.green, icon: "MessageSquare" },
     ],
     whatsIncluded: [
       "N8N workflow JSON for document embedding pipeline",
@@ -138,10 +139,10 @@ export const blueprints: Blueprint[] = [
     isNew: true,
     pricing: { blueprint: 299, setup: 749 },
     workflowNodes: [
-      { label: "CRM / ERP", color: nodeColors.blue },
-      { label: "Pattern Analysis", color: nodeColors.purple },
-      { label: "Draft Email", color: nodeColors.orange },
-      { label: "Alert Sales Rep", color: nodeColors.rose },
+      { label: "CRM / ERP", color: nodeColors.blue, icon: "Building2" },
+      { label: "Pattern Analysis", color: nodeColors.purple, icon: "TrendingDown" },
+      { label: "Draft Email", color: nodeColors.orange, icon: "PenLine" },
+      { label: "Alert Sales Rep", color: nodeColors.rose, icon: "Bell" },
     ],
     whatsIncluded: [
       "N8N workflow JSON with scheduling and CRM connection",
@@ -173,10 +174,10 @@ export const blueprints: Blueprint[] = [
     isNew: false,
     pricing: { blueprint: 349, setup: 899 },
     workflowNodes: [
-      { label: "ERP Data", color: nodeColors.blue },
-      { label: "Analyze Patterns", color: nodeColors.purple },
-      { label: "Generate Recs", color: nodeColors.orange },
-      { label: "Review Queue", color: nodeColors.green },
+      { label: "ERP Data", color: nodeColors.blue, icon: "BarChart3" },
+      { label: "Analyze Patterns", color: nodeColors.purple, icon: "Brain" },
+      { label: "Generate Recs", color: nodeColors.orange, icon: "ListChecks" },
+      { label: "Review Queue", color: nodeColors.green, icon: "CheckCircle" },
     ],
     whatsIncluded: [
       "N8N workflow JSON with ERP connection and scheduling",
@@ -209,10 +210,10 @@ export const blueprints: Blueprint[] = [
     isNew: true,
     pricing: { blueprint: 279, setup: 699 },
     workflowNodes: [
-      { label: "Prospect List", color: nodeColors.blue },
-      { label: "Enrich Data", color: nodeColors.purple },
-      { label: "Verify Email", color: nodeColors.cyan },
-      { label: "Push to CRM", color: nodeColors.green },
+      { label: "Prospect List", color: nodeColors.blue, icon: "Users" },
+      { label: "Enrich Data", color: nodeColors.purple, icon: "Search" },
+      { label: "Verify Email", color: nodeColors.cyan, icon: "ShieldCheck" },
+      { label: "Push to CRM", color: nodeColors.green, icon: "UserPlus" },
     ],
     whatsIncluded: [
       "N8N workflow JSON with enrichment and CRM sync",
@@ -243,10 +244,10 @@ export const blueprints: Blueprint[] = [
     isNew: false,
     pricing: { blueprint: 249, setup: 599 },
     workflowNodes: [
-      { label: "Enriched Lead", color: nodeColors.blue },
-      { label: "AI Score", color: nodeColors.purple },
-      { label: "Approve / Reject", color: nodeColors.orange },
-      { label: "CRM", color: nodeColors.green },
+      { label: "Enriched Lead", color: nodeColors.blue, icon: "User" },
+      { label: "AI Score", color: nodeColors.purple, icon: "Gauge" },
+      { label: "Approve / Reject", color: nodeColors.orange, icon: "ThumbsUp" },
+      { label: "CRM", color: nodeColors.green, icon: "Contact" },
     ],
     whatsIncluded: [
       "N8N workflow JSON with scoring and routing logic",
@@ -279,10 +280,10 @@ export const blueprints: Blueprint[] = [
     isNew: true,
     pricing: { blueprint: 349, setup: 899 },
     workflowNodes: [
-      { label: "Web Form", color: nodeColors.blue },
-      { label: "AI Generate", color: nodeColors.purple },
-      { label: "Human Review", color: nodeColors.orange },
-      { label: "PDF & Email", color: nodeColors.green },
+      { label: "Web Form", color: nodeColors.blue, icon: "ClipboardList" },
+      { label: "AI Generate", color: nodeColors.purple, icon: "Sparkles" },
+      { label: "Human Review", color: nodeColors.orange, icon: "Eye" },
+      { label: "PDF & Email", color: nodeColors.green, icon: "FileOutput" },
     ],
     whatsIncluded: [
       "React web form component (customizable fields)",
@@ -316,10 +317,10 @@ export const blueprints: Blueprint[] = [
     isNew: false,
     pricing: { blueprint: 199, setup: 499 },
     workflowNodes: [
-      { label: "Shared Inbox", color: nodeColors.blue },
-      { label: "AI Classify", color: nodeColors.purple },
-      { label: "Extract Info", color: nodeColors.cyan },
-      { label: "Route", color: nodeColors.green },
+      { label: "Shared Inbox", color: nodeColors.blue, icon: "Inbox" },
+      { label: "AI Classify", color: nodeColors.purple, icon: "Brain" },
+      { label: "Extract Info", color: nodeColors.cyan, icon: "ScanText" },
+      { label: "Route", color: nodeColors.green, icon: "GitBranch" },
     ],
     whatsIncluded: [
       "N8N workflow JSON with email monitoring and routing",
@@ -351,10 +352,10 @@ export const blueprints: Blueprint[] = [
     isNew: false,
     pricing: { blueprint: 199, setup: 499 },
     workflowNodes: [
-      { label: "Search Sources", color: nodeColors.blue },
-      { label: "AI Summarize", color: nodeColors.purple },
-      { label: "Score Relevance", color: nodeColors.orange },
-      { label: "Deliver Digest", color: nodeColors.green },
+      { label: "Search Sources", color: nodeColors.blue, icon: "Globe" },
+      { label: "AI Summarize", color: nodeColors.purple, icon: "BookOpen" },
+      { label: "Score Relevance", color: nodeColors.orange, icon: "Star" },
+      { label: "Deliver Digest", color: nodeColors.green, icon: "Send" },
     ],
     whatsIncluded: [
       "N8N workflow JSON with scheduled news search",
@@ -386,10 +387,10 @@ export const blueprints: Blueprint[] = [
     isNew: false,
     pricing: { blueprint: 199, setup: 499 },
     workflowNodes: [
-      { label: "Expiry Database", color: nodeColors.blue },
-      { label: "Check Dates", color: nodeColors.cyan },
-      { label: "Send Alert", color: nodeColors.orange },
-      { label: "Track Renewal", color: nodeColors.green },
+      { label: "Expiry Database", color: nodeColors.blue, icon: "CalendarClock" },
+      { label: "Check Dates", color: nodeColors.cyan, icon: "Clock" },
+      { label: "Send Alert", color: nodeColors.orange, icon: "AlertTriangle" },
+      { label: "Track Renewal", color: nodeColors.green, icon: "RefreshCw" },
     ],
     whatsIncluded: [
       "N8N workflow JSON with daily expiration checks",

@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="8" fill="#0A0A0A"/>
-  <text x="16" y="22" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="700" font-size="18" fill="#EDEDED">A</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="10" fill="#0a0a0a"/>
+  <path d="M14 36 L24 10 L34 36" stroke="#ededed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <line x1="18" y1="27" x2="30" y2="27" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="18" cy="27" r="2.5" fill="#3b82f6"/>
+  <circle cx="24" cy="27" r="2.5" fill="#3b82f6"/>
+  <circle cx="30" cy="27" r="2.5" fill="#3b82f6"/>
 </svg>

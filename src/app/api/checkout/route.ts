@@ -1,51 +1,62 @@
 import { NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
+import { getBlueprint } from "@/content/blueprints";
 
-/**
- * POST /api/checkout
- *
- * Creates a Stripe Checkout session for a blueprint purchase.
- *
- * Request body:
- *   { blueprintSlug: string, tier: "blueprint" | "setup" }
- *
- * Integration steps (when Stripe is connected):
- *   1. npm install stripe
- *   2. Add STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET to .env.local
- *   3. Create Stripe products/prices for each blueprint and tier
- *   4. Replace the stub below with real Stripe Checkout session creation
- *   5. Return the session URL for client redirect
- */
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!);
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { blueprintSlug, tier } = body;
 
-    if (!blueprintSlug || !tier) {
+    if (!blueprintSlug || !tier || !["blueprint", "setup"].includes(tier)) {
       return NextResponse.json(
-        { error: "Missing blueprintSlug or tier" },
+        { error: "Missing or invalid blueprintSlug or tier" },
         { status: 400 }
       );
     }
 
-    // TODO: Replace with real Stripe Checkout session creation
-    //
-    // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-    // const session = await stripe.checkout.sessions.create({
-    //   mode: "payment",
-    //   line_items: [{ price: priceId, quantity: 1 }],
-    //   success_url: `${process.env.NEXT_PUBLIC_URL}/blueprints/${blueprintSlug}?purchased=true`,
-    //   cancel_url: `${process.env.NEXT_PUBLIC_URL}/blueprints/${blueprintSlug}`,
-    //   metadata: { blueprintSlug, tier },
-    //   customer_email: body.email,
-    // });
-    // return NextResponse.json({ url: session.url });
+    const blueprint = getBlueprint(blueprintSlug);
+    if (!blueprint) {
+      return NextResponse.json(
+        { error: "Blueprint not found" },
+        { status: 404 }
+      );
+    }
 
-    return NextResponse.json(
-      { message: "Stripe integration pending. Blueprint: " + blueprintSlug + ", Tier: " + tier },
-      { status: 200 }
-    );
+    const price = tier === "setup" ? blueprint.pricing.setup : blueprint.pricing.blueprint;
+    const tierLabel = tier === "setup" ? "Blueprint + Setup" : "Blueprint";
+
+    const session = await getStripe().checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: `${blueprint.title} (${tierLabel})`,
+              description: blueprint.headline,
+            },
+            unit_amount: price * 100,
+          },
+          quantity: 1,
+        },
+      ],
+      success_url: `${process.env.NEXT_PUBLIC_URL}/blueprints/${blueprintSlug}?purchased=true&tier=${tier}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_URL}/blueprints/${blueprintSlug}`,
+      metadata: {
+        blueprintSlug,
+        tier,
+        blueprintTitle: blueprint.title,
+      },
+    });
+
+    return NextResponse.json({ url: session.url });
   } catch (error) {
+    console.error("Checkout error:", error);
     return NextResponse.json(
       { error: "Failed to create checkout session" },
       { status: 500 }

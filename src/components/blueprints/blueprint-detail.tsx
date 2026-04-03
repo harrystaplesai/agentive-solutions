@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,12 +11,30 @@ import {
   Package,
   Wrench,
   MessageSquare,
+  Loader2,
 } from "lucide-react";
 import type { Blueprint } from "@/content/blueprints";
 import { WorkflowDiagram } from "./workflow-diagram";
 import { staggerContainer, staggerItem, springs } from "@/lib/animations";
 
+async function handleCheckout(blueprintSlug: string, tier: "blueprint" | "setup") {
+  const res = await fetch("/api/checkout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ blueprintSlug, tier }),
+  });
+
+  const data = await res.json();
+
+  if (data.url) {
+    window.location.href = data.url;
+  } else {
+    console.error("Checkout failed:", data.error);
+  }
+}
+
 export function BlueprintDetail({ blueprint }: { blueprint: Blueprint }) {
+  const [loadingTier, setLoadingTier] = useState<string | null>(null);
   return (
     <section className="px-6 pb-24 md:px-8 lg:px-12">
       <div className="mx-auto max-w-[1000px]">
@@ -165,14 +184,22 @@ export function BlueprintDetail({ blueprint }: { blueprint: Blueprint }) {
                   ${blueprint.pricing.blueprint}
                 </span>
                 <button
-                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-fg-primary px-4 py-3 text-sm font-medium text-bg-primary transition-all hover:bg-fg-secondary"
-                  onClick={() => {
-                    // Stripe checkout integration point
-                    alert("Stripe checkout will open here");
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-fg-primary px-4 py-3 text-sm font-medium text-bg-primary transition-all hover:bg-fg-secondary disabled:opacity-50"
+                  disabled={loadingTier === "blueprint"}
+                  onClick={async () => {
+                    setLoadingTier("blueprint");
+                    await handleCheckout(blueprint.slug, "blueprint");
+                    setLoadingTier(null);
                   }}
                 >
-                  Purchase blueprint
-                  <ArrowRight className="h-4 w-4" />
+                  {loadingTier === "blueprint" ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <>
+                      Purchase blueprint
+                      <ArrowRight className="h-4 w-4" />
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -191,14 +218,22 @@ export function BlueprintDetail({ blueprint }: { blueprint: Blueprint }) {
                   ${blueprint.pricing.setup}
                 </span>
                 <button
-                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-medium text-white transition-all hover:bg-accent-hover"
-                  onClick={() => {
-                    // Stripe checkout integration point
-                    alert("Stripe checkout will open here");
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-medium text-white transition-all hover:bg-accent-hover disabled:opacity-50"
+                  disabled={loadingTier === "setup"}
+                  onClick={async () => {
+                    setLoadingTier("setup");
+                    await handleCheckout(blueprint.slug, "setup");
+                    setLoadingTier(null);
                   }}
                 >
-                  Purchase with setup
-                  <ArrowRight className="h-4 w-4" />
+                  {loadingTier === "setup" ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <>
+                      Purchase with setup
+                      <ArrowRight className="h-4 w-4" />
+                    </>
+                  )}
                 </button>
               </div>
             </div>

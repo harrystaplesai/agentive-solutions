@@ -29,11 +29,17 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-4">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link
-              href="/"
-              className="font-display text-lg font-bold tracking-tight text-fg-primary"
-            >
-              Agentive
+            <Link href="/" className="flex items-center gap-2.5">
+              <svg width="24" height="24" viewBox="0 0 44 40" fill="none" aria-hidden="true">
+                <path d="M8 34 L22 6 L36 34" stroke="#ededed" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                <line x1="14" y1="24" x2="30" y2="24" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round"/>
+                <circle cx="14" cy="24" r="2.5" fill="#3b82f6"/>
+                <circle cx="22" cy="24" r="2.5" fill="#3b82f6"/>
+                <circle cx="30" cy="24" r="2.5" fill="#3b82f6"/>
+              </svg>
+              <span className="font-display text-lg font-bold tracking-tight text-fg-primary">
+                Agentive
+              </span>
             </Link>
             <p className="mt-3 max-w-[240px] text-sm leading-relaxed text-fg-secondary">
               AI systems that run your operations. Built for companies that want

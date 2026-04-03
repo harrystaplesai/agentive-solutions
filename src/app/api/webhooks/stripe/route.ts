@@ -1,73 +1,65 @@
 import { NextRequest, NextResponse } from "next/server";
+import Stripe from "stripe";
 
-/**
- * POST /api/webhooks/stripe
- *
- * Handles Stripe webhook events after successful payment.
- *
- * On checkout.session.completed:
- *   1. Generate a signed Supabase Storage URL for the blueprint files
- *   2. Send an email to the buyer with the download link (via Resend)
- *   3. Create a FreeAgent invoice marked as paid (via FreeAgent API)
- *
- * Integration steps:
- *   1. npm install stripe @supabase/supabase-js resend
- *   2. Add environment variables:
- *      - STRIPE_WEBHOOK_SECRET
- *      - SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
- *      - RESEND_API_KEY
- *      - FREEAGENT_CLIENT_ID, FREEAGENT_CLIENT_SECRET, FREEAGENT_REFRESH_TOKEN
- *   3. Configure Stripe webhook endpoint in Stripe dashboard pointing to this URL
- *   4. Upload blueprint files to Supabase Storage in a private bucket
- *   5. Replace the stub below with real implementation
- */
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!);
+}
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.text();
+    const sig = request.headers.get("stripe-signature");
 
-    // TODO: Verify Stripe webhook signature
-    //
-    // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-    // const sig = request.headers.get("stripe-signature")!;
-    // const event = stripe.webhooks.constructEvent(
-    //   body,
-    //   sig,
-    //   process.env.STRIPE_WEBHOOK_SECRET!
-    // );
+    if (!sig) {
+      return NextResponse.json({ error: "Missing signature" }, { status: 400 });
+    }
 
-    // TODO: Handle checkout.session.completed event
-    //
-    // if (event.type === "checkout.session.completed") {
-    //   const session = event.data.object;
-    //   const { blueprintSlug, tier } = session.metadata;
-    //   const customerEmail = session.customer_email;
-    //
-    //   // 1. Generate signed download URL (expires in 48 hours)
-    //   // const supabase = createClient(
-    //   //   process.env.SUPABASE_URL!,
-    //   //   process.env.SUPABASE_SERVICE_ROLE_KEY!
-    //   // );
-    //   // const { data } = await supabase.storage
-    //   //   .from("blueprints")
-    //   //   .createSignedUrl(`${blueprintSlug}/files.zip`, 48 * 60 * 60);
-    //
-    //   // 2. Send email with download link
-    //   // const resend = new Resend(process.env.RESEND_API_KEY!);
-    //   // await resend.emails.send({
-    //   //   from: "blueprints@agentivesolutions.co.uk",
-    //   //   to: customerEmail,
-    //   //   subject: `Your blueprint: ${blueprintSlug}`,
-    //   //   html: `<p>Download your blueprint: <a href="${data.signedUrl}">Download link</a></p>
-    //   //          <p>This link expires in 48 hours.</p>`,
-    //   // });
-    //
-    //   // 3. Create FreeAgent invoice
-    //   // await createFreeAgentInvoice(session);
-    // }
+    let event: Stripe.Event;
+
+    try {
+      event = getStripe().webhooks.constructEvent(
+        body,
+        sig,
+        process.env.STRIPE_WEBHOOK_SECRET!
+      );
+    } catch (err) {
+      console.error("Webhook signature verification failed:", err);
+      return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
+    }
+
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object as Stripe.Checkout.Session;
+      const { blueprintSlug, tier, blueprintTitle } = session.metadata || {};
+      const customerEmail = session.customer_details?.email;
+      const amountPaid = session.amount_total;
+
+      console.log("Payment received:", {
+        blueprintSlug,
+        tier,
+        blueprintTitle,
+        customerEmail,
+        amountPaid: amountPaid ? amountPaid / 100 : 0,
+        sessionId: session.id,
+      });
+
+      // TODO: Phase 2 integrations (wire up when services are configured)
+      //
+      // 1. Generate signed download URL from Supabase Storage
+      //    Requires: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY env vars
+      //    and blueprint files uploaded to a private "blueprints" bucket
+      //
+      // 2. Send email with download link via Resend
+      //    Requires: RESEND_API_KEY env var
+      //    and verified sending domain (agentivesolutions.co.uk)
+      //
+      // 3. Create FreeAgent invoice via API
+      //    Requires: FREEAGENT_CLIENT_ID, FREEAGENT_CLIENT_SECRET,
+      //    FREEAGENT_REFRESH_TOKEN env vars
+    }
 
     return NextResponse.json({ received: true }, { status: 200 });
   } catch (error) {
+    console.error("Webhook error:", error);
     return NextResponse.json(
       { error: "Webhook handler failed" },
       { status: 500 }
