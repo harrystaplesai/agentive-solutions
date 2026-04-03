@@ -12,7 +12,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      timeout: 30000,
+      maxNetworkRetries: 3,
+    });
 
     const body = await request.json();
     const { blueprintSlug, tier } = body;
