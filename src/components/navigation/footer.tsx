@@ -117,7 +117,7 @@ export function Footer() {
             href="/contact"
             className="text-sm text-fg-secondary transition-colors hover:text-accent"
           >
-            harry.staples@agentivesolutions.co.uk
+            hello@agentivesolutions.co.uk
           </Link>
         </div>
       </div>

@@ -55,7 +55,7 @@ export function CTASection() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <a
-                href="mailto:harry.staples@agentivesolutions.co.uk"
+                href="mailto:hello@agentivesolutions.co.uk"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-medium text-fg-secondary transition-all hover:border-border-hover hover:text-fg-primary"
               >
                 Email us instead

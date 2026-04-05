@@ -114,10 +114,10 @@ export function ContactContent() {
                     Prefer email?
                   </span>
                   <a
-                    href="mailto:harry.staples@agentivesolutions.co.uk"
+                    href="mailto:hello@agentivesolutions.co.uk"
                     className="block text-sm text-fg-primary transition-colors hover:text-accent"
                   >
-                    harry.staples@agentivesolutions.co.uk
+                    hello@agentivesolutions.co.uk
                   </a>
                 </div>
               </div>
