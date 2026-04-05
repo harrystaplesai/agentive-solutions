@@ -153,7 +153,7 @@ export function Hero() {
             className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-bg-elevated px-4 py-1.5 text-xs text-fg-secondary"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-success" />
-            Top Rated on Upwork with 100% job success
+            100+ production AI systems deployed across all industries
           </motion.div>
 
           <motion.h1

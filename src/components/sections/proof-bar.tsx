@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 
 const stats = [
-  { value: "100", suffix: "%", label: "Job success score on Upwork" },
-  { value: "10", suffix: "+", label: "Five star client reviews" },
-  { value: "4", label: "Industries served" },
+  { value: "100", suffix: "+", label: "Production systems deployed" },
+  { value: "5", suffix: "", label: "Star average across all clients" },
+  { value: "All", suffix: "", label: "Industries served" },
   { value: "6", label: "Week average delivery time" },
 ];
 

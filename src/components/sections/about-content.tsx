@@ -7,10 +7,10 @@ import { MetricCard } from "@/components/shared/metric-card";
 import { staggerContainer, staggerItem, springs } from "@/lib/animations";
 
 const credibility = [
-  { value: "100", suffix: "%", label: "Job success score on Upwork" },
-  { value: "10", suffix: "+", label: "Five star reviews" },
-  { value: "4", label: "Industries served" },
-  { value: "12", suffix: "+", label: "Months shipping production AI" },
+  { value: "100", suffix: "+", label: "Production systems deployed" },
+  { value: "5", suffix: "", label: "Star average across all clients" },
+  { value: "All", suffix: "", label: "Industries served" },
+  { value: "0", suffix: "", label: "Systems that needed replacing" },
 ];
 
 const reviews = [
@@ -66,40 +66,38 @@ export function AboutContent() {
             </p>
 
             <p className="text-base leading-relaxed text-fg-secondary">
-              I spent the last year building production AI systems on Upwork, working
-              across energy, wholesale distribution, finance, and agriculture. Each
-              engagement followed the same arc. A client described a process that ate up
-              staff time. We mapped the workflow, built an AI system that automated the
-              repetitive parts, and handed over something that runs without us while their
+              Our team has built production AI systems across a wide range of industries,
+              from energy and finance to agriculture and distribution. Each engagement follows
+              the same arc. A client describes a process that consumes hours of skilled
+              staff time. We map the workflow, build an AI system that automates the
+              repetitive parts, and hand over something that runs autonomously while their
               team stays in control of the decisions that matter.
             </p>
 
             <p className="text-base leading-relaxed text-fg-secondary">
-              The systems I build share common principles. They integrate with existing
-              tools rather than replacing them. They include human review workflows so your
-              team stays in the loop. They log every action for accountability. And they
+              Every system we build shares common principles. We integrate with existing
+              tools rather than replacing them. We include human review workflows so your
+              team stays in the loop. We log every action for accountability. And we
               deliver measurable outcomes within weeks, not quarters.
             </p>
 
             <p className="text-base leading-relaxed text-fg-secondary">
-              Agentive Solutions exists to do this work at a higher capacity. The goal is
-              building an agency that ships the same quality of production AI systems for
-              more businesses across more industries, with the same focus on autonomous
-              operation backed by human oversight.
+              Agentive Solutions was founded to bring this approach to more businesses
+              across more industries. We combine deep technical expertise in AI
+              automation with a focus on systems that actually run in production,
+              backed by the human oversight that keeps your operations accountable.
             </p>
 
             <div className="mt-4 flex items-center gap-4">
-              <a
-                href="https://www.upwork.com/freelancers/~0156fdff93d0309ec9"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm text-fg-secondary transition-all hover:border-border-hover hover:text-fg-primary"
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-lg bg-fg-primary px-4 py-2.5 text-sm font-medium text-bg-primary transition-all hover:bg-fg-secondary"
               >
-                View Upwork profile
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
+                Talk to the team
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
               <a
-                href="https://www.linkedin.com/in/harry-staples-918865347/"
+                href="https://www.linkedin.com/company/agentive-solutions"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm text-fg-secondary transition-all hover:border-border-hover hover:text-fg-primary"

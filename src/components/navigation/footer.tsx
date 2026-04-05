@@ -17,8 +17,7 @@ const footerLinks = {
     { href: "/contact", label: "Contact" },
   ],
   external: [
-    { href: "https://www.upwork.com/freelancers/~0156fdff93d0309ec9", label: "Upwork", external: true },
-    { href: "https://www.linkedin.com/in/harry-staples-918865347/", label: "LinkedIn", external: true },
+    { href: "https://www.linkedin.com/company/agentive-solutions", label: "LinkedIn", external: true },
   ],
 };
 
